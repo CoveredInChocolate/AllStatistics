@@ -1,0 +1,574 @@
+
+\newpage
+\section{Chapter 2 - Random Variables}
+
+\subsection*{Exercises}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.1}\\  % PDF page 43
+\textbf{Claim}: $\P(X = x) = F(x^+) - F(x^-)$. (Discrete)\\
+\textsc{Proof}. By definition of the CDF:
+$$
+F(x^+) = \lim_{z\downarrow x}F(z) = \lim_{z\downarrow x}\P(X\leq z),\qquad
+F(x^-) = \lim_{y\uparrow x}F(y) = \lim_{y\uparrow x}\P(X\leq y)
+$$
+(so $y<x$ and $y\ra x$, and $x<z$ and $x\leftarrow z$). By the right continuous property,
+we can deduce that $z > y$ and we can set $z = x$ and $y = x-1$.
+$$
+\P(X\leq x^+) = \P(X\leq x) = \P(X = x) + \P(X \leq x-1),\quad
+\P(X\leq x^-) = \P(X\leq x-1)
+$$
+So:
+\begin{align*}
+    \P(X = x) &= \P(X = x) + \P(X\leq x-1) - \P(X\leq x-1) \\
+    &= \P(X\leq x) - \P(X\leq x-1) \\
+    &= \P(X\leq x^+) - \P(X\leq x^-) \\
+    &= F(x^+) - F(x^-)
+    \tag*{\qed}
+\end{align*}
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.2}\\  % PDF page 44
+Let $X$ be such that $\P(X = 2) = \P(X = 3) = 1/10$ and $\P(X = 5) = 8/10$.
+Here is a plot of the CDF.
+\begin{center}
+    \begin{tikzpicture}
+\begin{axis}[
+    clip=false,
+    jump mark left,
+    ymin=0,ymax=1,
+    xmin=0, xmax=8,
+    every axis plot/.style={very thick},
+    discontinuous,
+    table/create on use/cumulative distribution/.style={
+        create col/expr={\pgfmathaccuma + \thisrow{f(x)}}   
+    }
+]
+\addplot [blue] table [y=cumulative distribution]{
+x f(x)
+0 0
+2 1/10
+3 1/10
+5 8/10
+8 0
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+By reading the plot, we can see that:
+$$
+\P(2 < X\leq 4.8) = F(4.8) - F(2) = 2/10 - 1/10 = 1/10
+$$
+$$
+\P(2\leq X\leq 4.8) = F(4.8) = 2/10
+$$
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.3}\\  % PDF page 44
+\textbf{Lemma 2.15} Let $F$ be the CDF for a random variable $X$. Then:
+\begin{enumerate}
+    \item $\P(X = x) = F(x) - F(x^-)$
+    \item $\P(x < X\leq y) = F(y) - F(x)$
+    \item $\P(X > x) = 1 - F(x)$
+    \item If $X$ is continuous, then
+$$
+F(b) - F(a) = \P(a < X < b) = \P(a \leq X < b) = \P(a < X\leq b) = \P(a\leq X\leq b)
+$$
+\end{enumerate}
+\textsc{Proof}. We will prove each statement in turn. (1.) was proved in exercise \textbf{2.1}.
+Doing (3) first, since we need it to prove (2).
+
+\medskip\noindent(3) By definition of complements of sets $A = \{X > x\}$ means $A^c = \{X\leq x\}$,
+and it follows that:
+$$
+\P(X > x) = \P(A) = 1 - \P(A^c) = 1 - \P(X\leq x) = 1 - F(x).
+$$
+
+\medskip\noindent(2) Assume $x < y$. We will need that $\{X > x\}\cup\{X\leq y\} = \Omega$,
+and we will also use Lemma 1.6 (in reverse).
+\begin{align*}
+    \P(x < X\leq y) &= \P(\{X > x\}\cap\{X\leq y\}) \\
+    &= \P(X > x) + \P(X\leq y) - \P(\{X > x\}\cup\{X\leq y\}) \\
+    &= 1 - F(x) + F(y) - 1 \\
+    &= F(y) - F(x)
+\end{align*}
+
+\medskip\noindent(4) Similar argument for all cases, so will just do one.
+We just need to turn the inequalities into
+strict inequalities. For continuous random variables, pointwise probabilities are 0.
+Again, we will need to use $\{X > a\}\cup\{X < b\} = \Omega$.
+
+Define $A := \{a \leq X\}$ and $B := \{X < b\}$.
+First, we make the following observation:
+\begin{align*}
+    \P(A) &= \P(\{a \leq X\}) \\
+    &= \P(\{a = X\}\cup\{a < X\}) \\
+    &= \P(\{a = X\}) + \P(\{a < X\}) + \P(\{a = X\}\cap\{a < X\}) \\
+    &= 0 + \P(A') + 0 \\
+    &= \P(A')
+\end{align*}
+where $A' = \{a < X\}$. We get 0 for the pointwise probability, since this is continuous,
+and we get 0 because the sets are disjoint. We have shown that $\P(A) = \P(A')$ and can use
+this to conclude the proof.
+\begin{align*}
+    \P(a \leq X < b) &= \P(\{a\leq X\}\cap\{X < b\})\\
+    &= \P(A\cap B) \\
+    &= \P(A) + \P(B) + \P(A\cup B) \\
+    &= \P(A) + \P(B) + \P(\Omega) \\
+    &= \P(A') + \P(B) + \P(A'\cup B) \\
+    &= \P(A'\cap B) \\
+    &= \P(a < X < b)
+    \tag*{\qed}
+    %&= \P\bigg(\Big[\{X = a\}\cup \{a < X\}\Big]\cap \{X < b\}\bigg)
+\end{align*}
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.4}\\  % PDF page 44
+$X$ has the probability density (PDF):
+$$
+f_X(x) = 
+\left\{
+    \begin{matrix}
+        1/4 & 0<x<1 \\
+        3/8 & 3<x<5 \\
+        0 & \text{otherwise}
+    \end{matrix}
+\right.
+$$
+Plot of the PDF:
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = left,
+            ymin = -0.002,
+            ymax = 0.5,
+            xlabel = $x$,
+            ylabel = {$f_X(x)$},
+        ]
+        %Section 1
+        \addplot [
+            domain=0:1, 
+            samples=10, 
+            color=blue,
+            style=ultra thick,
+        ]
+        {1/4};
+        %Section 2
+        \addplot [
+            domain=1:3, 
+            samples=10, 
+            color=blue,
+            style=ultra thick,
+        ]
+        {0};
+        %Section 3
+        \addplot [
+            domain=3:5, 
+            samples=10, 
+            color=blue,
+            style=ultra thick,
+        ]
+        {3/8};
+        %Section 4
+        \addplot [
+            domain=5:7, 
+            samples=10, 
+            color=blue,
+            style=ultra thick,
+        ]
+        {0};
+        %Vertical lines
+        \addplot +[mark=none, color=blue, style=dashed] coordinates {(1, -0) (1, 1/4)};
+        \addplot +[mark=none, color=blue, style=dashed] coordinates {(3, -0) (3, 3/8)};
+        \addplot +[mark=none, color=blue, style=dashed] coordinates {(5, -0) (5, 3/8)};
+        \end{axis}
+        \end{tikzpicture}
+\end{center}
+From the relatively simple structure, we can easily determine the area under the graph:
+$$
+A = (1)\left(\frac{1}{4}\right) + (2)\left(\frac{3}{8}\right) = \frac{2}{8} + \frac{6}{8} = 1
+$$
+(a) Finding the CDF by integrating the PDF. We will split up the integral in several parts.
+First for the case when $y\in(0,1)$:
+$$
+F_X(y) = \int_{-\infty}^y f_X(t)dt = \frac{1}{4}\int_0^y 1dt  
+= \frac{1}{4}\Big[t\Big]_0^y 
+= \frac{y}{4}
+$$
+When $y=1$ we have $F_X(1) = 1/4$.
+Next, we must consider the case $y\in(1,3)$. Here the PDF is 0, so it doesn't increase.
+It remains constant at 1/4 (since the CDF doesn't decrease).
+$$
+F_X(y) = \frac{1}{4}
+$$
+Next is the case $y\in(3,5)$. Consider the intermediary integral:
+$$
+I_1= \int_3^y\frac{3}{8}dt
+= \frac{3}{8}\Big[t\Big]_3^y
+= \frac{3y - 9}{8}
+$$
+For values $y\in(3,5)$ we start on 1/4, so the CDF in this region becomes:
+$$
+F_X(y) = \frac{3y - 9}{8} + \frac{1}{4}
+$$
+% $$
+% F_X(y) = \int_{-\infty}^y f_X(t)dt = \int_0^y \frac{1}{4}dt + \int_3^y\frac{3}{8}dt = I_1 + I_2
+% $$
+% \begin{align*}
+%     I_1 =
+%     \int_0^y \frac{1}{4}dt  
+%     = \frac{1}{4}\int_0^y 1dt  
+%     = \frac{1}{4}\Big[t\Big]_0^y 
+%     = \frac{y}{4}
+% \end{align*}
+% \begin{align*}
+%     I_2 = \int_3^y\frac{3}{8}dt 
+%     = \frac{3}{8}\int_3^y 1 dt 
+%     = \frac{3}{8}\Big[t\Big]_3^y
+%     = \frac{3y - 9}{8}
+% \end{align*}
+% With these results, we can write:
+% $$
+% F_X(y) =
+% \left\{
+%     \begin{matrix}
+%         \displaystyle \frac{y}{4} & 0 < y < 1 \\
+%         \displaystyle \frac{3y - 9}{8} & 3 < y < 5 \\
+%     \end{matrix}
+% \right.
+% $$
+% Note that when $y = 5$ we get:
+% $$
+% F_X(5) = \frac{3(5) - 9}{8} + \frac{(1)}{4} = \frac{6}{8} + \frac{2}{8} = 1
+% $$
+\newpage\noindent
+So, the full expression for the CDF becomes:
+$$
+F_X(y) =
+\left\{
+    \begin{matrix}
+        \displaystyle y/4 & y\in(0,1) \\
+        1/4 & y\in(1,3) \\
+        \displaystyle \frac{3y - 9}{8} + \frac{1}{4} & y\in(3,5) \\
+        1 & y\geq 5
+    \end{matrix}
+\right.
+$$
+Note that when $y = 5$ we get:
+$$
+F_X(5) = \frac{3(5) - 9}{8} + \frac{1}{4} = \frac{6}{8} + \frac{2}{8} = 1
+$$
+Plot of the CDF:
+\begin{center}
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = left,
+        ymin = -0.002,
+        ymax = 1.05,
+        xlabel = $x$,
+        ylabel = {$y$},
+    ]
+    %Section 1
+    \addplot [
+        domain=0:1, 
+        samples=10, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {x/4};
+    %Section 2
+    \addplot [
+        domain=1:3, 
+        samples=10, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {1/4};
+    %Section 3
+    \addplot [
+        domain=3:5, 
+        samples=10, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {(3*x - 9)/8 + 1/4};
+    %Section 4
+    \addplot [
+        domain=5:7, 
+        samples=10, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {1};
+    \end{axis}
+    \end{tikzpicture}
+\end{center}
+% (b) Defining $Y = 1/X$ and finding the PDF of $Y$. Following the instructions
+% mentioned at equation (2.11) and example 2.46 on page 41. We usually begin by finding the set:
+% $$
+% A_y = \{x : r(x)\leq y\} = \{x : 1/x\leq y\} = \{x : x\leq 1/y\}.
+% $$
+% But following the hint we are given, we will consider the following three sets:
+% $$
+% A_1 = \frac{1}{5} \leq y \leq \frac{1}{3},\quad
+% A_2 = \frac{1}{3} \leq y \leq 1,\quad
+% A_3 = y\geq 1
+% $$
+(b) Defining $Y = 1/X$ and finding the PDF of $Y$. Following the hint we are given,
+we will consider the following three sets:
+$$
+A_1 = \frac{1}{5} \leq y \leq \frac{1}{3},\quad
+A_2 = \frac{1}{3} \leq y \leq 1,\quad
+A_3 = y\geq 1
+$$
+Where $A_1$ corresponds to $(3, 5)$, $A_2$ to $(1, 3)$
+and $A_3$ to $(0,1)$. We can express the CDF for $F_Y(y)$ in terms
+of $F_X(x)$: %First, we consider $A_1: y\in(1/5,1/3)$.
+\begin{align*}
+    F_Y(y) &= \P(Y\leq y) = \P(\frac{1}{X} \leq y) \\
+    &= \P(X \geq \frac{1}{y}) \\
+    &= 1 - \P(X\leq \frac{1}{y}) \\
+    &= 1 - F_X(\frac{1}{y})
+\end{align*}
+\newpage\noindent
+First, we consider $A_1: y\in[1/5,1/3]$, and when we input $1/y$ to
+$F_X(\cdot)$, it will be in $(3, 5)$. So:
+\begin{align*}
+    F_Y(y) &= 1 - F_X(1/y) \\
+    &= 1 - \left(\frac{3(\frac{1}{y}) - 9}{8} + \frac{1}{4}\right) \\
+    &= 1 - \frac{3 - 9y}{8y} - \frac{1}{4} \\
+    &= \frac{3}{4} + \frac{9y - 3}{8y} \\
+    &= \frac{15y - 3}{8y}
+\end{align*}
+Next, we consider $A_2: y\in[1/3,1]$. The input to $F_X(\cdot)$ will be in $(1, 3)$:
+\begin{align*}
+    F_Y(y) &= 1 - F_X(1/y) \\
+    &= 1 - \frac{1}{4} \\
+    &= \frac{3}{4}
+\end{align*}
+Next, we consider $A_3: y\geq 1$. The input to $F_X(\cdot)$ will be in $(0, 1)$:
+\begin{align*}
+    F_Y(y) &= 1 - F_X(1/y) \\
+    &= 1 - \frac{\frac{1}{y}}{4} \\
+    &= 1 - \frac{1}{4y}
+\end{align*}
+Also, whenever $y<1/5$, then $1/y > 5$ which means $F_X(\cdot) = 1$, and so:
+$$
+F_Y(y) = 1 - F_X(1/y) = 1 - 1 = 0.
+$$
+This gives a full description of the CDF for $F_Y(y)$.
+$$
+F_Y(y) =
+\left\{
+    \begin{matrix}
+        0 & y < 1/5 \\
+        \rule{0pt}{20pt}\displaystyle \frac{15y - 3}{8y} & 1/5\leq y\leq 1/3 \\
+        \rule{0pt}{20pt}\displaystyle \frac{3}{4} & 1/3\leq y \leq 1 \\
+        \rule{0pt}{20pt}\displaystyle 1 - \frac{1}{4y} & y\geq 1
+    \end{matrix}
+\right.
+$$
+
+\newpage\noindent
+Plot of CDF:
+\begin{center}
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = left,
+        ymin = -0.002,
+        ymax = 1.05,
+        xlabel = $y$,
+        ylabel = {$F_Y(y)$},
+    ]
+    %Section 1
+    \addplot [
+        domain=0:0.2, 
+        samples=10, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {0};
+    %Section 2
+    \addplot [
+        domain=0.2:0.333, 
+        samples=10, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {(15*x - 3)/(8*x)};
+    %Section 3
+    \addplot [
+        domain=0.333:1, 
+        samples=10, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {3/4};
+    %Section 4
+    \addplot [
+        domain=1:2, 
+        samples=10, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {1 - 1/(4*x)};
+    \end{axis}
+    \end{tikzpicture}
+\end{center}
+Finally, we can find the PDF of $Y$. We differentiate each of the parts in
+the CDF. When $y\in(1/5, 1/3)$:
+\begin{align*}
+    \frac{d}{dy}\left(\frac{15y - 3}{8y}\right) &= \frac{3}{8y^2}
+\end{align*}
+When $y\geq 1$:
+\begin{align*}
+    \frac{d}{dy}\left(1 - \frac{1}{4y}\right) &= \frac{1}{4y^2}
+\end{align*}
+(All other parts are constant, so they become 0). This gives us the PDF and its plot:
+
+\medskip\noindent
+\begin{minipage}[b]{0.4\textwidth}
+    $$
+    f_Y(y) =
+    \left\{
+        \begin{matrix}
+            0 & y < 1/5 \\
+            \rule{0pt}{20pt}\displaystyle \frac{3}{8y^2} & 1/5\leq y\leq 1/3 \\
+            \rule{0pt}{15pt}\displaystyle 0 & 1/3 < y < 1 \\
+            \rule{0pt}{20pt}\displaystyle \frac{1}{4y^2} & y\geq 1
+        \end{matrix}
+    \right.
+    $$
+    \rule{0pt}{2pt}
+    \end{minipage}
+\begin{minipage}[c]{0.6\textwidth}
+    %Plot of PDF:\\
+        \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = left,
+            ymin = -0.002,
+            ymax = 10,
+            xlabel = $y$,
+            ylabel = {$F_Y(y)$},
+        ]
+        %Section 1
+        \addplot [
+            domain=0:0.2, 
+            samples=10, 
+            color=blue,
+            style=ultra thick,
+        ]
+        {0};
+        %Section 2
+        \addplot [
+            domain=0.2:0.333, 
+            samples=10, 
+            color=blue,
+            style=ultra thick,
+        ]
+        {(3)/(8*x^2)};
+        %Section 3
+        \addplot [
+            domain=0.333:1, 
+            samples=10, 
+            color=blue,
+            style=ultra thick,
+        ]
+        {0};
+        %Section 4
+        \addplot [
+            domain=1:2, 
+            samples=10, 
+            color=blue,
+            style=ultra thick,
+        ]
+        {1/(4*x^2)};
+        %Vertical lines
+        \addplot +[mark=none, color=blue, style=dashed] coordinates {(1/5, -0) (1/5, 9.375)};
+        \addplot +[mark=none, color=blue, style=dashed] coordinates {(1/3, -0) (1/3, 3.375)};
+        \addplot +[mark=none, color=blue, style=dashed] coordinates {(1, -0) (1, 1/4)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+
+\newpage\noindent
+\textbf{2.5}\\  % PDF page 44
+Let $X$ and $Y$ be discrete RV. $X$ and $Y$ are independent
+if and only if $f_{X,Y}(x, y) = f_X(x)f_Y(y)$ for all $x$ and $y$. \\
+\textsc{Proof}.\\
+$\Rightarrow$) Assume that $X$ and $Y$ are independent. That means that for any $x,y$,
+we have
+$$
+\P(X=x\cap Y=y) = \P(X=x)\P(Y=y)
+$$
+Starting with the definition of the joint pdf:
+\begin{align*}
+    f_{X,Y}(x, y) &= \P(X=x, Y=y) \\
+    &= \P(X=x\cap Y=y) \\
+    &= \P(X=x)\P(Y=y) \\
+    &= f_X(x)f_Y(y)
+\end{align*}
+Which shows that $f_{X,Y}(x, y) = f_X(x)f_Y(y)$ for all $x$ and $y$.
+
+\medskip\noindent
+$\Leftarrow$) Assume that $f_{X,Y}(x, y) = f_X(x)f_Y(y)$ for all $x$ and $y$.
+By definition:
+\begin{align*}
+    f_{X,Y}(x, y) &= \P(X=x, Y=y) \\
+    &= \P(X=x\cap Y=y)
+\end{align*}
+And,
+\begin{align*}
+    f_X(x)f_Y(y) &= \P(X=x)\P(Y=y)
+\end{align*}
+From our assumption, these are equal, so $\P(X=x\cap Y=y) = \P(X=x)\P(Y=y)$ which shows that
+$X$ and $Y$ are independent.\\
+By implication both ways, the statement is proved.\qed
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.6}\\  % PDF page 44
+Let $X$ have distribution $F$ and density $f$, and let $A$ be a subset of the
+real line, e.g. $A = (a,b)$ for some $a,b\in\R$ and $a<b$. We have the indicator function
+$$
+I_A(x) =
+\left\{
+    \begin{matrix}
+        1 & x\in A \\
+        0 & x\not\in A
+    \end{matrix}
+\right.
+$$
+We will set $Y = I_A(X)$ and find the PDF and CDF of $Y$. The exercise asks for a
+probability mass function, but that cannot be correct. Since $X$ has a density $f$, it is
+a continuous RV. If $X\sim U(0,1)$ and $A = (0,1)$, then $Y = X$ and it will be a uniform
+variable with a continuous distribution.
+
+Given what we know, all we can conclude about the PDF of $Y$ is the following:
+$$
+f_Y(y) = \int_A f_X(t)dt
+$$
+
+
+\begin{comment}
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.X}\\  % PDF page 44
+
+
+\begin{align*}
+    A &= B
+\end{align*}
+
+
+\begin{equation*}
+    A = B
+    \tag*{\qed}
+\end{equation*}
+
+
+\end{comment}
