@@ -530,7 +530,7 @@ By implication both ways, the statement is proved.\qed
 
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{2.6}\\  % PDF page 44
+\textbf{2.6}\\  % PDF page 45
 Let $X$ have distribution $F$ and density $f$, and let $A$ be a subset of the
 real line, e.g. $A = (a,b)$ for some $a,b\in\R$ and $a<b$. We have the indicator function
 $$
@@ -543,14 +543,27 @@ I_A(x) =
 \right.
 $$
 We will set $Y = I_A(X)$ and find the PDF and CDF of $Y$. The exercise asks for a
+
+\medskip\noindent
 probability mass function, but that cannot be correct. Since $X$ has a density $f$, it is
 a continuous RV. If $X\sim U(0,1)$ and $A = (0,1)$, then $Y = X$ and it will be a uniform
 variable with a continuous distribution.
 
-Given what we know, all we can conclude about the PDF of $Y$ is the following:
-$$
-f_Y(y) = \int_A f_X(t)dt
-$$
+\medskip\noindent
+Since this must be a continuous distribution, what happens if we define $A = \mathbb{Q}\subset\R$?
+There will be an infinite number of points in any interval with measure 0. Then we cannot define
+a PDF at all... Poorly formulated exercise in my opinion! Skipping for now.
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.7}\\  % PDF page 45
+Let $X$ and $Y$ be independent and suppose that $X,Y\sim U(0,1)$.
+For $Z = \min(X, Y)$ we will find the density $f_Z(z)$ for $Z$. Following the hint, we will first
+find $\P(Z > z)$.
+
+
+
+
 
 
 \begin{comment}
