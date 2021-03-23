@@ -23,6 +23,10 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
@@ -31,8 +35,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
@@ -325,6 +327,11 @@ INPUT /home/sindre/AllStatistics/files/ch2_2.21b.pdf
 INPUT /home/sindre/AllStatistics/files/ch2_2.21b.pdf
 INPUT /home/sindre/AllStatistics/files/chap2.tex
 INPUT /home/sindre/AllStatistics/files/chap2.tex
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt9.tfm
+INPUT /home/sindre/AllStatistics/files/ch2_2.7b.pdf
+INPUT /home/sindre/AllStatistics/files/ch2_2.7b.pdf
+INPUT /home/sindre/AllStatistics/files/ch2_2.7b.pdf
 INPUT /home/sindre/AllStatistics/files/allstat.aux
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
@@ -339,4 +346,5 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb

@@ -452,7 +452,7 @@ When $y\geq 1$:
             ymin = -0.002,
             ymax = 10,
             xlabel = $y$,
-            ylabel = {$F_Y(y)$},
+            ylabel = {$f_Y(y)$},
         ]
         %Section 1
         \addplot [
@@ -542,27 +542,236 @@ I_A(x) =
     \end{matrix}
 \right.
 $$
-We will set $Y = I_A(X)$ and find the PDF and CDF of $Y$. The exercise asks for a
+We will set $Y = I_A(X)$ and find the PDF and CDF of $Y$. 
 
 \medskip\noindent
+The exercise asks for a
 probability mass function, but that cannot be correct. Since $X$ has a density $f$, it is
 a continuous RV. If $X\sim U(0,1)$ and $A = (0,1)$, then $Y = X$ and it will be a uniform
-variable with a continuous distribution.
+variable with a continuous distribution, so not necessarily continuous.
 
 \medskip\noindent
-Since this must be a continuous distribution, what happens if we define $A = \mathbb{Q}\subset\R$?
+And if it can be a continuous distribution, what happens if we define $A = \mathbb{Q}\subset\R$?
 There will be an infinite number of points in any interval with measure 0. Then we cannot define
-a PDF at all... Poorly formulated exercise in my opinion! Skipping for now.
+a PDF at all... Poorly formulated exercise in my opinion! Need to fill up with 
+extra assumptions? 
+
+\medskip\noindent
+Skipping for now.
 
 \newpage\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \textbf{2.7}\\  % PDF page 45
 Let $X$ and $Y$ be independent and suppose that $X,Y\sim U(0,1)$.
 For $Z = \min(X, Y)$ we will find the density $f_Z(z)$ for $Z$. Following the hint, we will first
-find $\P(Z > z)$.
+find $\P(Z > z)$. Since any observations of $x,y\in(0,1)$, then we can immediately see that
+$\P(Z > 0) = 1$ and $\P(Z > 1) = 0$. But what happens for other values? Best way to find out is
+with some illustrations. Here are plots of the cases $\P(Z > 1/2)$, $\P(Z > 1/4)$ and $\P(Z > 3/4)$.
 
+\begin{figure}[h]
+    \centering
+\begin{minipage}[t]{.3\textwidth}
+    \centering
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% P(Z > 1/2)
+\begin{tikzpicture}[
+    scale=3,
+    %axis/.style={very thick, ->, >=stealth'},
+    important line/.style={thick},
+    dashed line/.style={dashed, thin},
+    pile/.style={thick, ->, >=stealth', shorten <=2pt, shorten
+    >=2pt},
+    every node/.style={color=black}
+    ]
+    % axis
+    \draw[thick] (-0.1,0)  -- (1.1,0) node(xline)[below]
+        {$X$};
+    \draw[thick] (0,-0.1) -- (0,1.1) node(yline)[left] {$Y$};
+    % Values
+    \draw (0,1) node(xline)[left]{$1$};
+    \draw (0,0.5) node(xline)[left]{$1/2$};
+    \draw (1,0) node(xline)[below]{$1$};
+    \draw (0.5,0) node(xline)[below]{$1/2$};
+    % Fill
+    \fill[fill=gray!50] (0.5,0.5) -- (0.5,1) -- (1,1) -- (1,0.5) -- cycle;
+    % Box
+    \draw[important line] (0,0) -- (0,1) -- (1,1) -- (1,0) -- cycle;
+    % Lines
+    \draw (0.5,0) coordinate (A) -- (0.5,1);
+    \draw (0,0.5) coordinate (C) -- (1,0.5);
+\end{tikzpicture}  
+\end{minipage}%
+\begin{minipage}[t]{0.3\textwidth}
+    \centering 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% P(Z > 1/4)
+\begin{tikzpicture}[
+    scale=3,
+    %axis/.style={very thick, ->, >=stealth'},
+    important line/.style={thick},
+    dashed line/.style={dashed, thin},
+    pile/.style={thick, ->, >=stealth', shorten <=2pt, shorten
+    >=2pt},
+    every node/.style={color=black}
+    ]
+    % axis
+    \draw[thick] (-0.1,0)  -- (1.1,0) node(xline)[below]
+        {$X$};
+    \draw[thick] (0,-0.1) -- (0,1.1) node(yline)[left] {$Y$};
+    % Values
+    \draw (0,1) node(xline)[left]{$1$};
+    \draw (0,0.25) node(xline)[left]{$1/4$};
+    \draw (1,0) node(xline)[below]{$1$};
+    \draw (0.25,0) node(xline)[below]{$1/4$};
+    % Fill
+    \fill[fill=gray!50] (0.25,0.25) -- (0.25,1) -- (1,1) -- (1,0.25) -- cycle;
+    % Box
+    \draw[important line] (0,0) -- (0,1) -- (1,1) -- (1,0) -- cycle;
+    % Lines
+    \draw (0.25,0) coordinate (A) -- (0.25,1);
+    \draw[style=dashed] (0.5,0) coordinate (A) -- (0.5,1);
+    \draw[style=dashed] (0.75,0) coordinate (A) -- (0.75,1);
+    \draw (0,0.25) coordinate (C) -- (1,0.25);
+    \draw[style=dashed] (0,0.5) coordinate (C) -- (1,0.5);
+    \draw[style=dashed] (0,0.75) coordinate (C) -- (1,0.75);
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}[t]{0.3\textwidth}
+    \centering
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% P(Z > 3/4)
+    \begin{tikzpicture}[
+        scale=3,
+        %axis/.style={very thick, ->, >=stealth'},
+        important line/.style={thick},
+        dashed line/.style={dashed, thin},
+        pile/.style={thick, ->, >=stealth', shorten <=2pt, shorten
+        >=2pt},
+        every node/.style={color=black}
+        ]
+        % axis
+        \draw[thick] (-0.1,0)  -- (1.1,0) node(xline)[below]
+            {$X$};
+        \draw[thick] (0,-0.1) -- (0,1.1) node(yline)[left] {$Y$};
+        % Values
+        \draw (0,1) node(xline)[left]{$1$};
+        \draw (0,0.75) node(xline)[left]{$3/4$};
+        \draw (1,0) node(xline)[below]{$1$};
+        \draw (0.75,0) node(xline)[below]{$3/4$};
+        % Fill
+        \fill[fill=gray!50] (0.75,0.75) -- (0.75,1) -- (1,1) -- (1,0.75) -- cycle;
+        % Box
+        \draw[important line] (0,0) -- (0,1) -- (1,1) -- (1,0) -- cycle;
+        % Lines
+        \draw[style=dashed] (0.25,0) coordinate (A) -- (0.25,1);
+        \draw[style=dashed] (0.5,0) coordinate (A) -- (0.5,1);
+        \draw (0.75,0) coordinate (A) -- (0.75,1);
+        \draw[style=dashed] (0,0.25) coordinate (C) -- (1,0.25);
+        \draw[style=dashed] (0,0.5) coordinate (C) -- (1,0.5);
+        \draw (0,0.75) coordinate (C) -- (1,0.75);
+    \end{tikzpicture}
+\end{minipage}
+\end{figure}
+If we simulate lots of $X$ and $Y$ values, we see that about 1/4th of them will have both $X$ and
+$Y$ values larger than 0.5, so $\P(Z>0.5) = 1/4$. Similarly, we get $\P(Z>1/4) = 9/16$ and
+$\P(Z > 3/4) = 1/16$. Confirming this with a simulation.
 
+\begin{lstlisting}[style=RSyntax]
+# 2.7 - Simulating U(0,1)
+N = 100000;X = runif(N);Y = runif(N)
 
+Z = pmin(X, Y) # This is: Z = min{X, Y}
+
+# Comparing simualted vs. theoretical results
+sum(Z > 0.5)/N
+1/4
+sum(Z > 0.25)/N
+9/16
+sum(Z > 0.75)/N
+1/16   
+\end{lstlisting}
+\begin{Verbatim}[fontsize=\small]
+> # Comparing simualted vs. theoretical results
+> sum(Z > 0.5)/N
+[1] 0.24888
+> 1/4
+[1] 0.25
+
+> sum(Z > 0.25)/N
+[1] 0.56156
+> 9/16
+[1] 0.5625
+
+> sum(Z > 0.75)/N
+[1] 0.06205
+> 1/16
+[1] 0.0625
+\end{Verbatim}
+
+\newpage\noindent
+By inspecting the images on the previous page, we can determine the 'shape' of the probabilities.
+For $Z > 1/4$ we remove the union of $X \leq 1/4$ and $Y\leq 1/4$. We define $A = \{X \leq z\}$ and
+$B = \{Y\leq z\}$, and can write the general case as:
+\begin{align*}
+    \P(Z > z) &=
+    1 - \P(\{X \leq z\}\cup \{Y \leq z\}) \\
+    &= 1 - \P(A\cup B) \\
+    &= 1 - \big[\P(A) + \P(B) - \P(A\cap B)\big] \\
+    &= 1 - \big[\P(A) + \P(B) - \P(A)\P(B)\big]
+\end{align*}
+Where we used Lemma 1.6, and the fact that $X$ and $Y$ are independent. By using the probability
+law of complements, we can find the expression for $\P(Z\leq z)$.
+$$
+\P(Z\leq z) = \P(X\leq z) + \P(Y\leq z) - \P(X\leq z)\P(Y\leq z)
+$$
+The CDF for a uniform distribution on $U(a,b)$ is:
+$$
+F(z) = \frac{z-a}{b-a} \imp F_X(z) = F_Y(z) = \frac{z-0}{1-0} = z
+$$
+Which means:
+$$
+F_Z(z) = F_X(z) + F_Y(z) - F_X(z)F_Y(z) = 2z - z^2
+$$
+We can confirm our illustrations and simulated examples again by noting that:
+\begin{align*}
+    F_Z(1/2) &= \frac{1}{2} + \frac{1}{2} - \left(\frac{1}{2}\cdot\frac{1}{2}\right) = 1 - \frac{1}{4} = \frac{3}{4} \\
+    F_Z(1/4) &= \frac{1}{4} + \frac{1}{4} - \left(\frac{1}{4}\cdot\frac{1}{4}\right) = \frac{8}{16} - \frac{1}{16} = \frac{7}{16}\\
+    F_Z(3/4) &= \frac{3}{4} + \frac{3}{4} - \left(\frac{3}{4}\cdot\frac{3}{4}\right) = \frac{24}{16} - \frac{9}{16} = \frac{15}{16}
+\end{align*}
+which gives us the opposite results as expected (since we simulated and illustrated $\P(Z > z)$).
+The PDF $f_Z(z)$ is the derivative of the CDF $F_Z(z)$.
+Also show plot and histogram of the simulated $Z$.
+$$
+f_Z(z) = \frac{d}{dz}\Big(F_Z(z)\Big) = 2 - 2z.
+$$
+%Including a plot of the PDF as well as the histogram of the simulated $Z$ values.
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=\textwidth,
+        axis lines = left,
+        ymin = -0.002,
+        ymax = 2.1,
+        xlabel = $z$,
+        ylabel = {$f_Z(z)$},
+    ]
+    %Section 1
+    \addplot [
+        domain=0:1, 
+        samples=10, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {2 - 2*x};
+    \end{axis}
+\end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \includegraphics[scale=0.55]{ch2_2.7b.pdf}
+    \end{minipage}
+\end{figure}
+
+% \newpage\noindent
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \textbf{2.8}\\  % PDF page 44
 
 
 
@@ -582,6 +791,15 @@ find $\P(Z > z)$.
     A = B
     \tag*{\qed}
 \end{equation*}
+
+
+\begin{lstlisting}[style=RSyntax, title=R]
+# Code
+\end{lstlisting}
+
+\begin{verbatim}
+# Output
+\end{verbatim}
 
 
 \end{comment}
