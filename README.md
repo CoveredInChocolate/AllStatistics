@@ -3,7 +3,7 @@ Solutions for All Of Statistics by Wasserman
 
 [My solutions are here](allstat.pdf)
 
-I am doing some repetition on statistics and have chosen 'All Of Statistics' by Wasserman. I have greatly benefited from others who have shared their solutions, so I thought I could share my solutions as well. Maybe they can be of help to someone?
+I am doing some repetition on statistics and have chosen "**All Of Statistics**" by Wasserman. I have greatly benefited from others who have shared their solutions, so I thought I could share my solutions as well. Maybe they can be of help to someone?
 
 I have never been one for writing short, elegant proofs but instead I tend to spell things out. If you are like me, you will probably find it easier to understand.
 

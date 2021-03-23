@@ -771,81 +771,109 @@ $$
 
 \newpage\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{2.8}\\  % PDF page 44
+\textbf{2.8}\\  % PDF page 45
 The RV $X$ has CDF $F$. Finding the CDF of $X^+ = \max\{0, X\}$.
 
 \medskip\noindent
-Illustration of what happens when we go from $X$ to $X^+$ for some continuous
-distribution, such as $X\sim N(0,1)$.
-\begin{figure}[H]
-    \begin{minipage}{0.5\textwidth}
-\begin{tikzpicture}
-    \begin{axis}[
-        width=\textwidth,
-        axis lines = left,
-        ymin = -0.002,
-        ymax = 0.5,
-        xlabel = $x$,
-        ylabel = {$f_X(x)$},
-    ]
-    %Section 1
-    \addplot [
-        domain=-2:2, 
-        samples=50, 
-        color=blue,
-        style=ultra thick,
-    ]
-    {1/(sqrt(2*3.1415))*exp(-0.5*x^2)};
-    \end{axis}
-\end{tikzpicture}
-    \end{minipage}
-    \begin{minipage}{0.5\textwidth}
-        \begin{tikzpicture}
-            \begin{axis}[
-                width=\textwidth,
-                axis lines = left,
-                ymin = -0.002,
-                ymax = 0.5,
-                xlabel = $x$,
-                ylabel = {$f_{X^+}(x)$},
-            ]
-            %Section 1
-            \addplot [
-                domain=-2:0, 
-                samples=2, 
-                color=blue,
-                style=ultra thick,
-            ]
-            {0};
-            %Section 2
-            \addplot [
-                domain=0:2, 
-                samples=50, 
-                color=blue,
-                style=ultra thick,
-            ]
-            {1/(sqrt(2*3.1415))*exp(-0.5*x^2)};
-            %Vertical lines
-            \addplot +[mark=none, color=blue] coordinates {(0, -0) (0, 0.4)};
-            \end{axis}
-        \end{tikzpicture}
-    \end{minipage}
-\end{figure}
-
-We split up the $X$ into negative and positive values, which becomes a disjoint set.
+From the definition of CDF:
+\begin{align*}
+    F_{X^+}(u) &=  \P\big(\max(0, X)\leq u\big)\\
+    &= \P\Big(\{\omega\in \Omega \;:\; X(\omega)\leq u\;\text{and}\; u\geq 0\}\Big)
+\end{align*}
+We must consider two cases. When $u < 0$:
+\begin{align*}
+    F_{X^+}(u) &= \P\Big(\{\omega\in \Omega \;:\; X(\omega)\leq u\;\text{and}\; u\geq 0\}\Big) \\
+    &= \P(\emptyset) \\
+    &= 0
+\end{align*}
+When $u\geq 0$:
+\begin{align*}
+    F_{X^+}(u) &= \P\Big(\{\omega\in \Omega \;:\; X(\omega)\leq u\;\text{and}\; u\geq 0\}\Big) \\
+    &= \P\Big(\{\omega\in \Omega \;:\; X(\omega)\leq u\}\Big)  \\
+    &= \P(X\leq u) \\
+    &= F_X(u)
+\end{align*}
+So in summary:
 $$
-\{X\leq x : x\in\R\} = 
-\{X\leq x : x\leq 0\} \cup \{0 < X\leq x : x>0\}
-$$
-Since they are disjoint:
-$$
-\P(X\leq x) = \P(X \leq 0) + \P(0<X\leq x) = F(0) + F(x) - F(0)
-$$
-We can split up the CDF:
-$$
-F(X\leq x) = F(X\leq 0)
+F_{X^+}(u) =
+\left\{
+    \begin{matrix}
+        0 & u<0 \\
+        F_X(u) & u\geq0 \\
+    \end{matrix}
+\right.
 $$
 
+% \medskip\noindent
+% Illustration of what happens when we go from $X$ to $X^+$ for some continuous
+% distribution, such as $X\sim N(0,1)$.
+% \begin{figure}[H]
+%     \begin{minipage}{0.5\textwidth}
+% \begin{tikzpicture}
+%     \begin{axis}[
+%         width=\textwidth,
+%         axis lines = left,
+%         ymin = -0.002,
+%         ymax = 0.5,
+%         xlabel = $x$,
+%         ylabel = {$f_X(x)$},
+%     ]
+%     %Section 1
+%     \addplot [
+%         domain=-2:2, 
+%         samples=50, 
+%         color=blue,
+%         style=ultra thick,
+%     ]
+%     {1/(sqrt(2*3.1415))*exp(-0.5*x^2)};
+%     \end{axis}
+% \end{tikzpicture}
+%     \end{minipage}
+%     \begin{minipage}{0.5\textwidth}
+%         \begin{tikzpicture}
+%             \begin{axis}[
+%                 width=\textwidth,
+%                 axis lines = left,
+%                 ymin = -0.002,
+%                 ymax = 0.5,
+%                 xlabel = $x$,
+%                 ylabel = {$f_{X^+}(x)$},
+%             ]
+%             %Section 1
+%             \addplot [
+%                 domain=-2:0, 
+%                 samples=2, 
+%                 color=blue,
+%                 style=ultra thick,
+%             ]
+%             {0};
+%             %Section 2
+%             \addplot [
+%                 domain=0:2, 
+%                 samples=50, 
+%                 color=blue,
+%                 style=ultra thick,
+%             ]
+%             {1/(sqrt(2*3.1415))*exp(-0.5*x^2)};
+%             %Vertical lines
+%             \addplot +[mark=none, color=blue] coordinates {(0, -0) (0, 0.4)};
+%             \end{axis}
+%         \end{tikzpicture}
+%     \end{minipage}
+% \end{figure}
+% We split up the $X$ into negative and positive values, which becomes a disjoint set.
+% $$
+% \{X\leq x : x\in\R\} = 
+% \{X\leq x : x\leq 0\} \cup \{0 < X\leq x : x>0\}
+% $$
+% Since they are disjoint:
+% $$
+% \P(X\leq x) = \P(X \leq 0) + \P(0<X\leq x) = F(0) + F(x) - F(0)
+% $$
+% We can split up the CDF:
+% $$
+% F(X\leq x) = F(X\leq 0)
+% $$
 % \medskip\noindent
 % One of the defining properties of a PDF is that it must be greater than or equal to 0.
 % Since the CDF if the integral of the PDF, it will always be greater than or equal to 0
@@ -854,12 +882,58 @@ $$
 %%%% X will be negative. So the PDF is never negative, that is true, but that says
 %%%% nothing about the X.
 
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.9}\\  % PDF page 45
+We have $X\sim \text{Exp}(\beta)$. The PDF is given by:
+$$
+f(x) = \frac{1}{\beta}e^{-x/\beta},\quad x > 0
+$$
+Finding the CDF by integrating the PDF.
+\begin{align*}
+    F(y) &= \int_{-\infty}^y f(x)dx \\
+    &= \frac{1}{\beta}\int_0^y e^{-x/\beta}dx\\
+    &= \frac{1}{\beta}\big[-\beta e^{-x/\beta}\big]_0^y\\
+    &= \big[-e^{-x/\beta}\big]_0^y \\
+    &= 1 - e^{-y/\beta}
+\end{align*}
+To find the inverse $F^{-1}(q)$ we set $q = F(y)$ and solve for $y$.
+$$
+q = 1 - e^{-y/\beta}
+\imp
+y = -\beta\log(1 - q)
+\imp
+F^{-1}(q) = -\beta\log(1 - q)
+$$
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.10}\\  % PDF page 45
+If $X$ and $Y$ are independent, then $g(X)$ and $h(Y)$ are independent for some functions
+$g$ and $h$.
+
+\medskip\noindent
+\textsc{Proof}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \begin{comment}
 
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{2.X}\\  % PDF page 44
+\textbf{2.X}\\  % PDF page 45
 
 
 \begin{align*}
