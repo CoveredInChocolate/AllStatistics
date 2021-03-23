@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.10.2)  23 MAR 2021 19:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.10.2)  23 MAR 2021 21:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -587,55 +587,33 @@ Package pgfplots notification 'compat/show suggested version=true': document has
 \tf@toc=\write6
 \openout6 = `allstat.toc'.
 
-) (/home/sindre/AllStatistics/files/chap1.tex [1
+) (/home/sindre/AllStatistics/files/chap2.tex [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 12.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 9.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 9.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 12.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 9.
  (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-) [2] [3] [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 282--284
-
+) [2] [3] [4] [5] [6]
+Overfull \hbox (2.2222pt too wide) in paragraph at lines 432--496
+[] $[]$ 
  []
 
-[6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
-Overfull \hbox (23.69824pt too wide) detected at line 968
-[]
- []
-
-[18] [19] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+[7] [8] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang2.sty
 File: lstlang2.sty 2019/09/10 1.8c listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang3.sty
 File: lstlang3.sty 2019/09/10 1.8c listings language file
-)
-<ch2_2.21a.pdf, id=78, 505.89pt x 505.89pt>
-File: ch2_2.21a.pdf Graphic file (type pdf)
-<use ch2_2.21a.pdf>
-Package pdftex.def Info: ch2_2.21a.pdf  used on input line 1034.
-(pdftex.def)             Requested size: 258.00539pt x 258.0082pt.
- [20 </home/sindre/AllStatistics/files/ch2_2.21a.pdf>]
-<ch2_2.21b.pdf, id=89, 505.89pt x 505.89pt>
-File: ch2_2.21b.pdf Graphic file (type pdf)
-<use ch2_2.21b.pdf>
-Package pdftex.def Info: ch2_2.21b.pdf  used on input line 1068.
-(pdftex.def)             Requested size: 258.00539pt x 258.0082pt.
- [21 </home/sindre/AllStatistics/files/ch2_2.21b.pdf>] [22] [23] Excluding 'comment' comment.) (/home/sindre/AllStatistics/files/chap2.tex [24] [25] [26] [27] [28] [29]
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 432--496
-[] $[]$ 
- []
-
-[30] [31] [32]
-<ch2_2.7b.pdf, id=136, 344.28625pt x 289.08pt>
+) [9]
+<ch2_2.7b.pdf, id=47, 344.28625pt x 289.08pt>
 File: ch2_2.7b.pdf Graphic file (type pdf)
 <use ch2_2.7b.pdf>
 Package pdftex.def Info: ch2_2.7b.pdf  used on input line 768.
@@ -645,20 +623,25 @@ Overfull \hbox (2.2222pt too wide) in paragraph at lines 746--770
 []$[]$ $[]$ 
  []
 
-Excluding 'comment' comment.) [33 </home/sindre/AllStatistics/files/ch2_2.7b.pdf>] (/home/sindre/AllStatistics/files/allstat.aux) ) 
+[10 </home/sindre/AllStatistics/files/ch2_2.7b.pdf>]
+Overfull \hbox (2.2222pt too wide) in paragraph at lines 781--833
+[]$[]$ $[]$ 
+ []
+
+Excluding 'comment' comment.) [11] (/home/sindre/AllStatistics/files/allstat.aux) ) 
 Here is how much of TeX's memory you used:
- 28544 strings out of 481239
- 692330 string characters out of 5920377
- 1306832 words of memory out of 5000000
- 43297 multiletter control sequences out of 15000+600000
- 540853 words of font info for 57 fonts, out of 8000000 for 9000
+ 28519 strings out of 481239
+ 692236 string characters out of 5920377
+ 1249470 words of memory out of 5000000
+ 43279 multiletter control sequences out of 15000+600000
+ 540339 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 73i,15n,127p,753b,2656s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /home/sindre/AllStatistics/files/allstat.pdf (33 pages, 311882 bytes).
+ 73i,14n,127p,753b,2656s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on /home/sindre/AllStatistics/files/allstat.pdf (11 pages, 180987 bytes).
 PDF statistics:
- 195 PDF objects out of 1000 (max. 8388607)
- 137 compressed objects within 2 object streams
+ 106 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 28 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

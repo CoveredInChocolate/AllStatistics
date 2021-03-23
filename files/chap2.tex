@@ -736,8 +736,8 @@ We can confirm our illustrations and simulated examples again by noting that:
     F_Z(3/4) &= \frac{3}{4} + \frac{3}{4} - \left(\frac{3}{4}\cdot\frac{3}{4}\right) = \frac{24}{16} - \frac{9}{16} = \frac{15}{16}
 \end{align*}
 which gives us the opposite results as expected (since we simulated and illustrated $\P(Z > z)$).
-The PDF $f_Z(z)$ is the derivative of the CDF $F_Z(z)$.
-Also show plot and histogram of the simulated $Z$.
+The PDF $f_Z(z)$ is the derivative of $F_Z(z)$.
+Including PDF-plot and histogram of the simulated $Z$s.
 $$
 f_Z(z) = \frac{d}{dz}\Big(F_Z(z)\Big) = 2 - 2z.
 $$
@@ -769,10 +769,90 @@ $$
     \end{minipage}
 \end{figure}
 
-% \newpage\noindent
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \textbf{2.8}\\  % PDF page 44
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.8}\\  % PDF page 44
+The RV $X$ has CDF $F$. Finding the CDF of $X^+ = \max\{0, X\}$.
 
+\medskip\noindent
+Illustration of what happens when we go from $X$ to $X^+$ for some continuous
+distribution, such as $X\sim N(0,1)$.
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=\textwidth,
+        axis lines = left,
+        ymin = -0.002,
+        ymax = 0.5,
+        xlabel = $x$,
+        ylabel = {$f_X(x)$},
+    ]
+    %Section 1
+    \addplot [
+        domain=-2:2, 
+        samples=50, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {1/(sqrt(2*3.1415))*exp(-0.5*x^2)};
+    \end{axis}
+\end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=\textwidth,
+                axis lines = left,
+                ymin = -0.002,
+                ymax = 0.5,
+                xlabel = $x$,
+                ylabel = {$f_{X^+}(x)$},
+            ]
+            %Section 1
+            \addplot [
+                domain=-2:0, 
+                samples=2, 
+                color=blue,
+                style=ultra thick,
+            ]
+            {0};
+            %Section 2
+            \addplot [
+                domain=0:2, 
+                samples=50, 
+                color=blue,
+                style=ultra thick,
+            ]
+            {1/(sqrt(2*3.1415))*exp(-0.5*x^2)};
+            %Vertical lines
+            \addplot +[mark=none, color=blue] coordinates {(0, -0) (0, 0.4)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
+
+We split up the $X$ into negative and positive values, which becomes a disjoint set.
+$$
+\{X\leq x : x\in\R\} = 
+\{X\leq x : x\leq 0\} \cup \{0 < X\leq x : x>0\}
+$$
+Since they are disjoint:
+$$
+\P(X\leq x) = \P(X \leq 0) + \P(0<X\leq x) = F(0) + F(x) - F(0)
+$$
+We can split up the CDF:
+$$
+F(X\leq x) = F(X\leq 0)
+$$
+
+% \medskip\noindent
+% One of the defining properties of a PDF is that it must be greater than or equal to 0.
+% Since the CDF if the integral of the PDF, it will always be greater than or equal to 0
+% as well.
+%%%% No, wait - this is incorrect. We could have e.g. U(-1, 1) or N(0, 1) in which case many
+%%%% X will be negative. So the PDF is never negative, that is true, but that says
+%%%% nothing about the X.
 
 
 \begin{comment}
@@ -791,6 +871,53 @@ $$
     A = B
     \tag*{\qed}
 \end{equation*}
+
+
+%%% Tikz Image - side by side
+\begin{figure}
+    \begin{minipage}[0.5\textwidth]
+\begin{tikzpicture}
+    \begin{axis}[
+        width=\textwidth,
+        axis lines = left,
+        ymin = -0.002,
+        ymax = 2.1,
+        xlabel = $z$,
+        ylabel = {$f_Z(z)$},
+    ]
+    %Section 1
+    \addplot [
+        domain=0:1, 
+        samples=10, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {2 - 2*x};
+    \end{axis}
+\end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}[0.5\textwidth]
+\begin{tikzpicture}
+    \begin{axis}[
+        width=\textwidth,
+        axis lines = left,
+        ymin = -0.002,
+        ymax = 2.1,
+        xlabel = $z$,
+        ylabel = {$f_Z(z)$},
+    ]
+    %Section 1
+    \addplot [
+        domain=0:1, 
+        samples=10, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {2 - 2*x};
+    \end{axis}
+\end{tikzpicture}
+    \end{minipage}
+\end{figure}
 
 
 \begin{lstlisting}[style=RSyntax, title=R]
