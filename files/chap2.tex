@@ -105,8 +105,8 @@ First, we make the following observation:
 \begin{align*}
     \P(A) &= \P(\{a \leq X\}) \\
     &= \P(\{a = X\}\cup\{a < X\}) \\
-    &= \P(\{a = X\}) + \P(\{a < X\}) + \P(\{a = X\}\cap\{a < X\}) \\
-    &= 0 + \P(A') + 0 \\
+    &= \P(\{a = X\}) + \P(\{a < X\}) - \P(\{a = X\}\cap\{a < X\}) \\
+    &= 0 + \P(A') - 0 \\
     &= \P(A')
 \end{align*}
 where $A' = \{a < X\}$. We get 0 for the pointwise probability, since this is continuous,
@@ -670,7 +670,7 @@ with some illustrations. Here are plots of the cases $\P(Z > 1/2)$, $\P(Z > 1/4)
 \end{minipage}
 \end{figure}
 If we simulate lots of $X$ and $Y$ values, we see that about 1/4th of them will have both $X$ and
-$Y$ values larger than 0.5, so $\P(Z>0.5) = 1/4$. Similarly, we get $\P(Z>1/4) = 9/16$ and
+$Y$ values larger than 1/2, so $\P(Z>1/2) = 1/4$. Similarly, we get $\P(Z>1/4) = 9/16$ and
 $\P(Z > 3/4) = 1/16$. Confirming this with a simulation.
 
 \begin{lstlisting}[style=RSyntax]
@@ -914,13 +914,127 @@ $g$ and $h$.
 
 \medskip\noindent
 \textsc{Proof}.
+Let $X$ and $Y$ be some arbitrary random variables, and let $x$ and $y$ be
+values in the range of $g$ and $h$ such that $g(X) = x$ and $h(Y) = y$. Then:
+\begin{align*}
+    \P(g(X) = x, h(Y) = y) &=
+    \P(X = g^{-1}(x), Y = h^{-1}(y)) \\
+\shortintertext{By independence of $X$ and $Y$.}
+&= \P(X = g^{-1}(x))\P(Y = h^{-1}(y)) \\
+&= \P(g(X) = x)\P(h(Y) = y) 
+\end{align*}
+which shows that $g$ and $h$ satisfies the condition for independence.\qed
+% When $X$ and $Y$ are independent, we want to show that the following is true:
+% $$
+% \P(g(X)\cap h(Y)) = \P(g(X))\P(h(Y))
+% $$
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.11}\\  % PDF page 45
+Tossing a coin which has probability $p$ of getting H. We let $X$ denote the
+number of heads and $Y$ the number of tails.
+
+\medskip\noindent(a) Showing that $X$ and $Y$ are dependent. First it will be helpful
+to consider a simplified case where we have $N=1$ and $N=2$ coin tosses, and assuming $p=1/2$.
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+        $N = 1$ Tosses \\
+        $$
+            \begin{tabular}{c|c|c|c}
+                & $Y=0$ & $Y=1$ & \\
+                \hline
+                $X=0$ & 0 & $1/2$ & $1/2$ \\
+                \hline
+                $X=1$ & $1/2$ & 0 & $1/2$ \\
+                \hline
+                & $1/2$ & $1/2$ & 1
+            \end{tabular}
+        $$
+        \rule{0pt}{5pt}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        $N = 2$ Tosses \\
+        $$
+            \begin{tabular}{c|c|c|c|c}
+                & $Y=0$ & $Y=1$ & $Y=2$ & \\
+                \hline
+                $X=0$ & 0 & 0 & 1/4 & $1/4$ \\
+                \hline
+                $X=1$ & 0 & 1/2 & 0 & $1/2$ \\
+                \hline
+                $X=2$ & $1/4$ & 0 & 0 & $1/4$ \\
+                \hline
+                & $1/4$ & $1/2$ & $1/4$ & 1
+            \end{tabular}
+        $$
+    \end{minipage}
+\end{figure}
+In the case of $N=2$, we see that $f(0, 2) = 1/4$ while $f_X(0)f_Y(2) = 1/16$. This will be the
+inspiration for how we show it in the general case with $N$ tosses and probability $p$ of heads.
+
+\medskip\noindent
+We only need to show one specific case where $\P(X=x, Y=y) \not= \P(X=x)\P(Y=y)$ to show that these
+values are dependent. The total number of tosses will be $N = X + Y$ and we compare the cases where
+we get $N$ heads. In that case, using the Multinomial distribution:
+$$
+\P(X=N, Y=0) = {N\choose N,0} =p^N(1-p)^0 = p^N,
+$$
+but with the two Binomial distributions:
+$$
+\P(X=N)\P(Y=0) = {N\choose N}p^N(1-p)^0\times {N\choose 0}p^0(1-p)^N = p^N(1-p)^N.
+$$
+These are not equal, showing that $X$ and $Y$ are dependent variables.
 
 
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+(b) Now we have $N\sim\text{Poisson}(\lambda)$, where $N = X + Y$ for $X$ heads
+and $Y$ tails. Show that these values are now independent.
 
+\medskip\noindent\emph{Current solution, but not sure it's correct...}\\
+Assuming $X=x$ and $Y=y$. Then:
+\begin{align*}
+    \P(X=x\cap Y=y) &= \P(X=x\cap Y=y\cap N = x+y) \\
+    &= \P(X=x\cap Y=y \mid N = x+y)\cdot\P(N = x+y) \\
+    &= {x+y\choose x}p^x(1-p)^y\cdot e^{-\lambda}\frac{\lambda^{x+y}}{(x+y)!} \\
+    &= \frac{\cancel{(x+y)!}}{x!y!}p^x(1-p)^y\cdot e^{-\lambda}\frac{\lambda^x\lambda^y}{\cancel{(x+y)!}} \\
+    &= e^{-\lambda}\frac{p^x\lambda^x}{x!}\cdot\frac{(1-p)^y\lambda^y}{y!} \\
+    &= e^{-\lambda p}\frac{p^x\lambda^x}{x!}\cdot e^{-\lambda(1-p)}\frac{(1-p)^y\lambda^y}{y!} \\
+    &= \P(X=x | \lambda p)\cdot\P(Y=y|\lambda(1-p)) \\
+    &= \P(X=x)\P(Y=y)
+\end{align*}
+Which shows we have independence. We used:
+$$
+e^{-\lambda} = e^{-\lambda(p - p + 1)} = e^{-\lambda p + \lambda p - \lambda}
+= e^{-\lambda p}e^{\lambda p - \lambda} = e^{-\lambda p}e^{-\lambda(1-p)}
+$$
+Also, we made the assumption that $\P(X=x\cap Y=y \mid N = x+y)$ is Binomial. But I think this is
+only true when we can assume that $X$ and $Y$ are independent... which is what we are trying to show.
+Will review this later... hopefully!
 
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.12} \textsc{Theorem} 2.33\\  % PDF page 45
+Suppose that the range of $X$ and $Y$ is a (possibly infinite)
+rectangle. If $f(x, y) = g(x)h(y)$ for some functions $g$ and $h$ (not necessarily
+probability density functions) then $X$ and $Y$ are independent.
 
-
-
+\medskip\noindent\textsc{Proof}. From the joint PDF, we can find the marginal distributions:
+$$
+f_X(x) = \int f(x, y) dy, \quad
+f_Y(y) = \int f(x, y) dx
+$$
+By applying these integrals to both sides of the equality:
+$$
+\int f(x, y) dy = g(x)\int h(y) dy \imp f_X(x) = g(x)
+$$
+$$
+\int f(x, y) dx = h(y)\int g(x) dx \imp f_Y(y) = h(y)
+$$
+We get $g(x)$ and $h(y)$ since they are equal to $f(x,y)$ over the entire 'rectangle' and must therefore
+integrate to 1. This leaves us with: $g(x)h(y) = f_X(x)f_Y(y)$, and by the results in exercise 2.5,
+this means that $X$ and $Y$ are independent. \qed
 
 
 
