@@ -746,7 +746,7 @@ $$
     \begin{minipage}{0.5\textwidth}
 \begin{tikzpicture}
     \begin{axis}[
-        width=\textwidth,
+        width=0.8\textwidth,
         axis lines = left,
         ymin = -0.002,
         ymax = 2.1,
@@ -1007,7 +1007,7 @@ Assuming $X=x$ and $Y=y$. Then:
 Which shows we have independence. We used:
 $$
 e^{-\lambda} = e^{-\lambda(p - p + 1)} = e^{-\lambda p + \lambda p - \lambda}
-= e^{-\lambda p}e^{\lambda p - \lambda} = e^{-\lambda p}e^{-\lambda(1-p)}
+= e^{-\lambda p}e^{\lambda p - \lambda} = e^{-\lambda p}e^{-\lambda(1-p)}.
 $$
 Also, we made the assumption that $\P(X=x\cap Y=y \mid N = x+y)$ is Binomial. But I think this is
 only true when we can assume that $X$ and $Y$ are independent... which is what we are trying to show.
@@ -1033,10 +1033,71 @@ $$
 \int f(x, y) dx = h(y)\int g(x) dx \imp f_Y(y) = h(y)
 $$
 We get $g(x)$ and $h(y)$ since they are equal to $f(x,y)$ over the entire 'rectangle' and must therefore
-integrate to 1. This leaves us with: $g(x)h(y) = f_X(x)f_Y(y)$, and by the results in exercise 2.5,
+integrate to 1. This leaves us with: $f(x, y) = g(x)h(y) = f_X(x)f_Y(y)$, and by the results in exercise 2.5,
 this means that $X$ and $Y$ are independent. \qed
 
-
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.13}\\  % PDF page 45
+(a) Finding the PDF of $Y = e^X$ when $X\sim N(0,1)$.
+\begin{align*}
+    F_Y(y) &= \P(Y\leq y) = \P(e^X \leq y) \\
+    &= \P(X\leq \log(y)) = F_X(\log(y))
+\end{align*}
+We simply get the standard normal distribution back, but we input the logarithm of $y$.
+This means we get the PDF:
+$$
+f_Y(y) = f_X(\log(y)) = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{1}{2}\big(\log(y)\big)^2\right)
+$$
+Plotting the function:
+\begin{figure}[H]
+\begin{minipage}{0.5\textwidth}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.9\textwidth,
+        axis lines = left,
+        ymin = -0.002,
+        ymax = 0.42,
+        xlabel = $x$,
+        ylabel = {$f_X(\log(y))$},
+    ]
+    %Section 1
+    \addplot [
+        domain=-5:20, 
+        %domain=-1:5, 
+        samples=400, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {(1/(sqrt(2*pi)))*exp(-0.5*ln(x)*ln(x))};
+    \end{axis}
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\end{minipage}
+\end{figure}
+(b) Plotting histogram of simulated results. Comparable to the plot above.
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+        \begin{center}
+            \begin{figure}[H]
+            \includegraphics[scale=0.65]{ch2_2.13b.pdf}
+            \end{figure}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+    \begin{lstlisting}[style=RSyntax]
+x = rnorm(10000)
+y = exp(x)
+hist(y, breaks = 100, xlim = c(0, 20))
+pdf("~/AllStatistics/files/ch2_2.13b.pdf",
+     width = 4.7747, height = 4)
+hist(y, breaks = 100, xlim = c(0, 20))
+dev.off()
+    \end{lstlisting}
+    \rule{0pt}{55pt}
+\end{minipage}
+\end{figure}
 
 
 

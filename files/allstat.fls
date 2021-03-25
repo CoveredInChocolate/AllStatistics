@@ -332,6 +332,9 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt9.tfm
 INPUT /home/sindre/AllStatistics/files/ch2_2.7b.pdf
 INPUT /home/sindre/AllStatistics/files/ch2_2.7b.pdf
 INPUT /home/sindre/AllStatistics/files/ch2_2.7b.pdf
+INPUT /home/sindre/AllStatistics/files/ch2_2.13b.pdf
+INPUT /home/sindre/AllStatistics/files/ch2_2.13b.pdf
+INPUT /home/sindre/AllStatistics/files/ch2_2.13b.pdf
 INPUT /home/sindre/AllStatistics/files/allstat.aux
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
