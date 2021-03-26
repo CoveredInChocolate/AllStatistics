@@ -548,7 +548,7 @@ We will set $Y = I_A(X)$ and find the PDF and CDF of $Y$.
 The exercise asks for a
 probability mass function, but that cannot be correct. Since $X$ has a density $f$, it is
 a continuous RV. If $X\sim U(0,1)$ and $A = (0,1)$, then $Y = X$ and it will be a uniform
-variable with a continuous distribution, so not necessarily continuous.
+variable with a continuous distribution, so not necessarily discrete.
 
 \medskip\noindent
 And if it can be a continuous distribution, what happens if we define $A = \mathbb{Q}\subset\R$?
@@ -1120,21 +1120,22 @@ which means $F_R(r) = r^2$.
 Following the general recipe for transformation of multiple random variables. We will define
 the function $r(X,Y) = \sqrt{X^2 + Y^2}$. %And we will use that $Y \leq \sqrt{1 - X^2}$.
 \begin{align*}
-    F_R(r) &= \P(R\leq r) = \P(r(X,Y)\leq r) = \P(\sqrt{X^2 + Y^2}\leq r)\\
-    &= \P(X^2 + Y^2\leq r^2) = \int\int_{A_r}f_{X,Y}(x,y)dxdy
+    F_R(r) &= \P(R\leq r) = \P(r(X,Y)\leq r)
+    %= \P(\sqrt{X^2 + Y^2}\leq r)\\
+    = \P(X^2 + Y^2\leq r^2) = \int\int_{A_r}f_{X,Y}(x,y)dxdy
     %= \P(X^2 + Y^2\leq r^2) \\ &= \P(X^2 + )
 \end{align*}
 Finding the set $A_r$ which in this case is still the unit circle,
 since $\sqrt{x^2 + y^2} \leq 1 \;\Longrightarrow\; x^2 + y^2 \leq 1$.
 
 Since the area of the unit circle is $\pi$, and since we have a uniform distribution,
-the probability is equal everywhere. It follows that:
+the probability is equal everywhere, it follows that:
 $$
-f_{X,Y}(x,y) = \frac{1}{\pi}
+f_{X,Y}(x,y) = \frac{1}{\pi}.
 $$
 As we saw, we must integrate this function over the circle: $\{(x,y) : x^2 + y^2 < r\}$
 for some $0\leq r \leq 1$.
-This is easier by calculating the integral in polar coordinates, so we introduce
+This is easiest when calculating the integral in polar coordinates, so we introduce
 $0\leq \theta\leq 2\pi$ and $0\leq \rho\leq r$ and change $dxdy = \rho d\rho d\theta$.
 So:
 \begin{align*}
@@ -1232,9 +1233,80 @@ dev.off()
 \end{minipage}
 \end{figure}
 
-% \newpage\noindent
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \textbf{2.15}\\  % PDF page 45
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.15}\\  % PDF page 45
+Let $X$ have a continuous, strictly increasing CDF $F$, and set $Y = F(X)$.
+Find the density of $Y$.
+
+By definition of the CDF, $F: \R\rightarrow [0,1]$ which will be the domain
+of $Y$. Since $F$ is strictly increasing, then $F(X_1) < F(X_2)$ if $X_1 < X_2$,
+but the important property is that $F$ must be \emph{invertible}. For any $y\in[0,1]$
+we get the following:
+\begin{align*}
+    F_Y(y) = \P(Y\leq y) &= \P(F(X) \leq y) \\
+    &= \P(X\leq F^{-1}(y)) 
+    = F(F^{-1}(y)) = y
+\end{align*}
+Since $F_Y(y) = y$, then the density is $f_Y(y) = 1$, the derivative. From these observations,
+we can conclude that $Y\sim U(0,1)$.
+
+Next, if $U\sim U(0,1)$, then $F^{-1}(U)$ has $F$ as its CDF. %Using that $F_U(y) = \P(U\leq y) = y$.
+\begin{align*}
+    \P(F^{-1}(U)\leq x) &= \P(X \leq x) = F(x) \imp X\sim F
+\end{align*}
+
+Writing a program that generates Exp($\beta$) values. Using the result found in exercise 2.9.
+
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+        \begin{lstlisting}[style=RSyntax]
+simExp = function(beta, N){
+    U = runif(N)
+    expRND = -beta*log(1 - U)
+}
+# Simulating
+expRND = simExp(beta = 2/3, N = 50000)
+# Making plot
+hist(expRND, breaks=80,
+    xlim=c(0, 5), prob=TRUE)
+lines(density(expRND), col="red", xlim=c(0,5), lwd=2)
+        \end{lstlisting}
+        \begin{center}
+            \begin{figure}[H]
+            \includegraphics[scale=0.7]{ch2_2.15.pdf}
+            \end{figure}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \bigskip\bigskip\bigskip\bigskip\bigskip\bigskip\bigskip
+        \medskip\noindent
+        \quad Plot of the exponential distribution for $\beta = 2/3$.
+        $$
+f_X(x) = 1.5\exp{(1.5x)}
+        $$
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=0.9\textwidth,
+                axis lines = left,
+                ymin = -0.002,
+                ymax = 1.3,
+                xlabel = $x$,
+                ylabel = {$f_X(x)$},
+            ]
+            %Section 1
+            \addplot [
+                domain=-1:5, 
+                samples=400, 
+                color=blue,
+                style=ultra thick,
+            ]
+            {1.5*exp(-1.5*x)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
+
 
 
 
