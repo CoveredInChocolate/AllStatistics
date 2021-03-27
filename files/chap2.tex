@@ -1709,7 +1709,90 @@ hist(d3, breaks=60, prob=TRUE,
 Let $X_1,\ldots,X_n\sim\text{Exp}(\beta)$ be IID. Define $Y = \max(X_1,\ldots,X_n)$.
 Find the PDF of $Y$.
 
+\medskip\noindent
+Recall the PDF of the exponential distribution:
+$$
+f_X(x) = \frac{1}{\beta}\exp\left(-x/\beta\right), \quad x\geq 0
+$$
+Defining $r(X_1,\ldots, X_n) = \max(X_1,\ldots, X_n)$. Finding an expression for the CDF of $Y$.
+\begin{align*}
+    F_Y(y) = \P(Y\leq y) = \P(\max(X_1,\ldots, X_n)\leq y)
+\end{align*}
+According to the hint, $Y\leq y$ iff $X_i\leq y$ for all $i\in I$, where $I=\{1,\ldots, n\}$
+is the index set. We can therefore express the CDF of $Y$ in terms of each individual CDF:
+$$
+F_Y(y) = \P(X_1\leq y)\cap \P(X_2\leq y)\cap\ldots\cap\P(X_n\leq y) = \left(F_X(y)\right)^n
+= \left(1 - \exp(-y/\beta)\right)^n
+$$
+Differentiating wrt. $y$ to find the PDF.
+\begin{align*}
+    f_Y(y) &= 
+    \frac{d}{dy}F_Y(y) =
+    \frac{d}{dy}(F_X(y))^n
+    = n(F_X(y))^{n-1}f_X(y)\\
+    &= n\left(1 - \exp(-y/\beta)\right)^{n-1}\frac{1}{\beta}\exp\left(-y/\beta\right) \\
+    &= \frac{n}{\beta}\exp\left(-y/\beta\right)\left(1 - \exp(-y/\beta)\right)^{n-1}
+\end{align*}
+Plots and simulation code for $n=10$ and $\beta = 0.2$.
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+    \begin{center}
+        \begin{figure}[H]
+            \includegraphics[scale=0.7]{ch2_2.21.pdf}
+            \end{figure}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=0.9\textwidth,
+                axis lines = left,
+                ymin = -0.002,
+                ymax = 2.1,
+                xlabel = $y$,
+                ylabel = {$f_Y(y)$},
+            ]
+            %Section 1
+            \addplot [
+                domain=0:2.5, 
+                samples=100, 
+                color=blue,
+                style=ultra thick,
+            ]
+            {50*exp(-5*x)*(1 - exp(-5*x))^9};
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
 
+\newpage\noindent
+\begin{lstlisting}[style=RSyntax, title=R]
+N = 100000
+lambda = 5
+
+exp1 = rexp(N, rate = lambda)
+exp2 = rexp(N, rate = lambda)
+exp3 = rexp(N, rate = lambda)
+exp4 = rexp(N, rate = lambda)
+exp5 = rexp(N, rate = lambda)
+exp6 = rexp(N, rate = lambda)
+exp7 = rexp(N, rate = lambda)
+exp8 = rexp(N, rate = lambda)
+exp9 = rexp(N, rate = lambda)
+exp10 = rexp(N, rate = lambda)
+
+Y = pmax(exp1, exp2, exp3, exp4, exp5,
+            exp6, exp7, exp8, exp9, exp10)
+
+hist(Y, breaks = 50, prob = TRUE)
+lines(density(Y), col="red", xlim=c(0,2.5), lwd=2)
+\end{lstlisting}
+
+% pdf("~/AllStatistics/files/ch2_2.21.pdf",
+%     width = 5, height = 4)
+% hist(Y, breaks = 50, prob = TRUE)
+% lines(density(Y), col="red", xlim=c(0,5), lwd=2)
+% dev.off()
 
 
 
