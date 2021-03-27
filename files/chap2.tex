@@ -679,7 +679,7 @@ N = 100000;X = runif(N);Y = runif(N)
 
 Z = pmin(X, Y) # This is: Z = min{X, Y}
 
-# Comparing simualted vs. theoretical results
+# Comparing simulated vs. theoretical results
 sum(Z > 0.5)/N
 1/4
 sum(Z > 0.25)/N
@@ -688,7 +688,7 @@ sum(Z > 0.75)/N
 1/16   
 \end{lstlisting}
 \begin{Verbatim}[fontsize=\small]
-> # Comparing simualted vs. theoretical results
+> # Comparing simulated vs. theoretical results
 > sum(Z > 0.5)/N
 [1] 0.24888
 > 1/4
@@ -1061,7 +1061,7 @@ Plotting the function:
         ymin = -0.002,
         ymax = 0.75,
         xlabel = $y$,
-        ylabel = {$f_X(\log(y))$},
+        ylabel = {$\frac{1}{y}\cdot f_X(\log(y))$},
     ]
     %Section 1
     \addplot [
@@ -1128,7 +1128,7 @@ the function $r(X,Y) = \sqrt{X^2 + Y^2}$. %And we will use that $Y \leq \sqrt{1 
 Finding the set $A_r$ which in this case is still the unit circle,
 since $\sqrt{x^2 + y^2} \leq 1 \;\Longrightarrow\; x^2 + y^2 \leq 1$.
 
-Since the area of the unit circle is $\pi$, and since we have a uniform distribution,
+Since the area of the unit circle is $\pi$, and since a uniform distribution means
 the probability is equal everywhere, it follows that:
 $$
 f_{X,Y}(x,y) = \frac{1}{\pi}.
@@ -1251,7 +1251,7 @@ we get the following:
 Since $F_Y(y) = y$, then the density is $f_Y(y) = 1$, the derivative. From these observations,
 we can conclude that $Y\sim U(0,1)$.
 
-Next, if $U\sim U(0,1)$, then $F^{-1}(U)$ has $F$ as its CDF. %Using that $F_U(y) = \P(U\leq y) = y$.
+Next, if $U\sim U(0,1)$ and $X = F^{-1}(U)$, then $X$ has $F$ as its CDF. %Using that $F_U(y) = \P(U\leq y) = y$.
 \begin{align*}
     \P(F^{-1}(U)\leq x) &= \P(X \leq x) = F(x) \imp X\sim F
 \end{align*}
@@ -1263,7 +1263,7 @@ Writing a program that generates Exp($\beta$) values. Using the result found in 
         \begin{lstlisting}[style=RSyntax]
 simExp = function(beta, N){
     U = runif(N)
-    expRND = -beta*log(1 - U)
+    return(-beta*log(1 - U))
 }
 # Simulating
 expRND = simExp(beta = 2/3, N = 50000)
@@ -1308,13 +1308,421 @@ f_X(x) = 1.5\exp{(1.5x)}
 \end{figure}
 
 
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.16}\\  % PDF page 45
+If $X\sim\text{Poisson}(\lambda_1)$ and $X\sim\text{Poisson}(\lambda_2)$, and $X$ and $Y$
+are independent, then the distribution of $X$ given that $X+Y = n$ is
+Binomial($n, \rho$) where $\rho = \lambda_1/(\lambda_1 + \lambda_2)$. (Changed some variable names).
+
+\medskip\noindent\textsc{Proof}.
+By definition of conditional probability, by applying hint 1, by independence and
+by using the fact that $X$ + $Y$ is a Poisson distribution with $\lambda_1 + \lambda_2$.
+\begin{align*}
+    \P(X = x | X + Y = n) &= \frac{\P(X = x \cap X + Y = n)}{\P(X + Y = n)} \\
+    &= \frac{\P(X = x \cap Y = n - x)}{\P(X + Y = n)} \tag{Hint}\\
+    &= \frac{\P(X = x)\P(Y = n - x)}{\P(X + Y = n)} \tag{Independence}
+\end{align*}
+Each of these terms are known:
+\begin{align*}
+\P(X = x) &= e^{-\lambda_1}\cdot\frac{\lambda_1^x}{x!} \\
+\P(Y = n - x) &= e^{-\lambda_2}\cdot\frac{\lambda_2^{(n-x)})}{(n-x)!} \\
+\P(X + Y = n) &= e^{-(\lambda_1 + \lambda_2)}\cdot\frac{(\lambda_1 + \lambda_2)^n}{n!} 
+\end{align*}
+We can invert the last equation:
+$$
+\frac{1}{\P(X + Y = n)} = e^{\lambda_1 + \lambda_2}\cdot\frac{n!}{(\lambda_1 + \lambda_2)^n} 
+$$
+Putting it all together, we can complete the justification.
+\begin{align*}
+    \P(X = x | X + Y = n) &= \frac{\P(X = x)\P(Y = n - x)}{\P(X + Y = n)} \\
+    &= \left(e^{-\lambda_1}\cdot\frac{\lambda_1^x}{x!}\right)
+    \left(e^{-\lambda_2}\cdot\frac{\lambda_2^{(n-x)})}{(n-x)!}\right)
+    \left(e^{\lambda_1 + \lambda_2}\cdot\frac{n!}{(\lambda_1 + \lambda_2)^n} \right) \\
+    &= \left(\frac{\lambda_1^x}{x!}\right)
+    \left(\frac{\lambda_2^{(n-x)})}{(n-x)!}\right)
+    \left(\frac{n!}{(\lambda_1 + \lambda_2)^x(\lambda_1 + \lambda_2)^{(n-x)}} \right) \\
+    &= \left(\frac{n!}{x!(n-x)!}\right)
+    \left(\frac{\lambda_1}{\lambda_1 + \lambda_2}\right)^x
+    \left(\frac{\lambda_2}{\lambda_1 + \lambda_2}\right)^{(n-x)} \\
+    &= {n\choose x}
+    \left(\frac{\lambda_1}{\lambda_1 + \lambda_2}\right)^x
+    \left(\frac{\lambda_2}{\lambda_1 + \lambda_2}\right)^{(n-x)} \\
+    &= {n\choose x}
+    \left(\frac{\lambda_1}{\lambda_1 + \lambda_2}\right)^x
+    \left(1 - \frac{\lambda_1}{\lambda_1 + \lambda_2}\right)^{(n-x)} \\
+    &= {n\choose x}
+    \rho^x
+    (1 - \rho)^{(n-x)}   \sim \text{Binomial}(n, \rho)
+\end{align*}
+for $\rho = \lambda_1/(\lambda_1 + \lambda_2)$. \qed
+
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.17}\\  % PDF page 46
+The joint probability density is:
+$$
+f_{X,Y}(x,y) = 
+\left\{
+    \begin{matrix}
+        c(x + y^2) & 0\leq x\leq 1, 0\leq y\leq 1 \\
+        0 & \text{otherwise}
+    \end{matrix}
+\right.
+$$
+Calculating $\P(X < 1/2 \,|\, Y = 1/2)$.
+
+\medskip\noindent
+We begin by calculating the marginal distribution for $f_Y(y)$.
+$$
+f_Y(y) = \int_0^1 cx + cy^2 dx = c\int_0^1 x dx + c\int_0^1 y^2 dx =
+c\big[ \frac{x^2}{2}\big]_0^1 + cy^2\big[x\big]_0^1 = c\left(\frac{1}{2} + y^2\right)
+$$
+Following the steps in example 2.38.
+$$
+f_{X|Y}(x|y) = \frac{f_{X,Y}(x,y)}{f_Y(y)} = \frac{c(x + y^2)}{c\left(\frac{1}{2} + y^2\right)}
+= \frac{x + y^2}{\frac{1}{2} + y^2}
+$$
+Calculating the conditional probability:
+\begin{align*}
+    \P(X < 1/2 | Y = 1/2) &= \int_0^{1/2} f_{X|Y}(1/2|1/2)dx \\
+    &= \int_0^{1/2} \frac{x + \frac{1}{4}}{\frac{1}{2} + \frac{1}{4}} dx \\
+    &= \frac{4}{3} \int_0^{1/2}x + \frac{1}{4}dx \\
+    &= \frac{4}{3} \Big[\frac{x^2}{2} + \frac{x}{4}\Big]_0^{1/2} = \frac{4}{3}\cdot\frac{1}{4} = \frac{1}{3}
+\end{align*}
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.18}\\  % PDF page 46
+Let $X \sim N(3, 16)$. Solve the following using the Normal table and using
+a computer package.
+
+\medskip\noindent(a)
+$$
+\P(X < 7) = \P(3 + 4Z < 7) = \P\left(Z < \frac{7 - 3}{4}\right) = \P(Z < 1) = 0.8413
+$$
+From \textbf{R}:
+\begin{verbatim}
+> pnorm(1)                     > 1 - pnorm(-0.25)
+[1] 0.84134475                 [1] 0.59870633
+\end{verbatim}
+
+\medskip\noindent(b)
+\begin{align*}
+    \P(X > 2) &= 1 - \P(X \leq 2) = 1 - \P(3 + 4Z \leq 2) = 1 - \P\left(Z \leq \frac{2 - 3}{4}\right) \\
+    &= 1 - \P(Z < -1/4) = 1 - (1 - 0.5987) = 0.5987
+\end{align*}
+
+\newpage\noindent
+(c) Find $x$ such that $\P(X > x) = 0.05$. By finding 0.95 in the table, we see that it is generated
+by the value 1.645, so:
+$$
+\P(Z\leq 1.645) = 0.95 \imp \P(Z > 1.645) = 1 - 0.95 = 0.05
+$$
+$$
+\P(4Z > 6.58) = \P(3 + 4Z > 9.58) = \P(X > 9.58) = 0.05
+$$
+So, $x = 9.58$.
+From \textbf{R}:
+\begin{verbatim}
+1 - pnorm(9.5794, mean = 3, sd = 4)
+[1] 0.05000037
+\end{verbatim}
+(d)
+\begin{align*}
+    \P(0\leq X < 4) &= \P(0\leq 3 + 4Z < 4) = \P(-3 \leq 4Z < 1)\\
+    &= \P(-3/4 \leq Z < 1/4) = \P(Z < 1/4) - \P(Z < -3/4) \\
+    &= 0.5987 - (1 - 0.7734) = 0.5987 - 0.2266 \\
+    &= 0.3721
+\end{align*}
+From \textbf{R}:
+\begin{verbatim}
+> pnorm(0.25) - pnorm(-0.75)
+[1] 0.37207897
+#### Alternatively
+> CH = rnorm(10000000, mean = 3, sd = 4)
+> sum(CH < 4 & CH > 0)/10000000
+[1] 0.3719199
+\end{verbatim}
+(e) Find $x$ such that $\P(|X| > |x|) = 0.05$.
+
+We can split this up in two sections if we assume $x>0$. Using that the sets are disjoint:
+\begin{align*}
+    \P(|X| > |x|) &= \P(X > x\cap X < -x) = \P(X > x) + \P(X < -x) \\
+    &= 1 - \P(X\leq x) + \P(X < - x) = 0.05 \\
+    \P(X\leq x) - \P(X < - x) &= 0.95
+\end{align*}
+Note we get minus. Translating to standard normal:
+$$
+\P\left(Z\leq \frac{x - 3}{4}\right) - \P\left(Z < \frac{-x - 3}{4}\right) = 0.95
+$$
+I am not able to see how to solve this by just looking up values because of the dependence.
+By using R, we can find that $x = 9.611$ which makes the lookup values $1.65275$ and -3.15275.
+Verifying in \textbf{R}.
+\begin{verbatim}
+> X = rnorm(10000000, mean = 3, sd = 4)
+> x = 9.611
+> sum(X < -x | X > x)/10000000
+[1] 0.0500769
+> sum(abs(X) > abs(x))/10000000
+[1] 0.0500769
+\end{verbatim}
+
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.19}\\  % PDF page 46
+Proving equation (2.12). Let $X$ be a random variable with pdf $f_X(x)$, and
+define the random variable $Y = r(X)$, where $r$ is either strictly monotone increasing
+or decreasing, so $r(\cdot)$ has the inverse function $s(\cdot) = r^{-1}(\cdot)$.
+Then, we can express the pdf of $Y$ as:
+$$
+f_Y(y) = f_X(s(y))\Big|\frac{ds(y)}{dy}\Big|.
+$$
+\textsc{Proof}. The proof will be in two parts. Assume first that $r$ is strictly increasing,
+which means that $s$ is strictly increasing and its derivative is positive.
+From the CDF of $Y$, we get:
+\begin{align*}
+    F_Y(y) &= \P(Y\leq y) \\
+    &= \P(r(X)\leq y) \\
+    &= \P(X\leq r^{-1}(y)) \\
+    &= \P(X\leq s(y)) \\
+    &= F_X(s(y))
+\end{align*}
+Differentiating the CDF to get the PDF.
+$$
+f_Y(y) = \frac{d}{dy}F_Y(y)
+= \frac{d}{dy}F_X(s(y)) =
+f_X(s(y))\frac{ds(y)}{dy}
+$$
+Now assume that $r$ is strictly decreasing, which means $s$ is strictly decreasing and thus
+has a negative derivative. From the CDF of $Y$, we now get:
+\begin{align*}
+    F_Y(y) &= \P(Y\leq y) \\
+    &= \P(r(X)\leq y) \\
+    &= \P(X\geq r^{-1}(y)) \\
+    &= 1 - \P(X\leq s(y)) \\
+    &= 1 - F_X(s(y))
+\end{align*}
+$$
+f_Y(y) = \frac{d}{dy}F_Y(y)
+= \frac{d}{dy}\big[1 - F_X(s(y))\big] =
+-f_X(s(y))\frac{ds(y)}{dy} =
+f_X(s(y))\left(-\frac{ds(y)}{dy}\right)
+$$
+Since the derivative will be negative, the negative of the derivative will be positive.
+Generalizing to both cases, we can write:
+\begin{equation}
+    f_Y(y) = f_X(s(y))\Big|\frac{ds(y)}{dy}\Big|
+    \tag*{\qed}
+\end{equation}
+A short note on why we get $1-\P(X\leq s(y))$ when $r$ is strictly decreasing. As an example,
+say that $X\sim U(0,5)$ and we define $Y = r(X)$ where $r(x) = 2 - 2x$, which is strictly
+decreasing. Then $r^{-1}(y) = s(y) = 1 - \frac{y}{2}$, which is also strictly decreasing. Then:
+$$
+\P(r(X) \leq y) = \P(2 - 2X \leq y) = \P(2 - y \leq 2X) = \P(1 - \frac{y}{2} \leq X) = \P(X \geq s(y))
+$$
+In order to get the expression in terms of $F_X(x)$, we rewrite it:
+$$
+\P(X \geq s(y)) = 1 - \P(X \leq s(y)) = 1 - F_X(s(y)).
+$$
+
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.20}\\  % PDF page 46
+Let $X, Y \sim U(0,1)$ be independent. Find the PDF for $X-Y$ and $X/Y$.
+The joint density of $X, Y$ is
+$$
+f(x, y) = 1,\quad x,y\in(0,1)
+$$
+and 0 elsewhere.
+
+\medskip\noindent We define $Z = X - Y$. We note that $Z$ can assume values between
+-1 and 1, which are the two extremes. This gives us $A_z = (-1, 1)$. We split this
+into two cases: when $X > Y$, then $A_z = (0, 1)$ and when $X < Y$, which means $A_z = (-1, 0)$.
+
+When $X > Y$ and $A_z = (0, 1)$.
+\begin{align*}
+    F_Z(z) &= \int_0^z\int_y^1 1 dxdy = \int_0^z[x]_y^1 dy \\
+    &= \int_0^z 1 - y dy = \left[y - \frac{y^2}{2}\right]_0^z \\
+    &= z - \frac{z^2}{2} 
+\end{align*}
+
+When $X < Y$ and $A_z = (-1, 0)$.
+\begin{align*}
+    F_Z(z) &= \int_{-1}^z\int_{-1}^y 1 dxdy = \int_{-1}^z[x]_{-1}^y dy \\
+    &= \int_{-1}^z y + 1 dy = \left[\frac{y^2}{2} + y\right]_{-1}^z \\
+    &= \frac{z^2}{2} + z + \frac{1}{2} 
+\end{align*}
+Summarizing the CDF, and differentiating to find the PDF. (The 1/2 carries over).
+$$
+F_Z(z) =
+\left\{
+    \begin{matrix}
+        \frac{z^2}{2} + z + \frac{1}{2} & z\in(-1, 0) \\
+        z - \frac{z^2}{2} + \frac{1}{2} & z\in(0, 1) 
+    \end{matrix}
+\right.
+\imp
+f_Z(z) =
+\left\{
+    \begin{matrix}
+        z + 1 & z\in(-1, 0) \\
+        1 - z & z\in(0, 1) 
+    \end{matrix}
+\right.
+$$
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+    \begin{center}
+        \begin{figure}[H]
+            \includegraphics[scale=0.51]{ch2_2.20.pdf}
+            \end{figure}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=0.75\textwidth,
+                axis lines = left,
+                ymin = -0.002,
+                ymax = 1.1,
+                xlabel = $z$,
+                ylabel = {$f_Z(z)$},
+            ]
+            %Section 1
+            \addplot [
+                domain=-1:0, 
+                samples=10, 
+                color=blue,
+                style=ultra thick,
+            ]
+            {x + 1};
+            %Section 2
+            \addplot [
+                domain=0:1, 
+                samples=10, 
+                color=blue,
+                style=ultra thick,
+            ]
+            {1 - x};
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
+
+\newpage\noindent  Now we define $Z = X/Y$.
+$$
+F_Z(z) = \P(Z\leq z) = \P(X/Y\leq z) = \P(X\leq zY)
+$$
+$$
+F_Z(z) = \int_0^1\int_0^{\min(z,y)}1dxdy =
+\int_0^1\min(z,y) dy = 
+\left\{
+    \begin{tabular}{ll}
+        $\displaystyle\int_0^{\frac{1}{z}} zydy + \int_{\frac{1}{z}}^1 1 dy$ & $z\geq 1$ \\
+        $\displaystyle\int_0^1 zydy$ & $z < 1$
+    \end{tabular}
+\right.
+$$
+Evaluating the integrals to get the CDF, and differentiating to get the PDF:
+$$
+F_Z(z) = 
+\left\{
+    \begin{tabular}{ll}
+        $\displaystyle 1-\frac{1}{2z}$ & $z\geq 1$ \\
+        $\displaystyle \frac{z}{2}$ & $z < 1$
+    \end{tabular}
+\right.
+\imp
+f_Z(z) = 
+\left\{
+    \begin{tabular}{ll}
+        $\displaystyle \frac{1}{2z^2}$ & $z\geq 1$ \\
+        \rule{0pt}{20pt}$\displaystyle \frac{1}{2}$ & $z < 1$
+    \end{tabular}
+\right.
+$$
+Plots and simulation code.
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+    \begin{center}
+        \begin{figure}[H]
+            \includegraphics[scale=0.51]{ch2_2.20b.pdf}
+            \end{figure}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=0.75\textwidth,
+                axis lines = left,
+                ymin = -0.002,
+                ymax = 0.55,
+                xlabel = $z$,
+                ylabel = {$f_Z(z)$},
+            ]
+            %Section 1
+            \addplot [
+                domain=0:1.02, 
+                samples=10, 
+                color=blue,
+                style=ultra thick,
+            ]
+            {0.5};
+            %Section 2
+            \addplot [
+                domain=1:3, 
+                samples=40, 
+                color=blue,
+                style=ultra thick,
+            ]
+            {1/(2*x*x)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
+
+\begin{lstlisting}[style=RSyntax, title=R]
+# Simulating X-Y
+N = 10000
+X = runif(N);Y = runif(N)
+d1 = X - Y
+hist(d1, breaks = 50, prob = TRUE,
+        main="Histogram of X-Y")
+
+# Simulating X/Y
+N = 1000000
+X = runif(N);Y = runif(N)
+d2 = X/Y
+d3 = d2[abs(d2) < 3] # Removing very rare large vals
+d3 = d3*length(d2)/length(d3) # Normalizing probability
+hist(d3, breaks=60, prob=TRUE,
+        main = "Histogram of X/Y")
+\end{lstlisting}
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{2.21}\\  % PDF page 46
+Let $X_1,\ldots,X_n\sim\text{Exp}(\beta)$ be IID. Define $Y = \max(X_1,\ldots,X_n)$.
+Find the PDF of $Y$.
+
+
+
+
+
+
+
+
 
 
 \begin{comment}
 
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{2.X}\\  % PDF page 45
+\textbf{2.1X}\\  % PDF page 46
 
 
 \begin{align*}
