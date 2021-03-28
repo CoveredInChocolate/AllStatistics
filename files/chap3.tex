@@ -7,8 +7,179 @@
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \textbf{3.1}\\  % PDF page 58
+Define $X$ as the wealth after $n$ games. The probability of winning and losing is the same
+for each outcome so $p = 1/2$.
+\begin{align*}
+    \E[X] &= \frac{1}{2}\cdot 2c+ \frac{1}{2}\cdot \left(\frac{1}{2}\right)c
+    = c + \frac{c}{4} = \frac{5}{4}c
+\end{align*}
+We expect to have $5/4\cdot c$ after $n$ games. We can also verify this result with a simulation
+in \textbf{R}.
+\begin{lstlisting}[style=RSyntax, title=R]
+> games = sample(c(2, 0.5), size = 1000000, replace = TRUE)
+> mean(games)
+[1] 1.250973
+> 5/4
+[1] 1.25
+\end{lstlisting}
 
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.2}\\  % PDF page 59
+\textbf{Claim}. $\V(X) = 0$ if and only if $\P(X = c) = 1$ for some constant $c$.
 
+\medskip\noindent\textsc{Proof}.\\
+$\Rightarrow)$ Set $c = \mu$ and assume $\V(X) = 0$, which means that
+$$
+%\E[(X - \mu)^2] = \E[X^2] - \mu^2 = 0
+\E[(X - \mu)^2] = 0
+\imp
+%\E[X^2] = \mu^2
+\int (x - \mu)^2dF(x) = 0.
+$$
+This can only be 0 when $x = \mu = c$ for the entire domain of $X$. Hence $\P(X = c) = 1$.
+
+\medskip\noindent
+$\Leftarrow)$ Assume $\P(X=c) = 1$. When calculating the expectation:
+$$
+\mu = \E[X] = \int c dF(x) = c
+$$
+When calculating the variance:
+$$
+\V(X) = \int (x - \mu)^2dF(x) = \int (c - c)^2dF(x) = 0,
+$$
+since $x = c$ for all $x$ in the domain of $X$. \qed
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.3}\\  % PDF page 59
+Let $X_1,\ldots, X_n\sim U(0,1)$ and define $Y = \max(X_1,\ldots, X_n)$. We will calculate
+$\E[Y]$. It is not stated in the exercise, but we will assume that the $X_i$ are independent.
+Finding the CDF for $Y$.
+\begin{align*}
+    F_Y(y) &= \P(Y\leq y) \\
+    &= \P(\max(X_1, \ldots, X_n) \leq y) \\
+    &= \P(X_1\leq y)\cap\ldots\cap\P(X_n\leq y) \\
+    &= \P(X_1\leq y)\P(X_2\leq y)\cdots\P(X_n\leq y) \tag{Independence}\\
+    &= (F_X(y))^n
+\end{align*}
+Differentiating to get the PDF for $Y$.
+$$
+f_Y(y) = \frac{d}{dy}F_Y(y) = \frac{d}{dy}(F_X(y))^n = n(F_X(y))^{n-1}f_X(y)
+$$
+Since $X_i$ are uniformly distributed, we know that $F_X(y) = y$ and $f_X(y) = 1$, so:
+$$
+f_Y(y) = ny^{n-1}
+$$
+Now we can calculate the expectation of $Y$.
+$$
+\E[Y] = \int_0^1 y\cdot ny^{n-1} dy = n\int_0^1 y^n dy = n\Big[\frac{y^{n+1}}{n+1}\Big]_0^1 = \frac{n}{n+1}
+$$
+Confirming this result with a numeric simulation in \RR.
+
+\begin{lstlisting}[style=RSyntax, title=R]
+> # 3.3
+> N = 1000000
+> U1 = runif(N)
+> U2 = runif(N)
+> U3 = runif(N)
+> U4 = runif(N)
+> U5 = runif(N)
+> U6 = runif(N)
+> U7 = runif(N)
+> U8 = runif(N)
+> U9 = runif(N)
+> U10 = runif(N)
+> Y = pmax(U1, U2, U3, U4, U5,
++          U6, U7, U8, U9, U10)
+> mean(Y)
+[1] 0.9091151
+> # Theoretical Result
+> 10/11
+[1] 0.9090909
+\end{lstlisting}
+As we can see, the theoretical result is very close to the simulated result for $n=10$.
+% \begin{verbatim}
+%     # Output
+% \end{verbatim}
+% # 3.3
+% N = 1000000
+% U1 = runif(N)
+% U2 = runif(N)
+% U3 = runif(N)
+% U4 = runif(N)
+% U5 = runif(N)
+% U6 = runif(N)
+% U7 = runif(N)
+% U8 = runif(N)
+% U9 = runif(N)
+% U10 = runif(N)
+% Y = pmax(U1, U2, U3, U4, U5,
+%          U6, U7, U8, U9, U10)
+% mean(Y)
+% # Theoretical Result n/(n+1)
+% 10/11
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.4} - Random Walk\\  % PDF page 59
+A particle starts in the origin and jumps left, a step of -1, with probability $p$
+and jumps right, a step of 1, with probability $1-p$. The expected location will be:
+$$
+\E[X] = (-1)p + (1)(1-p) = -p + 1 - p = 1 - 2p
+$$
+To calculate the variance, we start by finding the second moment:
+$$
+\E[X^2] = (-1)^2p + (1)^2(1-p) = p + 1 - p = 1
+$$
+So the variance is:
+$$
+\V(X) = \E[X^2] - \E[X]^2 = 1 - (1 - 2p)^2 = 1 -(1 - 4p + 4p^2) = 4p - 4p^2
+$$
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.5}\\  % PDF page 59
+Tossing a fair coin until we get H. Finding the expected number of tosses. The reasoning is
+as follows. We get H on the first toss with probability 1/2, first H on the second toss
+with probability $1/2^2$ = 1/4 and so on. The pattern becomes as follows, for the first 7 cases:
+$$
+\begin{tabular}{lll}
+    \textbf{Tosses} & \textbf{Outcome} & \textbf{Probability} \\
+    1 & $\{H\}$ & 1/2 \\
+    2 & $\{TH\}$ & 1/4 \\
+    3 & $\{TTH\}$ & 1/8 \\
+    4 & $\{TTTH\}$ & 1/16 \\
+    5 & $\{TTTTH\}$ & 1/32 \\
+    6 & $\{TTTTTH\}$ & 1/64 \\
+    7 & $\{TTTTTTH\}$ & 1/128
+\end{tabular}
+$$
+Define $T$ to be the number of tosses to get H.
+\begin{align*}
+    \E[T] &= (1)\left(\frac{1}{2}\right) + (2)\left(\frac{1}{4}\right) + \ldots + (k)\left(\frac{1}{2^k}\right) + \ldots \\
+    &= \sum_{k=1}^\infty \frac{k}{2^k} \\
+    &= 2
+\end{align*}
+Not delving in to the mathematics of the infinite sum, but it can be shown that this sum becomes 2
+which will be the expected number of tosses to get a H. Here is a numeric approximation in \RR.
+\begin{lstlisting}[style=RSyntax, title=R]
+> sumApprox = 0
+> for (k in 1:1000) {
++   sumApprox = sumApprox + k/2^k
++ } 
+> sumApprox
+[1] 2
+\end{lstlisting}
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.6} \textbf{Theorem} - The Rule of the Lazy Statistician\\  % PDF page 59
+Proving the following result for the discrete case. Let $Y = r(X)$, then
+$$
+\E[Y] = \E[r(X)] = \sum_{x}r(x)f(x)
+$$
+\textsc{Proof}.
 
 
 
@@ -33,6 +204,17 @@
     A = B
     \tag*{\qed}
 \end{equation*}
+
+
+\begin{lstlisting}[style=RSyntax, title=R]
+# Code
+\end{lstlisting}
+
+\begin{verbatim}
+# Output
+\end{verbatim}
+
+
 
 
 %%% Tikz Image - side by side
@@ -80,15 +262,6 @@
 \end{tikzpicture}
     \end{minipage}
 \end{figure}
-
-
-\begin{lstlisting}[style=RSyntax, title=R]
-# Code
-\end{lstlisting}
-
-\begin{verbatim}
-# Output
-\end{verbatim}
 
 
 \end{comment}
