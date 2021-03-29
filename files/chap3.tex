@@ -177,13 +177,486 @@ which will be the expected number of tosses to get a H. Here is a numeric approx
 \textbf{3.6} \textbf{Theorem} - The Rule of the Lazy Statistician\\  % PDF page 59
 Proving the following result for the discrete case. Let $Y = r(X)$, then
 $$
-\E[Y] = \E[r(X)] = \sum_{x}r(x)f(x)
+\E[Y] = \E[r(X)] = \sum_{x}r(x)f_X(x)
 $$
-\textsc{Proof}.
+\textsc{Proof}. Set $\mathcal{X}, \mathcal{Y}$ to be the set of all
+values for $X$ and $Y$. We have the functions $r: \mc{X}\rightarrow\mc{Y}$
+and $r^{-1}: \mc{Y}\ra\mc{X}$. We will define $s := r^{-1}$ for convenience.
+By definition of the expectation:
+\begin{align*}
+    \E[Y] &= \sum_{y\in\mc{Y}} y \cdot f_Y(y) = \sum_{y\in\mc{Y}} y \cdot \P(Y=y) \\
+    &= \sum_{y\in\mc{Y}} y \sum_{x\in s(y)}\P(X=x) \\
+    &= \sum_{y\in\mc{Y}} \sum_{x\in s(y)}y\P(X=x) \\
+    &= \sum_{x\in\mc{X}} r(x)\P(X=x) \\
+    &= \sum_{x\in\mc{X}} r(x)f_X(x) \tag*{\qed}
+\end{align*}
 
+\medskip\noindent
+A simplified case to make the proof easier a bit easier to understand. We define the variables
+$X$ and $Y = r(X) = X^2$, and use the following distributions.
+$$
+\begin{tabular}{r|c}
+    $x$ & $\P(X=x)$ \\
+    \hline
+    $-1$ & $1/4$ \\
+    $0$ & $1/4$ \\
+    $1$ & $1/2$
+\end{tabular}
+\quad
+Y = r(X) = X^2
+\quad
+\begin{tabular}{r|c}
+    $y$ & $\P(Y=y)$ \\
+    \hline
+    $0$ & $1/4$ \\
+    $1$ & $3/4$ \\
+    &
+\end{tabular}
+$$
+Then the calculations above become:
+\begin{align*}
+    \E[Y] &= \sum_{y\in\mc{Y}} y \cdot f_Y(y) = (0)(1/4) + (1)(3/4) \\
+    &= \sum_{y\in\mc{Y}} y \sum_{x\in s(y)}\P(X=x) = (0)(1/4) + (1)\big[1/4 + 1/2\big]\\
+    &= \sum_{y\in\mc{Y}} \sum_{x\in s(y)}y\P(X=x) = (0)(1/4) + (1)(1/4) + (1)(1/2) \\
+    &= \sum_{x\in\mc{X}} r(x)\P(X=x) = (0)^2(1/4) + (-1)^2(1/4) + (1)^2(1/2)  \\
+    &= \sum_{x\in\mc{X}} r(x)f_X(x)
+\end{align*}
+In both cases, the expectation becomes 3/4.
 
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.7}\\  % PDF page 59
+$X\sim F$ is continuous and we suppose that $\P(X > 0) = 1$ and that $\E[X]$ exists.
+Show that $\E[X] = \int_0^\infty \P(X > x)dx$.
 
+\medskip\noindent\textsc{Proof}. By definition of the expectation, and since the
+domain of $X$ must be $(0, \infty)$:
+$$
+\E[X] = \int_0^\infty x\cdot f_X(x)dx
+$$
+Using integration by parts, and setting $u = x$ and $v' = f_X$, which gives $u' = 1$ and $v = F_X$:
+$$
+\int u v' = uv - \int u'v,
+$$
+which gives us:
+\begin{align*}
+    \E[X] = \int_0^\infty x\cdot f_X(x)dx &=
+    x F_X(x)\Big|_0^\infty - \int_0^\infty F_X(x)dx \\
+    &= x F_X(x)\Big|_0^\infty - \int_0^\infty \P(X\leq x)dx \\
+    &= x F_X(x)\Big|_0^\infty - \int_0^\infty 1 - \P(X > x)dx \\
+    &= x F_X(x)\Big|_0^\infty - x\Big|_0^\infty + \int_0^\infty\P(X > x)dx \\
+    &= -\big(\lim_{x\ra\infty}x(1 -F_X(x)\big) + \int_0^\infty\P(X > x)dx\\
+    &= \int_0^\infty\P(X > x)dx
+\end{align*}
+which proves the result. In the second to last step, we applied the hint regarding the limit.\qed
 
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.8} - Theorem 3.17\\  % PDF page 59
+Let $X_1,\ldots, X_n$ be IID and let $\mu = \E[X_i]$, $\sigma^2 = \V(X_i)$.
+Then:
+$$
+\E[\overline{X}] = \mu,\quad
+\V(\overline{X}) = \frac{\sigma^2}{n},\quad
+\E[S^2] = \sigma^2.
+$$
+\textsc{Proof}. Start with the expectation of the sample mean:
+$$
+\E[\overline{X}] = \E\left[\frac{1}{n}\sum_{i=1}^n X_i\right] = \frac{1}{n}\sum_{i=1}^n\E[X_i]
+= \frac{1}{n}\sum_{i=1}^n \mu = \frac{n\cdot\mu}{n} = \mu.
+$$
+Next, the variance.
+$$
+\V[\overline{X}] = \V\left[\frac{1}{n}\sum_{i=1}^n X_i\right] = \frac{1}{n^2}\sum_{i=1}^n\V[X_i]
+= \frac{1}{n^2}\sum_{i=1}^n \sigma^2 = \frac{n\cdot\sigma^2}{n^2} =\frac{\sigma^2}{n}.
+$$
+
+\newpage\noindent
+Finally, the expectation of the sample variance. This calculation is a lot more involved.
+$$
+\E[S^2] = \E\left[\frac{1}{n-1}\sum_{i=1}^n (X_i - \overline{X})^2\right]
+%= \frac{1}{n-1}\E\left[\sum_{i=1}^n (X_i - \overline{X})^2\right]
+\imp
+(n-1)\E[S^2] = \E\left[\sum_{i=1}^n (X_i - \overline{X})^2\right]
+$$
+We will use that $\bar{X} = (1/n)\Sigma X_i$ means that $\Sigma X_i = n\bar{X}$.
+Running through the calculations:
+\begin{align*}
+    (n-1)\E[S^2] &= \E\left[\sum_{i=1}^n (X_i^2 - 2X_i\bar{X} + \bar{X}^2)\right] \\
+    &= \E\left[\sum_{i=1}^n X_i^2 - 2 \sum_{i=1}^n X_i\bar{X} + \sum_{i=1}^n\bar{X}^2)\right] \\
+    &= \E\left[\sum_{i=1}^n X_i^2\right] - \E\left[2 \sum_{i=1}^n X_i\bar{X}\right] + \E\left[\sum_{i=1}^n\bar{X}^2)\right] \\
+    &= \sum_{i=1}^n \E\left[X_i^2\right] - \E\left[2 \bar{X}\sum_{i=1}^n X_i\right] + \E\left[\bar{X}^2\sum_{i=1}^n 1)\right] \tag{$\bar{X}$ indp. of $i$}\\
+    &= n\E\left[X_i^2\right] - 2n\E\left[\bar{X}^2\right] + n\E\left[\bar{X}^2\right] \tag{$\Sigma X_i = n\bar{X}$}\\
+    &= n\E\left[X_i^2\right] - n\E\left[\bar{X}^2\right]
+\end{align*}
+By dividing both sides of the equality by $n$, we have shown:
+\[
+\frac{n-1}{n}\E[S^2] = \E\left[X_i^2\right] - \E\left[\bar{X}^2\right]
+\tag{3.8.1}
+\]
+We have the second moment for $X$. From the definition of the variance:
+$$
+\V(X_i) = \E[X_i^2] - \mu^2 \imp \E[X_i^2] = \V(X_i) + \mu^2 = \sigma^2 + \mu^2
+$$
+From the previous results:
+$$
+\V(\bar{X}) = \E[\bar{X}^2] - \E[\bar{X}]^2 \imp
+\E[\bar{X}^2] = \V(\bar{X}) + \E[\bar{X}]^2 = \frac{\sigma^2}{n} + \mu^2
+$$
+Replacing each of these into (3.8.1) and isolating $\E[S^2]$.
+\begin{align*}
+    \E[S^2] &= \frac{n}{n-1}\left(\sigma^2 + \mu^2 - \Big(\frac{\sigma^2}{n} + \mu^2\Big)\right) \\
+    &= \frac{n}{n-1}\left(\sigma^2 - \frac{\sigma^2}{n}\right) \\
+    &= \frac{n}{n-1}\left(\frac{n-1}{n}\right)\sigma^2 \\
+    &= \sigma^2
+\end{align*}
+and we have finally shown the final result. \qed
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.9}\\  % PDF page 59
+Computer experiment; studying the effects of the mean over 10.000 simulations from the standard normal
+distribution and the Cauchy distribution.
+
+As we can see the simulation of the normal distribution quickly stabilizes to a value of around 0 which
+is the expected value. The Cauchy distribution is a very heavy-tailed distribution and the expectation does
+not exist. Therefore, there is no mean it can stablize to and it ends up behaving erraticaly even after
+10.000 simulations. The jumps that can be seen are extreme outliers that are added to the data, which
+are relatively common in the Cauchy distribution.
+
+Results:
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+    \begin{center}
+        \begin{figure}[H]
+            \includegraphics[scale=0.7]{ch3_3.9A.pdf}
+        \end{figure}
+    \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+    \begin{center}
+        \begin{figure}[H]
+            \includegraphics[scale=0.7]{ch3_3.9B.pdf}
+        \end{figure}
+    \end{center}
+    \end{minipage}
+\end{figure}
+
+\begin{lstlisting}[style=RSyntax, title=R]
+# Setting the number of simulations
+N = 10000
+
+# Simulating N standard normal values
+X = rnorm(N)
+Xmean = cumsum(X)/1:N
+plot(1:N, Xmean, type="l", ylim = c(-0.2, 0.2),
+main = "Mean of N(0,1)")
+abline(h = 0, col="red")
+
+# Simulating N Cauchy values with loc = 0, scale = 1
+Y = rcauchy(N)
+Ymean = cumsum(Y)/1:N
+plot(1:N, Ymean, type="l",
+main = "Mean of Cauchy")
+\end{lstlisting}
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.10}\\  % PDF page 59
+Let $X\sim N(0,1)$ and define $Y = e^X$. Find $\E[Y]$ and $\V(Y)$.
+
+\medskip\noindent
+One possible way to solve this is defining $r(X) = e^X$ and evaluating:
+$$
+\E[Y] = \E[r(X)] = \int_{\R} e^xf_X(x)dx
+= \frac{1}{\sqrt{2\pi}}\int_{\R} \exp\left(x - \frac{1}{2}x^2\right)dx.
+$$
+Completing the square in the exponential term:
+$$
+x - \frac{1}{2}x^2 = -\frac{1}{2}\left(x^2 - 2x\right)
+= -\frac{1}{2}\left(x^2 - 2x + 1 - 1\right)
+= -\frac{1}{2}\left(x - 1\right)^2 + \frac{1}{2}
+$$
+We can rewrite the integral:
+$$
+\E[Y] = e^{1/2}\frac{1}{\sqrt{2\pi}}\int_{\R} \exp\left(-\frac{1}{2}(x - 1)^2\right)dx
+$$
+We will integrate this by substitution:
+$$
+u = x-1 \imp du/dx = 1 \imp du = dx
+$$
+$$
+\E[Y] = e^{1/2}\underbrace{\frac{1}{\sqrt{2\pi}}\int_{\R} \exp\left(-\frac{1}{2}u^2\right)du}_{=1}
+= e^{1/2} \approx 1.6487
+$$
+Confirming with numerical simulation.
+\begin{lstlisting}[style=RSyntax]
+> N = 10000000; X = rnorm(N); Y = exp(X)
+> mean(Y)
+[1] 1.648564
+> exp(0.5)
+[1] 1.648721
+> var(Y)
+[1] 4.676382
+> exp(2) - exp(1)
+[1] 4.670774
+\end{lstlisting}
+We can calculate the variance by first finding the second moment: $\E[Y^2]$.
+$$
+\E[Y^2] = \E[r(X)^2] = \int_{\R} e^{2x}f_X(x)dx
+= \frac{1}{\sqrt{2\pi}}\int_{\R} \exp\left(2x - \frac{1}{2}x^2\right)dx.
+$$
+Just as above, we complete the square and get: $-(1/2)(x - 2)^2 + 2$ and move $e^2$ outside the integral. Then
+we use integration by substitution: $u = x - 2$ which gives $du = dx$. We end up with a similar integral: 
+$$
+\E[Y^2] = e^{2}\underbrace{\frac{1}{\sqrt{2\pi}}\int_{\R} \exp\left(-\frac{1}{2}u^2\right)du}_{=1}
+= e^{2}
+$$
+Now we can calculate the variance of $Y$.
+$$
+\V(Y) = \E[Y^2] - \E[Y]^2 = e^2 - (e^{1/2})^2 = e^2 - e^1,
+$$
+and as we can see in the simulation above, this corresponds to the simulated variance.
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.11}\\  % PDF page 59
+Simulating stocks. For each day $Y_i$ can be either $-1$ or 1, each with probability 1/2.
+We have $X_n = \sum_{i=1}^n Y_i$ which is the cumulative value of the stock.
+
+\medskip\noindent(a) Calculating the expectation and variance of $X_n$. First we calculate it for
+$Y_i$.
+$$
+\E[Y_i] = (-1)(1/2) + (1)(1/2) = -1/2 + 1/2 = 0
+$$
+$$
+\E[Y_i^2] = (-1)^2(1/2) + (1)^2(1/2) = 1/2 + 1/2 = 1
+$$
+$$
+\V(Y_i) = \E[Y_i^2] - \E[Y_i]^2 = 1 - 0 = 1
+$$
+Now for $X_n$.
+$$
+\E[X_n] = \E\left[\sum_{i=1}^n Y_i\right] = \sum_{i=1}^n \E[Y_i] = 0
+$$
+$$
+\V(X_n) = \V\left[\sum_{i=1}^n Y_i\right] = \sum_{i=1}^n \V[Y_i] = \sum_{i=1}^n 1 = n
+$$
+(b) Simulating four stocks.
+\begin{lstlisting}[style=RSyntax, title=R]
+simStock <- function(N) {
+    dailyMovements = sample(c(-1, 1), size=N, replace = TRUE)
+    totalMovements = cumsum(dailyMovements)
+    return(totalMovements)
+} 
+N = 10000
+s1 = simStock(N);s2 = simStock(N)
+s3 = simStock(N);s4 = simStock(N)
+plot(1:N, s1, type="l",
+    ylim=c(-119, 212), # Adjust according to simulation results
+    main = "Stock simulation")
+lines(1:N, s2, type="l", col="red")
+lines(1:N, s3, type="l", col="blue")
+lines(1:N, s4, type="l", col="green")
+\end{lstlisting}
+\begin{figure}[H]
+    \begin{minipage}{0.55\textwidth}
+        \begin{figure}[H]
+            \includegraphics[scale=0.6]{ch3_11.pdf}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \medskip\noindent
+        The simulations have mean 0, so they should vary around the x-axis.
+        Since the variance is $n$, it is dependent on the time. The longer
+        the simulations last, the more they will vary which is what we see.
+
+        \medskip\noindent The standard deviation in this example will be
+        the square root of $n$, which is about 100, and that is also what
+        we see (and it is expected that they will not be exactly on the standard
+        deviation).
+    \end{minipage}
+\end{figure}
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.12}\\  % PDF page 60
+Deriving the general expression for the expectation and variance for a whole bunch of
+probability distributions.
+
+\medskip\noindent$\bullet$ \textbf{Bernoulli} with parameter $p$. Possible values: $\mc{X} = \{0, 1\}$.
+$$
+f(x) = p^x(1-p)^{x-1}
+$$
+Expectation.
+$$
+\E[X] = \sum_{x\in\mc{X}} x\cdot f(x) = (0) + (1)p^1 = p
+$$
+Second moment.
+$$
+\E[X^2] = \sum_{x^2\in\mc{X}} x^2\cdot f(x) = (0) + (1)^2p^1 = p
+$$
+Variance.
+$$
+\V(X) = \E[X^2] - \E[X]^2 = p - p^2 = p(1 - p)
+$$
+
+\medskip\noindent$\bullet$ \textbf{Poisson} with parameter $\lambda$. Possible values: $\mc{X} = \N\cup\{0\}$.
+$$
+f(x) = e^{-\lambda}\frac{\lambda^x}{x!}
+$$
+Expectation. First term disappears. Cancel $x$ against the factorial. Switch to $k = x-1$. 
+\begin{align*}
+    \E[X] &= \sum_{x\in\mc{X}} xf(x) = \sum_{x=0}^\infty x\cdot e^{-\lambda}\frac{\lambda^x}{x!} \\
+    &= 0 + \lambda e^{-\lambda}\sum_{x=1}^\infty\frac{\lambda^{x-1}}{(x-1)!} \\
+    &= \lambda e^{-\lambda}\sum_{k=0}^\infty\frac{\lambda^k}{k!} \\
+    &= \lambda e^{-\lambda}e^{\lambda} \\
+    &= \lambda
+\end{align*}
+Second moment. We will split the sum into two Poisson sums.
+\begin{align*}
+    \E[X^2] &=  \sum_{x^2\in\mc{X}} x^2\cdot f(x) = \sum_{x=0}^\infty x^2\cdot e^{-\lambda}\frac{\lambda^x}{x!} \\
+    &= 0 + \lambda e^{-\lambda}\sum_{x=1}^\infty x\cdot \frac{\lambda^{x-1}}{(x-1)!} \\
+    &= \lambda e^{-\lambda}\sum_{x=1}^\infty (x - 1 + 1)\cdot \frac{\lambda^{x-1}}{(x-1)!} \\
+    &= \lambda e^{-\lambda}\sum_{x=1}^\infty\Big[(x - 1)\frac{\lambda^{x-1}}{(x-1)!} + \frac{\lambda^{x-1}}{(x-1)!}\Big]
+\end{align*}
+
+\newpage\noindent
+\begin{align*}
+    &= \lambda e^{-\lambda}\left(\sum_{x=2}^\infty(x - 1)\frac{\lambda^{x-1}}{(x-1)!} + 
+    \sum_{x=1}^\infty\frac{\lambda^{x-1}}{(x-1)!}\right) \\
+    &= \lambda e^{-\lambda}\left(\lambda\sum_{x=2}^\infty\frac{\lambda^{x-2}}{(x-2)!} + 
+    \sum_{x=1}^\infty\frac{\lambda^{x-1}}{(x-1)!}\right) \\
+    &= \lambda e^{-\lambda}\left(\lambda\sum_{j=0}^\infty\frac{\lambda^{j}}{j!} + 
+    \sum_{k=0}^\infty\frac{\lambda^{k}}{k!}\right) \\
+    &= \lambda e^{-\lambda}\left(\lambda e^{\lambda} + e^{\lambda}\right) \\
+    &= \lambda^2 + \lambda
+\end{align*}
+The remaining calculation for the variance is easy.
+$$
+\V(X) = \E[X^2] - \E[X]^2 = \lambda^2 + \lambda - \lambda^2 = \lambda
+$$
+
+\medskip\noindent$\bullet$ \textbf{Uniform} on $(a, b)$. Possible values: $\mc{X} = (a,b)$. 
+$$
+f(x) = \frac{1}{b - a}
+$$
+Expectation.
+\begin{align*}
+    \E[X] &= \int_{\mc{X}} x\cdot f(x) = \frac{1}{b-a}\int_a^b x dx \\
+    &= \frac{1}{b-a}\Big[\frac{x^2}{2}\Big]_a^b = \frac{1}{b-a}\left(\frac{b^2 - a^2}{2}\right) \\
+    &= \frac{1}{b-a}\left(\frac{(b+a)(b-a)}{2}\right) \\
+    &= \frac{b + a}{2}
+\end{align*}
+Second moment.
+\begin{align*}
+    \E[X^2] &= \int_{\mc{X}} x^2\cdot f(x) = \frac{1}{b-a}\int_a^b x^2 dx \\
+    &= \frac{1}{b-a}\Big[\frac{x^3}{3}\Big]_a^b = \frac{1}{b-a}\left(\frac{b^3 - a^3}{3}\right) \\
+    &= \frac{1}{b-a}\left(\frac{(b-a)(b^2 + ab + a^2)}{3}\right) \\
+    &= \frac{b^2 + ab + a^2}{3}
+\end{align*}
+Variance.
+\begin{align*}
+    \V(X) &= \E[X^2] - \E[X]^2 = \frac{b^2 + ab + a^2}{3} - \frac{(b+a)^2}{4}\\ % = \frac{(b-a)^2}{12} \\
+    &= \frac{4b^2 + 4ab + 4a^2 - 3b^2 - 6ab - 3a^2}{12} = \frac{b^2 - 2ab + a^2}{12} = \frac{(b-a)^2}{12}
+\end{align*}
+
+\newpage\noindent$\bullet$ \textbf{Exponential} with parameter $\beta$. Possible values: $\mc{X} = \{x\in\R : x\geq0\}$. 
+$$
+f(x) = \frac{1}{\beta}\exp(-x/\beta)
+$$
+Expectation.
+\begin{align*}
+    \E[X] &= \int_{\mc{X}} x\cdot f(x) = \int_0^\infty x\cdot \frac{1}{\beta} e^{-x/\beta} dx
+\end{align*}
+We will integrate this with the substitution $u = x/\beta$, so $du/dx = 1/\beta$ which gives us $dx = \beta du$.
+Note that the antiderivative of $ue^{-u}$ is $-ue^{-u} - e^{-u}$.
+\begin{align*}
+    \E[X] &= \int_0^\infty x\cdot \frac{1}{\beta} e^{-x/\beta} dx
+    = \beta\int_0^\infty u e^{-u} du \\
+    &= \beta\Big[-ue^{-u} - e^{-u}\Big]_0^\infty \\
+    &= \beta\Big(\lim_{u\ra\infty}(-ue^{-u} - e^{-u}) - (- 1)\Big) \\
+    &= \beta
+\end{align*}
+    Skipping the evaluation of the limit. The first term can be shown to converge to 0 by using L'Hôpital's rule.
+    The second term in the limit obviously becomes 0.\\
+Second moment. Will derive the expression for the expectation in the calculations.
+\begin{align*}
+    \E[X^2] &= \int_{\mc{X}} x^2\cdot f(x) = \int_0^\infty x^2\cdot \frac{1}{\beta} e^{-x/\beta} dx
+\end{align*}
+Using integration by parts: $u = x^2$ so $u' = 2x$. Setting $v' = (1/\beta)e^{-x/\beta}$ which yields
+$v = -e^{-x/\beta}$. From the integration-by-parts formula:
+$$
+\int uv' = uv - \int u'v
+$$
+\begin{align*}
+    \E[X^2] = \int_0^\infty x^2\cdot \frac{1}{\beta} e^{-x/\beta} dx
+    &= \Big[-x^2e^{-x/\beta}\Big]_0^\infty - \int_0^\infty -2x e^{-x/\beta}dx \\
+    &= 0 + \int_0^\infty 2x e^{-x/\beta}dx  \\
+    &= 2\beta\int_0^\infty x\cdot\frac{1}{\beta}e^{-x/\beta}dx  \\
+    &= 2\beta\E[X] \\
+    &= 2\beta^2
+\end{align*}
+The limit can be shown to converge to 0 by applying L'Hôpital's rule twice. We use a clever trick and
+substitute in the expectation and get the result. Finally, we calculate the variance.
+$$
+\V(X) = \E[X^2] - \E[X]^2 = 2\beta^2 - \beta^2 = \beta^2
+$$
+\newpage\noindent$\bullet$ \textbf{Gamma} with parameters $\alpha,\beta$.
+Possible values: $\mc{X} = \{x\in\R : x > 0\}$. 
+$$
+f(x) = \frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}\exp(-x/\beta)
+$$
+We will use the definition of the Gamma function, and the 'Gamma difference' chaining property:
+$$
+\Gamma(\alpha+1) = \int_0^\infty t^{\alpha}e^{-t}dt,\quad
+\Gamma(\alpha+1) = \alpha\Gamma(\alpha)
+$$
+In step 3, we make the substitution $t = x/\beta$ which makes $x = \beta t$.
+$dt/dx = 1/\beta$, so $dx = \beta dt$.
+\begin{align*}
+    \E[X] &= \int_{\mc{X}} x\cdot f(x)
+    = \int_0^\infty x\cdot\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}\exp(-x/\beta) dx \\
+    &= \int_0^\infty \frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha}\exp(-x/\beta) dx \\
+    &= \int_0^\infty \frac{1}{\Gamma(\alpha)\beta^\alpha}(\beta t)^{\alpha}\exp(-t) \beta dt\\
+    &= \int_0^\infty \frac{1}{\Gamma(\alpha)\beta^\alpha}\beta^\alpha t^{\alpha}\exp(-t) \beta dt\\
+    &= \int_0^\infty \frac{1}{\Gamma(\alpha)\beta^\alpha}\beta^{\alpha+1} t^{\alpha}\exp(-t) dt\\
+    &= \frac{\beta^{\alpha+1}}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty t^{\alpha}\exp(-t) dt\\
+    &= \frac{\beta}{\Gamma(\alpha)}\int_0^\infty t^{\alpha}\exp(-t) dt\\
+    &= \frac{\beta\Gamma(\alpha + 1)}{\Gamma(\alpha)}\\
+    &= \frac{\beta\alpha\Gamma(\alpha)}{\Gamma(\alpha)}\\
+    &= \alpha\beta
+\end{align*}
+For the Gamma distribution, we will not calculate the second moment. Instead we will go straight to the
+variance calculation and calculate it directly. We will use the same substitution and use the definition of
+the Gamma function again.
+\begin{align*}
+    \V(X) = \E[X^2] - \E[X]^2 &= 
+    \int_0^\infty x^2\cdot\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha-1}\exp(-x/\beta) dx - \alpha^2\beta^2 \\
+    &= \frac{1}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty x^{\alpha+1}\exp(-x/\beta) dx - \alpha^2\beta^2 \\
+    &= \frac{1}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty (\beta t)^{\alpha+1}\exp(-t) \beta dt - \alpha^2\beta^2 \\
+    &= \frac{\beta^{\alpha+2}}{\Gamma(\alpha)\beta^\alpha}\int_0^\infty t^{\alpha+1}\exp(-t) dt - \alpha^2\beta^2 
+\end{align*}
+
+\newpage\noindent
+Using the definition of the Gamma function.
+\begin{align*}
+    &= \frac{\beta^{2}\Gamma(\alpha + 2)}{\Gamma(\alpha)} - \alpha^2\beta^2 \\
+    &= \frac{\beta^{2}\Gamma(\alpha + 2) - \alpha^2\beta^2\Gamma(\alpha)}{\Gamma(\alpha)} \\
+    &= \frac{\beta^{2}\big(\Gamma(\alpha + 2) - \alpha^2\Gamma(\alpha)\big)}{\Gamma(\alpha)} \\
+    &= \frac{\beta^{2}\big((\alpha + 1)\Gamma(\alpha + 1) - \alpha^2\Gamma(\alpha)\big)}{\Gamma(\alpha)} \\
+    &= \frac{\beta^{2}\big((\alpha + 1)\alpha\Gamma(\alpha) - \alpha^2\Gamma(\alpha)\big)}{\Gamma(\alpha)} \\
+    &= \frac{\beta^{2}\Gamma(\alpha)\big((\alpha + 1)\alpha - \alpha^2\big)}{\Gamma(\alpha)} \\
+    &= \beta^{2}\big((\alpha + 1)\alpha - \alpha^2\big)\\
+    &= \beta^{2}\big(\alpha^2 \alpha - \alpha^2\big) \\
+    &= \alpha\beta^2
+\end{align*}
+And the calculation for the Gamma distribution has been completed.
+
+\bigskip\noindent$\bullet$ \textbf{Beta} with parameter $\alpha,\beta$. Possible values: $\mc{X} = (0,1)$. 
+$$
+f(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha - 1}e^{-x/\beta}
+$$
 
 
 
@@ -192,7 +665,7 @@ $$
 
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{3.X}\\  % PDF page 59
+\textbf{3.1X}\\  % PDF page 60
 
 
 \begin{align*}
@@ -217,6 +690,38 @@ $$
 
 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Minipages x 2
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+        % MINIPAGE 1
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        % MINIPAGE 2
+    \end{minipage}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Two R images
+\begin{figure}[H]
+    \begin{minipage}{0.5\textwidth}
+    \begin{center}
+        \begin{figure}[H]
+            \includegraphics[scale=0.7]{IMG1.pdf}
+        \end{figure}
+    \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+    \begin{center}
+        \begin{figure}[H]
+            \includegraphics[scale=0.7]{IMG2.pdf}
+        \end{figure}
+    \end{center}
+    \end{minipage}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Two TikZ images
 %%% Tikz Image - side by side
 \begin{figure}
     \begin{minipage}[0.5\textwidth]
@@ -262,6 +767,7 @@ $$
 \end{tikzpicture}
     \end{minipage}
 \end{figure}
+
 
 
 \end{comment}
