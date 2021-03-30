@@ -912,14 +912,425 @@ For the special case, we can set $s(Y) = 1$.
 \end{align*}
 which proves the statement. It is similar in the discrete case. \qed
 
-% \newpage\noindent
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \textbf{3.17}\\  % PDF page 60
-% Proving that
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.17}\\  % PDF page 60
+Proving that
+$$
+\V(Y) = \E[\V(Y|X)] + \V(\E[Y|X]).
+$$
+\textsc{Proof}. Will disregard the hints.
+\begin{align*}
+    \V(Y) &= \E[(Y - \E[Y])^2] \\
+    &= \E\big[((Y - \E[Y|X]) + (\E[Y|X]- \E[Y]))^2\big] \\
+    &= \E\Big[(Y - \E[Y|X])^2 + 2(Y - \E[Y|X])(\E[Y|X] - \E[Y]) + (b_X - \E[Y])^2\Big] \\
+    &= \E[(Y - \E[Y|X])^2] + 2\E[(Y - \E[Y|X])(\E[Y|X] - \E[Y])] + \E[(\E[Y|X] - \E[Y])^2] \\
+    &= E_1 + 2E_2 + E_3
+\end{align*}
+% Following the hint, we set $m = \E[Y]$ and let
+% $b(x) = \E[Y|X=x]$, in which case:
 % $$
-% \V(Y) = \E[\V(Y|X)] + \V(\E[Y|X]).
+% \E[\E[Y|X]] = \E[Y] = m.
 % $$
-% \textsc{Proof}.
+% To further simplify the notation, we will use $b_X = b(X)$. Using these, we do the calculations:
+% \begin{align*}
+%     \V(Y) &= \E[(Y - m)^2] \\
+%     &= \E\big[((Y - b_X) + (b_X - m))^2\big] \\
+%     &= \E\Big[(Y - b_X)^2 + 2(Y - b_X)(b_X - m) + (b_X - m)^2\Big] \\
+%     &= \E[(Y - b_X)^2] + 2\E[(Y - b_X)(b_X - m)] + \E[(b_X - m)^2] \\
+%     &= E_1 + 2E_2 + E_3
+% \end{align*}
+Consider each of these in turn. Using the definition of the conditional variance,
+with $\mu(x) = \E[Y|X]$.
+$$
+E_1 = \E[(Y - \E[Y|X])^2] = \E\big[\E[(Y - \E[Y|X])^2|X]\big]
+= \E\Big[\int_\mc{Y}(y - \mu(x))^2f(y|x)dy\Big] = \E[\V(Y|X)]
+$$
+For $E_3$, we define $M = \E[Y|X]$, and $\mu_M = \E[M] = \E[\E[Y|X]] = \E[Y]$.
+On this form, we see that we can use the definition of variance.
+$$
+E_3 = \E[(\E[Y|X] - \E[Y])^2] = \E[(M - \mu_M)^2] = \V(M) = \V(\E[Y|X])
+$$
+Finally, we consider $E_2$. Using iterated expectation and conditioning on $X$,
+then $\E[Y|X]$ and $\E[Y]$ become constants wrt. expectation. Define
+$C := \E[Y|X] - \E[Y]$ in order to clarify.
+\begin{align*}
+    \E[E_2] &= \E\Big(\E\big[ (Y - \E[Y|X])(\E[Y|X] - \E[Y]) \big|X\big]\Big) \\
+    &= \E\Big(\E\big[ (Y - \E[Y|X])C \big|X\big]\Big) \\
+    &= \E\Big(C\E\big[ (Y - \E[Y|X]) \big|X\big]\Big) \\
+    &= \E\Big(C(\E[Y|X] - \E[Y|X])\Big) \\
+    &= \E\Big(C\cdot0\Big) \\
+    &= 0
+\end{align*}
+Collecting all the terms:
+\begin{align*}
+    \V(Y) &= E_1 + 2E_2 + E_3 \\
+    &= \E[\V(Y|X)] + 2(0) + \V(\E[Y|X])\\
+    &= \E[\V(Y|X)] + \V(\E[Y|X])
+\end{align*}
+and the result has been proved. \qed
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.18}\\  % PDF page 61
+If $\E[X|Y = y] = c$ for some constant $c$, then $X$ and $Y$ are uncorrelated.
+
+\medskip\noindent\textsc{Proof}. Assuming $\E[X|Y = y] = c$ for a constant $c$.
+Calculating the covariance:
+\begin{align*}
+    \Cov(X, Y) &= \E[XY] - \E[X]\E[Y] \\
+    &= \E[\E[XY|Y]] - \E[\E[X|Y]]\E[Y] \\
+    &= \E[\E[X|Y]Y] - \E[\E[X|Y]]\E[Y] \\
+    &= \E[cY] - \E[c]\E[Y]\\
+    &= c\E[Y] - c\E[Y] \\
+    &= 0
+\end{align*}
+Since the covariance is 0, then it follows that the correlation is 0.\qed
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.19}\\  % PDF page 61
+Studying the sample distribution for the Uniform(0,1) distribution. If $X\sim U(0,1)$
+then $\E[X] = 1/2$ and $\V(X) = 1/12$. Will not plot $f_X$ since it will simply be
+the straight line at $y=1$.
+
+From Theorem 3.17, we found that $\E[bar{X}_n] = \mu = 1/2$ and
+$\V(\bar{X}_n) = \sigma^2/n = 1/(12n)$. Plotting these as functions of $n$,
+mean as blue and variance as red. The mean remains at 1/2, but the variance
+will become a lot smaller as $n$ increases.
+
+\begin{tikzpicture}
+    \begin{axis}[
+        width=0.5\textwidth,
+        axis lines = left,
+        ymin = -0.002,
+        ymax = 0.6,
+        xlabel = $x$,
+        ylabel = {$\mu, \sigma^2$},
+    ]
+    % Mean
+    \addplot [
+        domain=0:10, 
+        samples=5, 
+        color=blue,
+        style=ultra thick,
+    ]
+    {1/2};
+    % Variance
+    \addplot [
+        domain=0:10, 
+        samples=200, 
+        color=red,
+        style=ultra thick,
+    ]
+    {1/(12*x)};
+    \end{axis}
+\end{tikzpicture}
+
+% \begin{lstlisting}[style=RSyntax, title=R]
+% # Simulating the uniform distribution
+% N = 1000; mn = rep(0,N); vr = rep(0,N)
+% for (i in 1:N) {
+%     print(i)
+%     X = runif(n = i)
+%     mn[i] = mean(X)
+%     vr[i] = var(X)
+% } 
+% # Plotting result
+% plot(1:N, mn, type="l", ylim = c(0, 0.7))
+% lines(1:N, vr, type="l", col="red")
+% abline(h = 0.5, col = "blue", lty = 2)
+% abline(h = 1/12, col = "blue", lty = 2)
+% \end{lstlisting}
+    
+\medskip\noindent
+For each $n=1,5,25,100$ we do a 1000 simulations of each $n$ and make a histogram of the
+results that can be seen on the next page.
+The results are centered around the mean, 1/2, but the spread becomes smaller
+as we increase $n$. We are basically seeing the central limit theorem in action.
+
+\newpage\noindent
+\begin{figure}[H]
+    \includegraphics[scale = 0.85]{ch3_19.pdf}
+\end{figure}
+\begin{lstlisting}[style=RSyntax, title=R]
+simSampDist <- function(numSim) {
+  retMean = rep(0, 1000); retVar = rep(0, 1000)
+  for(i in 1:1000) {
+    sim = runif(numSim)
+    retMean[i]  = mean(sim)
+    retVar[i]  = var(sim)
+  } 
+  retVal = list()
+  retVal$mn = retMean
+  retVal$vr = retVal
+  return(retVal)
+} 
+s1 = simSampDist(1)
+s5 = simSampDist(5)
+s25 = simSampDist(25)
+s100 = simSampDist(100)
+# Creating plots
+par(mfrow = c(2,2))
+hist(s1$mn, main = "n = 1", xlim=c(0,1), prob = TRUE)
+hist(s5$mn, main = "n = 5", xlim=c(0,1), prob = TRUE)
+hist(s25$mn, main = "n = 25", xlim=c(0,1), prob = TRUE)
+hist(s100$mn, main = "n = 100", xlim=c(0,1), prob = TRUE)
+\end{lstlisting}
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.20}\\  % PDF page 61
+If $a$ is a vector and $X$ is a random vector with mean $\mu$
+and variance $\Sigma$, then $\E[a^TX] = a^T\mu$ and
+$\V(a^TX) = a^T\Sigma a$. If $A$ is a matrix then
+$\E[AX] = A\mu$ and $\V(AX) = A\Sigma A^T$.
+
+\medskip\noindent\textsc{Proof}.
+$$
+\E[a^TX] =
+\begin{bmatrix} 
+    \E[a_1X_1] \\ 
+    \E[a_2X_2] \\ 
+    \vdots \\ 
+    \E[a_nX_n] \\ 
+\end{bmatrix} =
+\begin{bmatrix} 
+    a_1\E[X_1] \\ 
+    a_2\E[X_2] \\ 
+    \vdots \\ 
+    a_n\E[X_n] \\ 
+\end{bmatrix} =
+\begin{bmatrix} 
+    a_1\mu_1 \\ 
+    a_2\mu_2 \\ 
+    \vdots \\ 
+    a_n\mu_n \\ 
+\end{bmatrix} =
+\begin{bmatrix} 
+    a_1 \\ 
+    a_2 \\ 
+    \vdots \\ 
+    a_n \\ 
+\end{bmatrix}^T
+\begin{bmatrix} 
+    \mu_1 \\ 
+    \mu_2 \\ 
+    \vdots \\ 
+    \mu_n \\ 
+\end{bmatrix} =
+a^T\mu
+$$
+The variance of a vector is the covariance matrix.
+\begin{align*}
+    \V(a^TX) &=
+    \begin{bmatrix} 
+        \V(a_1X_1) & \Cov(a_1X_1, a_2X_2)& \cdots & \Cov(a_1X_1, a_nX_n) \\ 
+        \Cov(a_2X_2, a_1X_1) & \V(a_2X_2) & \cdots & \Cov(a_2X_2,a_nX_n) \\ 
+        \vdots & \vdots & \ddots & \\ 
+        \Cov(a_nX_n, a_1X_1) & \Cov(a_mX_m, a_2X_2) & \cdots & \V(a_nX_n) \\ 
+    \end{bmatrix} \\&\\
+    &= 
+    \begin{bmatrix} 
+        a_1\V(X_1)a_1 & a_1\Cov(X_1, X_2)a_2 & \cdots & a_1\Cov(X_1, X_n)a_n \\ 
+        a_2\Cov(X_2, X_1)a_1 & a_2\V(X_2)a_2 & \cdots & a_2\Cov(X_2,X_n)a_n \\ 
+        \vdots & \vdots & \ddots & \\ 
+        a_n\Cov(X_n, X_1)a_1 & a_n\Cov(X_n, X_2)a_2 & \cdots & a_n\V(X_n)a_n \\ 
+    \end{bmatrix} \\&\\
+    &=
+\begin{bmatrix} 
+    a_1 \\ 
+    a_2 \\ 
+    \vdots \\ 
+    a_n \\ 
+\end{bmatrix}^T
+    \begin{bmatrix} 
+        \V(X_1)         & \Cov(X_1, X_2) & \cdots & \Cov(X_1, X_n) \\ 
+        \Cov(X_2, X_1)  & \V(X_2)        & \cdots & \Cov(X_2,X_n) \\ 
+        \vdots & \vdots & \ddots & \\ 
+        \Cov(X_n, X_1)  & \Cov(X_n, X_2) & \cdots & \V(X_n) \\ 
+    \end{bmatrix} 
+    \begin{bmatrix} 
+        a_1 \\ 
+        a_2 \\ 
+        \vdots \\ 
+        a_n \\ 
+    \end{bmatrix} =
+    a^T\Sigma a
+\end{align*}
+The same general idea applies to matrices as well, execpt the notation becomes more
+extensive. Will skip this for brevity. \qed
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.21}\\  % PDF page 61
+Let $X$ and $Y$ be random variables. If $\E[Y|X] = X$, then $\Cov(X, Y) = \V(X)$.
+
+\medskip\noindent\textsc{Proof}.
+Applying the covariance identity and using iterated expectation:
+\begin{align*}
+    \Cov(X, Y) &= \E[XY] - \E[X]\E[Y] \\
+    &= \E[\E[XY|X]] - \E[X]\E[\E[Y|X]] \\
+    &= \E[X\E[Y|X]] - \E[X]\E[X] \\
+    &= \E[X^2] - \E[X]^2 \\
+    &= \V(X)
+\end{align*}
+and the result has been proved.\qed
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.22}\\ 
+Let $X\sim U(0,1)$ and $0 < a < b < 1$. Define:
+$$
+Y =
+\left\{
+    \begin{tabular}{ll}
+        1 & $0 < x < b$ \\
+        0 & otherwise
+    \end{tabular}
+\right.,
+\qquad
+Z =
+\left\{
+    \begin{tabular}{ll}
+        1 & $a < x < 1$ \\
+        0 & otherwise
+    \end{tabular}
+\right.
+$$
+(a) Are $Y$ and $Z$ independent? One way of thinking about independence is
+whether knowing something about $Y$ tells us anything about $Z$, or vice-versa. In this case
+it doesn't seem to be that way. If we only know that $Z$ is one, there is no way
+to determine whether $x < b$ or $x > b$, so we don't know what $Y$ will be.
+By this reasoning, $Y$ and $Z$ are independent. 
+ To calculate it, let's set $a = 1/4$ and $b = 3/4$. Then:
+ $$
+\begin{tabular}{c|c|c|c}
+    & $Y=0$ & $Y=1$ & \\
+    \hline
+$Z = 0$ & 1/16&3/16& 1/4 \\
+\hline
+$Z = 1$ &3/16&9/16&3/4 \\
+\hline
+ & 1/4 & 3/4 & 1
+\end{tabular}
+ $$
+To determine e.g. $\P(Y=0\cap Z=0)$ we first determine $\P(Y=0|Z=0)$ which is 1/4,
+and then we determine $\P(Z=0)$ which is 1/4 which makes $\P(Y=0\cap Z=0) = 1/16$.
+Now we calculate that $\P(Y=0)\P(Z=0) = (1/4)(1/4) = 1/16 = \P(Y=0\cap Z=0)$ etc.
+which verifies that we have independence.
+
+\medskip\noindent(b) Finding $\E[Y|Z]$. By definition of the iterated expectation
+and using independence ($\P(Y=y|Z=z) = \P(Y=y)$).
+\begin{align*}
+    \E[Y|Z=0] &= \sum_y y\cdot\P(Y=y|Z=0) = 0 + (1)\P(Y=1|Z=0) = \P(Y=1) = b \\
+    \E[Y|Z=1] &= \sum_y y\cdot\P(Y=y|Z=1) = 0 + (1)\P(Y=1|Z=1) = \P(Y=1) = b
+\end{align*}
+The last step follows because we know $x\sim U(0,1)$, so the probability is equal to
+the length of the interval.
+
+Because of independence, $Z$ does not affect the outcome. And in fact, there is a result
+that says $\E[Y|Z] = \E[Y]$ when $Y$ is independent of $Z$, which we have almost proved above.
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.23}\\  % PDF page 61
+Finding the moment generating function for the Poisson, Normal and Gamma distributions.
+Recall the definition of the moment generating function:
+$$
+M(t) =
+\E[e^{tX}] =
+\left\{
+    \begin{tabular}{ll}
+        $\displaystyle \sum_{x} e^{tx}p(x)$ & discrete with pmf $p(x)$ \\
+        $\rule{0pt}{25pt}\displaystyle \int_{-\infty}^\infty  e^{tx}f(x)dx$ & continuous with pdf $f(x)$
+    \end{tabular}
+\right.
+$$
+As usual with the Poisson distribution, the following identity is useful:
+$$
+\sum_{k=0}^\infty \frac{a^n}{n!} = e^{a}
+$$
+
+\newpage\noindent$\bullet$ \textbf{Poisson}. Assuming some arbitrary $\lambda$.
+\begin{align*}
+    M(t) &= \E[e^{tX}] \\
+    &= \sum_{n=0}^\infty e^{-\lambda}\frac{e^{tn}\lambda^n}{n!} \\
+    &= e^{-\lambda}\sum_{n=0}^\infty \frac{(\lambda e^{t})^n}{n!} \\
+    &= e^{-\lambda}e^{\lambda e^{t}} \\
+    &= e^{\lambda e^{t}-\lambda} \\
+    &= e^{\lambda (e^{t}-1)} \\
+    &= \exp\left(\lambda (e^{t}-1)\right)
+\end{align*}
+
+\bigskip\noindent$\bullet$ \textbf{Normal}. Assuming some arbitrary $\mu$ and $\sigma^2$.
+The usual way of deriving the MGF for a normal distribution is to first do it for
+the standard normal distribution, since this is a lot easier. Denote this by $M_Z(t)$.
+We will 'compelte the square'.
+\begin{align*}
+    M_Z(t) &= \E[e^{tZ}] \\
+    &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty e^{tx}e^{-\frac{1}{2}x^2}dx \\
+    &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left(tx\right)\exp\left(-\frac{1}{2}x^2\right)dx\\
+    &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left(-\frac{1}{2}x^2 + tx\right)dx\\
+    &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left(-\frac{1}{2}x^2 + tx - \frac{t^2}{2} + \frac{t^2}{2} \right)dx\\
+    &= e^{t^2/2}\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left(-\frac{1}{2}(x^2 - 2tx + t^2)\right)dx \\
+    &= e^{t^2/2}\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\left(-\frac{1}{2}(x - t)^2\right)dx \\
+    &= e^{t^2/2}
+\end{align*}
+The integration is done by substituting $u = x-t$ which leads to the usual standard pdf, which
+integrates to 0. Hence, we have the MGF for the standard normal distribution. Using the
+MGF for the standard normal distribution, we can find it for a general normal distribution.
+\begin{align*}
+    M_X(t) &= \E[e^{tX}]
+    = \E[e^{t(\mu + \sigma Z)}] \\
+    &= \E[e^{t\mu + t\sigma Z)}]
+    = e^{t\mu}\E[e^{t\sigma Z)}]\\
+    &= e^{t\mu}M_Z(t\sigma) = e^{t\mu}e^{(t\sigma)^2/2} \\
+    &= \exp\left\{\frac{\sigma^2 t^2}{2} + \mu t\right\}
+\end{align*}
+So tedious!!
+
+\newpage\noindent
+$\bullet$ \textbf{Gamma}. Assuming some arbitrary $\alpha$ and $\beta$.
+\begin{align*}
+    M(t) &= \E[e^{tX}] \\
+    &= \frac{1}{\Gamma(\alpha)\beta^\alpha}\int_{0}^\infty e^{tx}x^{\alpha-1}\exp(-x/\beta)dx \\
+    &= \frac{1}{\Gamma(\alpha)\beta^\alpha}\int_{0}^\infty x^{\alpha-1}\exp(tx-x/\beta)dx \\
+    &= \frac{1}{\Gamma(\alpha)\beta^\alpha}\int_{0}^\infty x^{\alpha-1}\exp(-(\frac{1}{\beta} - t)x)dx \\
+    &= \frac{1}{\Gamma(\alpha)\beta^\alpha}\cdot \frac{\Gamma(\alpha)}{\left(\frac{1}{\beta} - t\right)^\alpha} \\
+    &= \frac{1}{\left[\beta\left(\frac{1}{\beta} - t\right)\right]^\alpha} \\
+    &= \frac{1}{\left[1 - \beta t\right]^\alpha} \\ 
+    &= \rule{0pt}{15pt}(1-\beta t)^{-\alpha}
+\end{align*}
+where we used the definition of the Gamma function like in an earlier exercise.
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{3.24}\\  % PDF page 61
+Let $X_1,\ldots, X_n\sim\text{Exp}(\beta)$. Find the MGF of $X_i$. Prove that
+$\sum_{i=1}^n X_i\sim \text{Gamma}(n, \beta)$.
+
+\medskip\noindent Finding the MGF for the exponential distribution with parameter $\beta$.
+\begin{align*}
+    M(t) &= \E[e^{tX}] \\
+    &= \frac{1}{\beta}\int_{0}^\infty\exp(tx)\exp(-x/\beta)dx \\
+    &= \frac{1}{\beta}\int_{0}^\infty\exp(-(1/\beta - t)x)dx \\
+    &= \frac{1}{\beta}\left(\frac{1}{\frac{1}{\beta} - t}\right) \\
+    &= \frac{1}{\beta}\left(\frac{\beta}{1 - \beta t}\right) \\
+    &= \frac{1}{1 - \beta t}
+\end{align*}
+All $X_i$ have the same MGF. If we now assume they are independent, and define
+$Y = \sum_{i=1}^n X_i$, then according to Lemma 3.31:
+$$
+M_Y(t) = \prod_{i=1}^n M_X(t) = \prod_{i=1}^n\left(\frac{1}{1 - \beta t}\right)
+= \frac{1}{(1 - \beta t)^n} = (1 - \beta t)^{-n}
+$$
+which is the MGF for a Gamma distribution with parameters $n$ and $\beta$, as we can see
+from the previous exercise. Hence, $Y\sim\text{Gamma}(n, \beta)$.
+
+
+
+
 
 
 
@@ -928,7 +1339,7 @@ which proves the statement. It is similar in the discrete case. \qed
 
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{3.1X}\\  % PDF page 60
+\textbf{3.2X}\\  % PDF page 61
 
 
 \begin{align*}

@@ -9,8 +9,10 @@
 #"""
 
 values = """
-H
-T
+V(a_1X_1),Cov(a_1X_1, a_2,X_2),x,Cov(a_1X_1,a_nX_n)
+Cov(a_2X_1),V(a_2X_2), a_2,X_2),x,Cov(a_1X_1,a_nX_n)
+x
+Cov(a_nX_n,a_1X_1),Cov(a_nX_n,a_2,X_2),x,V(a_nX_n)
 """
 
 matrix = True # If False: determinant
