@@ -1,3 +1,4 @@
 \contentsline {section}{\numberline {1}Chapter 1 - Probability}{2}%
 \contentsline {section}{\numberline {2}Chapter 2 - Random Variables}{25}%
 \contentsline {section}{\numberline {3}Chapter 3 - Expectation}{49}%
+\contentsline {section}{\numberline {4}Chapter 4 - Inequalities}{75}%
