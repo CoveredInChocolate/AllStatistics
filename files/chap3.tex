@@ -923,7 +923,7 @@ $$
 \begin{align*}
     \V(Y) &= \E[(Y - \E[Y])^2] \\
     &= \E\big[((Y - \E[Y|X]) + (\E[Y|X]- \E[Y]))^2\big] \\
-    &= \E\Big[(Y - \E[Y|X])^2 + 2(Y - \E[Y|X])(\E[Y|X] - \E[Y]) + (b_X - \E[Y])^2\Big] \\
+    &= \E\Big[(Y - \E[Y|X])^2 + 2(Y - \E[Y|X])(\E[Y|X] - \E[Y]) + (\E[Y|X] - \E[Y])^2\Big] \\
     &= \E[(Y - \E[Y|X])^2] + 2\E[(Y - \E[Y|X])(\E[Y|X] - \E[Y])] + \E[(\E[Y|X] - \E[Y])^2] \\
     &= E_1 + 2E_2 + E_3
 \end{align*}
@@ -1278,7 +1278,7 @@ We will 'compelte the square'.
     &= e^{t^2/2}
 \end{align*}
 The integration is done by substituting $u = x-t$ which leads to the usual standard pdf, which
-integrates to 0. Hence, we have the MGF for the standard normal distribution. Using the
+integrates to 1. Hence, we have the MGF for the standard normal distribution. Using the
 MGF for the standard normal distribution, we can find it for a general normal distribution.
 \begin{align*}
     M_X(t) &= \E[e^{tX}]
