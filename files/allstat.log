@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.10.2)  31 MAR 2021 20:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.10.2)  1 APR 2021 19:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -518,20 +518,20 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 ) (/home/sindre/AllStatistics/files/allstat.aux)
 \openout1 = `allstat.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 142.
-LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 146.
+LaTeX Font Info:    ... okay on input line 146.
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count302
@@ -587,311 +587,40 @@ Package pgfplots notification 'compat/show suggested version=true': document has
 \tf@toc=\write6
 \openout6 = `allstat.toc'.
 
-) (/home/sindre/AllStatistics/files/chap1.tex [1
+) (/home/sindre/AllStatistics/files/chap5.tex [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 12.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 6.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 6.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 12.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 6.
  (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-) [2] [3] [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 282--284
-
- []
-
-[6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
-Overfull \hbox (23.69824pt too wide) detected at line 968
-[]
- []
-
-[18] [19] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+) [2] [3] [4] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang2.sty
 File: lstlang2.sty 2019/09/10 1.8c listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang3.sty
 File: lstlang3.sty 2019/09/10 1.8c listings language file
-)
-<ch1_2.21a.pdf, id=79, 505.89pt x 505.89pt>
-File: ch1_2.21a.pdf Graphic file (type pdf)
-<use ch1_2.21a.pdf>
-Package pdftex.def Info: ch1_2.21a.pdf  used on input line 1034.
-(pdftex.def)             Requested size: 258.00539pt x 258.0082pt.
- [20 </home/sindre/AllStatistics/files/ch1_2.21a.pdf>]
-<ch1_2.21b.pdf, id=90, 505.89pt x 505.89pt>
-File: ch1_2.21b.pdf Graphic file (type pdf)
-<use ch1_2.21b.pdf>
-Package pdftex.def Info: ch1_2.21b.pdf  used on input line 1068.
-(pdftex.def)             Requested size: 258.00539pt x 258.0082pt.
- [21 </home/sindre/AllStatistics/files/ch1_2.21b.pdf>] [22] [23] Excluding 'comment' comment.) (/home/sindre/AllStatistics/files/chap2.tex [24] [25] [26] [27] [28] [29]
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 432--496
-[] $[]$ 
- []
-
-[30] [31] [32]
-<ch2_2.7b.pdf, id=137, 344.28625pt x 289.08pt>
-File: ch2_2.7b.pdf Graphic file (type pdf)
-<use ch2_2.7b.pdf>
-Package pdftex.def Info: ch2_2.7b.pdf  used on input line 768.
-(pdftex.def)             Requested size: 189.35802pt x 158.99448pt.
-
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 746--770
-[]$[]$ $[]$ 
- []
-
-[33 </home/sindre/AllStatistics/files/ch2_2.7b.pdf>] [34]
-Underfull \hbox (badness 10000) in paragraph at lines 942--943
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 957--958
-
- []
-
-
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 941--972
-[]$[]$ $[]$ 
- []
-
-
-Package amsmath Warning: Foreign command \atopwithdelims;
-(amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 981.
-
-[35] [36]
-NOTE: coordinate (2Y1.0e0],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y9.774435e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y9.54887e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y9.323303e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y9.097737e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y8.872171e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y8.646605e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y8.421039e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y8.195473e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y7.969907e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y7.74434e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y7.518776e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y7.29321e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y7.067644e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y6.842078e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y6.616512e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y6.390945e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y6.16538e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y5.939813e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y5.714247e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y5.488681e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y5.263116e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y5.03755e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y4.811984e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y4.586418e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y4.360852e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y4.135286e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y3.90972e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y3.684154e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y3.458588e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y3.233022e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y3.007457e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y2.781891e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y2.556325e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y2.330759e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y2.105193e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y1.879626e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y1.65406e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y1.428494e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y1.202928e-1],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y9.77362e-2],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y7.51797e-2],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y5.26231e-2],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y3.00665e-2],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-NOTE: coordinate (2Y7.5099e-3],3Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-<ch2_2.13b.pdf, id=158, 344.28625pt x 289.08pt>
-File: ch2_2.13b.pdf Graphic file (type pdf)
-<use ch2_2.13b.pdf>
-Package pdftex.def Info: ch2_2.13b.pdf  used on input line 1086.
-(pdftex.def)             Requested size: 223.7834pt x 187.89977pt.
-
-Overfull \hbox (8.7811pt too wide) in paragraph at lines 1086--1087
-[][] 
- []
-
-
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 1083--1104
-[]$[]$ $[]$ 
- []
-
-[37 </home/sindre/AllStatistics/files/ch2_2.13b.pdf>] [38]
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 1193.
- (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
-File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-<ch2_2.14.pdf, id=173, 289.08pt x 289.08pt>
-File: ch2_2.14.pdf Graphic file (type pdf)
-<use ch2_2.14.pdf>
-Package pdftex.def Info: ch2_2.14.pdf  used on input line 1211.
-(pdftex.def)             Requested size: 187.89977pt x 187.89977pt.
-<ch2_2.14b.pdf, id=174, 289.08pt x 289.08pt>
-File: ch2_2.14b.pdf Graphic file (type pdf)
-<use ch2_2.14b.pdf>
-Package pdftex.def Info: ch2_2.14b.pdf  used on input line 1230.
-(pdftex.def)             Requested size: 202.35461pt x 202.35461pt.
-
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 1181--1234
-[][] [] 
- []
-
-
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 1181--1234
-[]$ $[]$ 
- []
-
-[39 </home/sindre/AllStatistics/files/ch2_2.14.pdf> </home/sindre/AllStatistics/files/ch2_2.14b.pdf>]
-<ch2_2.15.pdf, id=191, 289.08pt x 289.08pt>
-File: ch2_2.15.pdf Graphic file (type pdf)
-<use ch2_2.15.pdf>
-Package pdftex.def Info: ch2_2.15.pdf  used on input line 1277.
-(pdftex.def)             Requested size: 202.35461pt x 202.35461pt.
-
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 1262--1308
-[]$[]$ $[]$ 
- []
-
-[40 </home/sindre/AllStatistics/files/ch2_2.15.pdf>] [41] [42] [43] [44]
-<ch2_2.20.pdf, id=214, 325.215pt x 289.08pt>
-File: ch2_2.20.pdf Graphic file (type pdf)
-<use ch2_2.20.pdf>
-Package pdftex.def Info: ch2_2.20.pdf  used on input line 1581.
-(pdftex.def)             Requested size: 165.85745pt x 147.42883pt.
-
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 1578--1614
-[]$[]$ $[]$ 
- []
-
-[45 </home/sindre/AllStatistics/files/ch2_2.20.pdf>]
-<ch2_2.20b.pdf, id=224, 325.215pt x 289.08pt>
-File: ch2_2.20b.pdf Graphic file (type pdf)
-<use ch2_2.20b.pdf>
-Package pdftex.def Info: ch2_2.20b.pdf  used on input line 1653.
-(pdftex.def)             Requested size: 165.85745pt x 147.42883pt.
-
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 1650--1686
-[]$[]$ $[]$ 
- []
-
-[46 </home/sindre/AllStatistics/files/ch2_2.20b.pdf>]
-<ch2_2.21.pdf, id=234, 361.35pt x 289.08pt>
-File: ch2_2.21.pdf Graphic file (type pdf)
-<use ch2_2.21.pdf>
-Package pdftex.def Info: ch2_2.21.pdf  used on input line 1741.
-(pdftex.def)             Requested size: 252.94327pt x 202.35461pt.
-
-Overfull \hbox (37.94096pt too wide) in paragraph at lines 1741--1742
-[][] 
- []
-
-
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 1738--1766
-[]$[]$ $[]$ 
- []
-
-[47 </home/sindre/AllStatistics/files/ch2_2.21.pdf>] Excluding 'comment' comment.) (/home/sindre/AllStatistics/files/chap3.tex [48] [49] [50] [51] [52] [53] [54]
-<ch3_3.9A.pdf, id=266, 344.28625pt x 289.08pt>
-File: ch3_3.9A.pdf Graphic file (type pdf)
-<use ch3_3.9A.pdf>
-Package pdftex.def Info: ch3_3.9A.pdf  used on input line 332.
-(pdftex.def)             Requested size: 240.99872pt x 202.35461pt.
-
-Overfull \hbox (25.99641pt too wide) in paragraph at lines 332--333
-[][] 
- []
-
-<ch3_3.9B.pdf, id=267, 344.28625pt x 289.08pt>
-File: ch3_3.9B.pdf Graphic file (type pdf)
-<use ch3_3.9B.pdf>
-Package pdftex.def Info: ch3_3.9B.pdf  used on input line 339.
-(pdftex.def)             Requested size: 240.99872pt x 202.35461pt.
-
-Overfull \hbox (25.99641pt too wide) in paragraph at lines 339--340
-[][] 
- []
-
-
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 329--343
-[]$[]$ $[]$ 
- []
-
-[55 </home/sindre/AllStatistics/files/ch3_3.9A.pdf> </home/sindre/AllStatistics/files/ch3_3.9B.pdf>] [56]
-<ch3_11.pdf, id=288, 344.28625pt x 289.08pt>
-File: ch3_11.pdf Graphic file (type pdf)
-<use ch3_11.pdf>
-Package pdftex.def Info: ch3_11.pdf  used on input line 465.
-(pdftex.def)             Requested size: 206.57333pt x 173.44933pt.
-
-Overfull \hbox (2.2222pt too wide) in paragraph at lines 463--479
-[]$[]$ $[]$ 
- []
-
-[57 </home/sindre/AllStatistics/files/ch3_11.pdf>] [58] [59] [60] [61] [62] [63] [64]
-Overfull \hbox (0.22452pt too wide) detected at line 796
-[]
- []
-
-
-Overfull \hbox (40.28728pt too wide) detected at line 807
-[]
- []
-
-[65] [66] [67] [68]
-NOTE: coordinate (0Y0.0e0],4Y0.0e0]) has been dropped because it is unbounded (in y). (see also unbounded coords=jump). 
-[69]
-<ch3_19.pdf, id=337, 505.89pt x 361.35pt>
-File: ch3_19.pdf Graphic file (type pdf)
-<use ch3_19.pdf>
-Package pdftex.def Info: ch3_19.pdf  used on input line 1054.
-(pdftex.def)             Requested size: 430.00851pt x 307.14896pt.
- [70 </home/sindre/AllStatistics/files/ch3_19.pdf>] [71] [72] [73] Excluding 'comment' comment.) (/home/sindre/AllStatistics/files/chap4.tex [74] [75] [76] [77]
-<ch4_4.pdf, id=369, 505.89pt x 361.35pt>
-File: ch4_4.pdf Graphic file (type pdf)
-<use ch4_4.pdf>
-Package pdftex.def Info: ch4_4.pdf  used on input line 199.
-(pdftex.def)             Requested size: 273.17651pt x 195.1261pt.
- [78 </home/sindre/AllStatistics/files/ch4_4.pdf>]
-<ch4_4b.pdf, id=379, 505.89pt x 361.35pt>
-File: ch4_4b.pdf Graphic file (type pdf)
-<use ch4_4b.pdf>
-Package pdftex.def Info: ch4_4b.pdf  used on input line 231.
-(pdftex.def)             Requested size: 354.12057pt x 252.94327pt.
- [79 </home/sindre/AllStatistics/files/ch4_4b.pdf>] [80]
-<ch4_6.pdf, id=393, 505.89pt x 361.35pt>
-File: ch4_6.pdf Graphic file (type pdf)
-<use ch4_6.pdf>
-Package pdftex.def Info: ch4_6.pdf  used on input line 309.
-(pdftex.def)             Requested size: 430.00851pt x 307.14896pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 307--310
-
- []
-
-[81 </home/sindre/AllStatistics/files/ch4_6.pdf>] Excluding 'comment' comment.) [82] (/home/sindre/AllStatistics/files/allstat.aux) ) 
+) [5] [6] [7] Excluding 'comment' comment.) [8] (/home/sindre/AllStatistics/files/allstat.aux) ) 
 Here is how much of TeX's memory you used:
- 28836 strings out of 481239
- 697305 string characters out of 5920377
- 1306851 words of memory out of 5000000
- 43565 multiletter control sequences out of 15000+600000
- 541150 words of font info for 58 fonts, out of 8000000 for 9000
+ 27802 strings out of 481239
+ 672784 string characters out of 5920377
+ 1222041 words of memory out of 5000000
+ 42563 multiletter control sequences out of 15000+600000
+ 540387 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 73i,19n,127p,753b,2656s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0800.pfb>
-Output written on /home/sindre/AllStatistics/files/allstat.pdf (82 pages, 862088 bytes).
+ 73i,13n,127p,753b,1865s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on /home/sindre/AllStatistics/files/allstat.pdf (8 pages, 183276 bytes).
 PDF statistics:
- 477 PDF objects out of 1000 (max. 8388607)
- 334 compressed objects within 4 object streams
+ 98 PDF objects out of 1000 (max. 8388607)
+ 71 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 98 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
