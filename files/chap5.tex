@@ -367,19 +367,41 @@ the probability that $\P(X < 90)$ turns out to be about 0.1467.
 [1] 0.146773
 \end{lstlisting}
 
-\bigskip\noindent
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{5.9}\\  % PDF page 82
-Suppose that $\P(X=1) = \P(X = -1) = 1/2$ and define:
-$$
-X_n =
-\left\{
-    \begin{tabular}{lll}
-        $X$ & with probability & $1 - \frac{1}{n}$ \\
-        $e^n$ & with probability & $\frac{1}{n}$
-    \end{tabular}
-\right.
-$$
+% \bigskip\noindent
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \textbf{5.9}\\  % PDF page 82
+% Suppose that $\P(X=1) = \P(X = -1) = 1/2$ and define:
+% $$
+% X_n =
+% \left\{
+%     \begin{tabular}{lll}
+%         $X$ & with probability & $1 - \frac{1}{n}$ \\
+%         $e^n$ & with probability & $\frac{1}{n}$
+%     \end{tabular}
+% \right.
+% $$
+% We will determine what kinds of convergences it satisfies.
+
+% \medskip\noindent
+% For starters, we can get some information about $X$. The expectation:
+% $$
+% \E[X] = (-1)\left(\frac{1}{2}\right) + (1)\left(\frac{1}{2}\right) = 0
+% $$
+% Then, the second moment and the variance.
+% $$
+% \E[X^2] = (-1)^2\left(\frac{1}{2}\right) + (1)^2\left(\frac{1}{2}\right) = 1
+% $$
+% $$
+% \V(X) = \E[X^2] - \E[X]^2 = 1 - 0 = 1
+% $$
+% Next we can find the expectation of $X_n$. Since we are using $X$ which is itself
+% a random variable, we will use its expectation. (Simplified example verified in
+% \texttt{5.9.R}).
+% $$
+% \E[X_n] = X\left(1 - \frac{1}{n}\right) + e^n\left(\frac{1}{n}\right)
+% $$
+
+%Investigating different kinds of conversion.
 
 
 
