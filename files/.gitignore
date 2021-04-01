@@ -1,0 +1,5 @@
+allstat*
+allstat.fdb_latexmk
+allstat.log
+allstat.pdf
+allstat.synctex.gz
