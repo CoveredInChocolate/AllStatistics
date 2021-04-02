@@ -128,7 +128,7 @@ By showing implication both ways, the result is proved.\qed
 
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{5.3}\\  % PDF page 82
+\textbf{5.3}\\  % PDF page 83
 Let $X_1,\ldots, X_n$ be IID and let $\mu = \E[X_i]$ with finite variance.
 Show that $\bar{X} \raQ \mu$.
 
@@ -150,7 +150,7 @@ $\E[(\bar{X} - \mu)^2]\ra 0$ as $n\ra\infty$ which proves $\bar{X}\raQ \mu$.\qed
 
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{5.4}\\  % PDF page 82
+\textbf{5.4}\\  % PDF page 83
 Let $X_1,X_2,\ldots$ be a sequence of random variables such that
 $$
 \P\left(X_n = \frac{1}{n}\right) = 1 - \frac{1}{n^2},
@@ -221,7 +221,7 @@ Since this does not tend to 0, we do NOT have convergence in probability.
 
 \newpage\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{5.5}\\  % PDF page 82
+\textbf{5.5}\\  % PDF page 83
 Let $X_1,\ldots,X_n\sim\text{Bernoulli}(p)$. Prove that
 $$
 \frac{1}{n}\sum_{i=1}^n X_i^2 \raP p,
@@ -263,7 +263,7 @@ in probability. \qed
 
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{5.6}\\  % PDF page 82
+\textbf{5.6}\\  % PDF page 83
 The height of men has mean 68 inches and standard deviation 2.6 inches. We have $n=100$.
 Finding the approximate probability that the average height in the sample will
 be at least 68 inches.
@@ -292,7 +292,7 @@ be at least 68 inches.
 
  \newpage\noindent
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- \textbf{5.7}\\  % PDF page 82
+ \textbf{5.7}\\  % PDF page 83
  Let $\lambda_n = \frac{1}{n}$ for all $n$ and let $X_n\sim\text{Poisson}(\lambda_n)$.
 
  \medskip\noindent(a) Showing that $X_n \raP 0$. By properties of the Poisson
@@ -326,7 +326,7 @@ In this case we get that $X_n \raP 0$ implies $nX_n\raP n\cdot 0$ so $Y_n \raP 0
 
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{5.8}\\  % PDF page 82
+\textbf{5.8}\\  % PDF page 83
 A program has $n=100$ pages of code. Let $X_i\sim\text{Poisson}(1)$ be iid and denote the
 number of errors on page $i$. Let $Y = \sum_{i=1}^n X_i$ denote the total
 number of errors. Use the CLT to approximate $\P(Y < 90)$.
@@ -367,61 +367,222 @@ the probability that $\P(X < 90)$ turns out to be about 0.1467.
 [1] 0.146773
 \end{lstlisting}
 
-% \bigskip\noindent
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \textbf{5.9}\\  % PDF page 82
-% Suppose that $\P(X=1) = \P(X = -1) = 1/2$ and define:
-% $$
-% X_n =
-% \left\{
-%     \begin{tabular}{lll}
-%         $X$ & with probability & $1 - \frac{1}{n}$ \\
-%         $e^n$ & with probability & $\frac{1}{n}$
-%     \end{tabular}
-% \right.
-% $$
-% We will determine what kinds of convergences it satisfies.
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{5.9}\\  % PDF page 83
+Suppose that $\P(X=1) = \P(X = -1) = 1/2$ and define:
+$$
+X_n =
+\left\{
+    \begin{tabular}{lll}
+        $X$ & with probability & $1 - \frac{1}{n}$ \\
+        $e^n$ & with probability & $\frac{1}{n}$
+    \end{tabular}
+\right.
+$$
+We will determine what kinds of convergences it satisfies.
 
-% \medskip\noindent
-% For starters, we can get some information about $X$. The expectation:
-% $$
-% \E[X] = (-1)\left(\frac{1}{2}\right) + (1)\left(\frac{1}{2}\right) = 0
-% $$
-% Then, the second moment and the variance.
-% $$
-% \E[X^2] = (-1)^2\left(\frac{1}{2}\right) + (1)^2\left(\frac{1}{2}\right) = 1
-% $$
-% $$
-% \V(X) = \E[X^2] - \E[X]^2 = 1 - 0 = 1
-% $$
-% Next we can find the expectation of $X_n$. Since we are using $X$ which is itself
-% a random variable, we will use its expectation. (Simplified example verified in
-% \texttt{5.9.R}).
-% $$
-% \E[X_n] = X\left(1 - \frac{1}{n}\right) + e^n\left(\frac{1}{n}\right)
-% $$
+\medskip\noindent
+For starters, we can get some information about $X$. The expectation:
+$$
+\E[X] = (-1)\left(\frac{1}{2}\right) + (1)\left(\frac{1}{2}\right) = 0
+$$
+Then, the second moment and the variance.
+$$
+\E[X^2] = (-1)^2\left(\frac{1}{2}\right) + (1)^2\left(\frac{1}{2}\right) = 1
+$$
+$$
+\V(X) = \E[X^2] - \E[X]^2 = 1 - 0 = 1
+$$
+Next we can find the expectation of $X_n$. Since we are using $X$ which is itself
+a random variable, we can't calculate it directly, instead we will use iterated
+expectation. Calculations are on the next page.
+$$
+\E[X_n] = X\left(1 - \frac{1}{n}\right) + e^n\left(\frac{1}{n}\right)
+$$
 
-%Investigating different kinds of conversion.
+\newpage\noindent
+\begin{align*}
+    \E[X_n] = \E[\E[X_n|X]] &=
+    \E[X_n|X=1]\P(X=1) + \E[X_n|X=-1]\P(X=-1) \\
+    &= \Big[(1)\left(1 - \frac{1}{n}\right) + (e^n)\left(\frac{1}{n}\right)\Big]\left(\frac{1}{2}\right)
+    +
+    \Big[(-1)\left(1 - \frac{1}{n}\right) + (e^n)\left(\frac{1}{n}\right)\Big]\left(\frac{1}{2}\right) \\
+    &= \frac{e^n}{n}
+\end{align*}
+Calculating the second moment.
+\begin{align*}
+    \E[X_n^2] = \E[\E[X_n^2|X]] &=
+    \E[X_n^2|X=1]\P(X=1) + \E[X_n^2|X=-1]\P(X=-1) \\
+    &= \Big[(1)^2\left(1 - \frac{1}{n}\right) + (e^n)^2\left(\frac{1}{n}\right)\Big]\left(\frac{1}{2}\right)
+    +
+    \Big[(-1)^2\left(1 - \frac{1}{n}\right) + (e^n)^2\left(\frac{1}{n}\right)\Big]\left(\frac{1}{2}\right) \\
+    &= 1 - \frac{1}{n} + \frac{e^{2n}}{n}
+\end{align*}
+Variance.
+\begin{align*}
+    \V(X_n) &= \E[X_n^2] - \E[X_n]^2 \\
+    &= 1 - \frac{1}{n} + \frac{e^{2n}}{n} - \frac{e^{2n}}{n^2} \\
+    &= 1 - \frac{1}{n} + \left(\frac{1}{n} - \frac{1}{n^2}\right)e^{2n}
+\end{align*}
+Verified by simulation for $n=5$. (See \texttt{5.9.R}).
+\begin{lstlisting}[style=RSyntax, title=R]
+> # Theoretical vs. Simulated
+> mean(Xn)
+[1] 29.72278
+> exp(n)/n
+[1] 29.68263
+> var(Xn)
+[1] 3528.798
+> (1 - 1/n) + (1/n - 1/n^2)*exp(2*n)
+[1] 3525.035
+\end{lstlisting}
+Both the expectation and variance will tend to infinity as $n\ra\infty$, so we can conclude
+that $X_n$ does NOT converge in probability, and it does NOT converge in quadratic mean.
+Even just the oscillating $X$ wouldn't converge. The variance would be constant, so there
+would be no quadratic mean convergence by the results in exercise 5.2, and we would not
+be able to apply Chebyshev's inequality to prove convergene in probability.
+
+Evaluating the density convergence later.
 
 
 
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{5.10}\\  % PDF page 83
+Let $Z\sim N(0,1)$ and let $t>0$ Show that for any $k>0$
+$$
+\P(|Z| > t) \leq \frac{\E[|Z|^k]}{t^k}.
+$$
+\textsc{Proof}. Following the method used in the proof of Markov's inequality.
+Will also use the hint from 4.5: $\P(|Z| > t) = 2\P(Z > t)$ and what was found
+in 4.6 that the expected value of $Z$ is two times the integral from 0 to $\infty$.
 
-% By the CLT the normal approximation will be $N = (\mu, \sigma^2/n) = N(1, 1/100)$.
-% With this we can approximate the probability:
-% $$
-% \P(Y < 90) = \P\left(Y - 100 < -10\right)
-% = \P\left(10(Y - 100) < -100\right)
-% %= \P\left(10(Y - 100) < -100\right)
-% $$
+\medskip\noindent
+For any $t > 0$ and $k > 0$:
+\begin{align*}
+    \E[|Z|^k] &= 2\int_0^\infty z^kf(z)dz = 2\int_t^\infty z^kf(z)dz + 2\int_0^t z^kf(z)dz \\
+    &\geq 2\int_t^\infty z^kf(z)dz \geq 2t^k\int_t^\infty f(z)dz = 2t^k\P(Z > t) = t^k\P(|Z| > t)
+\end{align*}
+Which implies,
+\begin{equation}
+    \P(|Z| > t) \leq \frac{\E[|Z|^k]}{t^k}\tag*{\qed}
+\end{equation}
+Comparing to Mill's inequality and Markov's inequality by extending the plot used in
+exercise 6.4. Plotting the bounds for $k=2,4,6,8$. 
+This method is not quite as precise as Mill's inequality, but it gets very close after $t>3$.
+The bound is not as good for smaller $t$, where even the Markov bound is better.
+(The dark green line is $k=8$, and the Markov bound corresponds to $k=1$)
+\begin{figure}[H]
+    \includegraphics[scale=0.7]{ch5_10.pdf}
+\end{figure}
+Code for making this plot is in \texttt{5.10.R}.
 
 
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{5.11}\\  % PDF page 84
+Let $X_n\sim N(0, 1/n)$ and let $X$ have the following CDF:
+$$
+F(x) =
+\left\{
+    \begin{tabular}{ll}
+        0 & $x<0$ \\
+        1 & $x\geq 0$
+    \end{tabular}
+\right.
+$$
+The variable $X$ has a point mass distribution at 0, and we want to see if
+$X_n$ converges. Note that $\mu = \E[X_n] = 0$ and $\sigma^2 = \V(X_n) = 1/n$
+and $\lim_{n\ra\infty}(1/n) = 0$, so by 5.2, this actually converges in quadratic
+mean to 0, which implies convergence in distribution.
+
+Also showing it directly by using Chebyshev's inequality. For any $\eps > 0$:
+$$
+\P(|X_n - 0| > \eps) \leq \frac{\sigma^2}{\eps^2} = \frac{1}{n\eps^2} \ra  0
+$$
+when $n\ra\infty$. In conclusion, $X_n\raP X$.
+
+Next is investigating convergence in distribution which must be true, since convergence
+in probability implies convergence in distribution. We can also see the trend by
+plotting the CDF of $X_n$ for $n=1, 2, 5, 10, \ldots, 5000$ where $n=5000$ is in black.
+Code for generating plot in \texttt{5.11.R}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{ch5_11.pdf}
+\end{figure}
+To show convergence in distribution, we find an expression for the CDF of $X_n$.
+By using the definition of the CDF and translating to the standard normal distribution:
+$$
+F_n(z) = \P(X\leq z) = \P\left(\frac{X_n - 0}{1/\sqrt{n}}\leq \frac{z - 0}{1/\sqrt{n}}\right)
+= \P(\sqrt{n}X_n \leq \sqrt{n}z) = \P(Z\leq \sqrt{n}z),
+$$
+where $Z\sim N(0,1)$. As $n\ra\infty$ then for any $z<0$, $F_n(z) = 0$ and for $z\geq 0$
+$F_n(z) = 1$ so it assumes the exact same form as $F(x)$, so $F_n\ra F$ and $X_n\raD X$
+as $n\ra\infty$.
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{5.12}\\  % PDF page 84
+Let $X_1,X_2,\ldots$ and $X$ be random variables that are positive integers.
+Show that $X_n\raD X$ if and only if, for every integer $k$,
+$$
+\lim_{n\ra\infty} \P(X_n = k) = \P(X = k).
+$$
+\textsc{Proof}. This is a discrete random variable.\\
+$\Rightarrow$). Assuming that $X_n\raD X$. By definition of convergence in distribution,
+for any $k$,
+$$
+\lim_{n\ra\infty} F_n(k) = F(k)
+\quad\text{and}\quad
+\lim_{n\ra\infty} F_n(k-1) = F(k-1)
+$$
+Since we have a discrete distribution,
+\begin{align*}
+    F(k) - F(k-1)
+    &= \sum_{p\leq k}\P(X=p) - \sum_{p\leq k-1}\P(X=p) \\
+    &= \P(X=k) + \sum_{p\leq k-1}\P(X=p) - \sum_{p\leq k-1}\P(X=p) \\
+    &= \P(X=k)
+\end{align*}
+The same relation is true for $F_n$, but here we also apply our assumption of convergence.
+\begin{align*}
+    \lim_{n\ra\infty}\P(X_n=k) &= \lim_{n\ra\infty}F_n(k) - \lim_{n\ra\infty}F_n(k-1) \\
+    &= F(k) - F(k-1)
+\end{align*}
+By combining these together, we have shown, for any $k$,
+$$
+\lim_{n\ra\infty}\P(X_n=k) = \P(X=k).
+$$
+$\Leftarrow$) Now we assume that the limit of $\P(X_n = k)$ is equal to $\P(X = k)$ for all $k$,
+which means they have equal probability mass function. Then, for any $k$:
+\begin{align*}
+    F(k) &= \P(X\leq k) = \sum_{z=1}^k\P(X = z) \\
+    &= \P(X = 1) + \P(X = 2) + \ldots + \P(X = k) \\
+    &= \lim_{n\ra\infty}\P(X_n = 1) + \lim_{n\ra\infty}\P(X_n = 2) + \ldots + \lim_{n\ra\infty}\P(X_n = k) \\
+    &= \sum_{z=1}^k\lim_{n\ra\infty}\P(X_n = z) \\
+    &= \lim_{n\ra\infty}\sum_{z=1}^k\P(X_n = z) \\
+    &= \lim_{n\ra\infty} \P(X_n\leq k) = \lim_{n\ra\infty} F_n(k)
+\end{align*}
+(We can change the order of the sum and limit since it is a finite sum).
+In conclusion, this shows that $\lim_{n\ra\infty} F_n(k) = F(k)$ and so $X_n\raD X$.\qed
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{5.13}\\  % PDF page 84
+Let $Z_1,Z_2,\ldots$ be IID random variables with density $f$. Suppose
+$\P(Z_i > 0) = 1$ and that $\lim_{x\downarrow 0}f(x) > 0$ Define:
+$$
+X_n = n\min\{Z_1,\ldots, Z_n\}.
+$$
+Show that $X_n\raD Z$ where $Z\sim\text{Exp}(1/\lambda)$.
 
 
 \begin{comment}
 
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{5.X}\\  % PDF page 82
+\textbf{5.X}\\  % PDF page 84
 
 
 \begin{align*}

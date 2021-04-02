@@ -1,4 +1,21 @@
 # 5.9
+##################### Exercise
+# Simulating the conditions in the exercise
+NSIM = 1000*1000
+n = 5
+X = sample(c(-1,1), size=NSIM, replace = TRUE)
+Xn = sample(c(0, exp(n)), size=NSIM, replace = TRUE, prob = c(1-1/n, 1/n))
+# Using 0 as a temporary value, and then replacing with simulated X
+ind = Xn == 0
+Xn[ind] = X[ind]  
+# Theoretical vs. Simulated
+mean(Xn)
+exp(n)/n
+var(Xn)
+(1 - 1/n) + (1/n - 1/n^2)*exp(2*n)
+
+
+##################### Investigating with a simplified example
 # What does it mean when we have X inside another random variable?
 # How does it affect the mean?
 
@@ -6,7 +23,7 @@
 # But instead of 6, we have p=1/2 of either 6 or -6 happening
 NSIM = 1000000
 
-# Simualte NSIM coin tosses
+# Simulate NSIM coin tosses
 coinToss = sample(c(-6, 6), size = NSIM, replace = TRUE)
 
 # Simulating a die
@@ -35,3 +52,13 @@ sm = sum((c(1:5, 6))^2/6)
 vr = sm - (15/6)^2
 vr
 var(dieToss)
+# Interesting example - but the expectation is calculated with
+# conditional expectation... of course!
+
+
+
+
+
+
+
+
