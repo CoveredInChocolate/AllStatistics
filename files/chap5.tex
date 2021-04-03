@@ -353,10 +353,10 @@ $$
 $$
 The standard deviation is: $\sqrt{\V(Y)} = 10$. Approximating the probability.
 $$
-\P(Y < 90) = \P\left(\frac{Y - 100}{10} < -9\right) \approx \P(Z\leq -9) \approx 0
+\P(Y < 90) = \P(Y - 100 < - 10) = \P\left(\frac{Y - 100}{10} < -1\right) \approx \P(Z\leq -1) \approx 0.1586
 $$
 Note: this exercise demonstrates that the CLT is just an approximation,
-and under certain conditions it's a very poor approximation. In \texttt{5.8.R}
+and under certain conditions it might not be a very accurate approximation. In \texttt{5.8.R}
 a simulation repeating the conditions were done one million times, and numerically,
 the probability that $\P(X < 90)$ turns out to be about 0.1467.
 \begin{lstlisting}[style=RSyntax, title=R]
@@ -456,7 +456,7 @@ $$
 $$
 \textsc{Proof}. Following the method used in the proof of Markov's inequality.
 Will also use the hint from 4.5: $\P(|Z| > t) = 2\P(Z > t)$ and what was found
-in 4.6 that the expected value of $Z$ is two times the integral from 0 to $\infty$.
+in 4.6 that the expected value of $|Z|$ is two times the integral from 0 to $\infty$.
 
 \medskip\noindent
 For any $t > 0$ and $k > 0$:
@@ -518,7 +518,7 @@ $$
 F_n(z) = \P(X\leq z) = \P\left(\frac{X_n - 0}{1/\sqrt{n}}\leq \frac{z - 0}{1/\sqrt{n}}\right)
 = \P(\sqrt{n}X_n \leq \sqrt{n}z) = \P(Z\leq \sqrt{n}z),
 $$
-where $Z\sim N(0,1)$. As $n\ra\infty$ then for any $z<0$, $F_n(z) = 0$ and for $z\geq 0$
+where $Z\sim N(0,1)$. As $n\ra\infty$ then for any $z<0$, $F_n(z) = 0$ and for $z\geq 0$,
 $F_n(z) = 1$ so it assumes the exact same form as $F(x)$, so $F_n\ra F$ and $X_n\raD X$
 as $n\ra\infty$.
 
@@ -571,11 +571,209 @@ In conclusion, this shows that $\lim_{n\ra\infty} F_n(k) = F(k)$ and so $X_n\raD
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \textbf{5.13}\\  % PDF page 84
 Let $Z_1,Z_2,\ldots$ be IID random variables with density $f$. Suppose
-$\P(Z_i > 0) = 1$ and that $\lim_{x\downarrow 0}f(x) > 0$ Define:
+$\P(Z_i > 0) = 1$ (the $Z_i$ are nonnegative) and that $\lambda =\lim_{x\downarrow 0}f(x) > 0$.
+Define:
 $$
 X_n = n\min\{Z_1,\ldots, Z_n\}.
 $$
-Show that $X_n\raD Z$ where $Z\sim\text{Exp}(1/\lambda)$.
+Show that $X_n\raD Z$ where $Z\sim\text{Exp}(\lambda)$.
+
+\medskip\noindent First, let's look at the CDF for a min function. Assume that
+we have some $V_1, \ldots, V_n$ that are IID and $V_i\sim F_V$, then define
+$$
+W_n = \min(V_1,\ldots, V_n).
+$$
+What is the CDF of $F_W$ of $W$? By definition, we have:
+$$
+F_W(y) = \P(W\leq y) = \P(\min(V_1,\ldots,V_n) \leq y)
+$$
+This means that for at least one $i$, we have $V_i\leq y$. Another way of expressing
+this is to look at the complement, which is equivalent. $\P(A) = 1 - \P(A^c)$, which
+is the case when ALL $V_i > y$. Using this, and using independence:
+\begin{align*}
+    F_W(y) = \P(W\leq y)
+    &= 1 - \P(V_1 > y, V_2 > y, \ldots, V_n > y) \\
+    &= 1 - \P(V_1 > y)\P(V_2 > y)\cdots\P(V_n > y) \\
+    &= 1 - [1 - F_V(y)][1 - F_V(y)]\cdots[1 - F_V(y)] \\
+    &= 1 - [1 - F_V(y)]^n
+\end{align*}
+We will use this result in the following.
+
+\medskip\noindent Returning to the exercise. Define $Z_m := \min(Z_1,\ldots, Z_n)$. Then:
+\begin{align*}
+    F_n(y) = \P(X_n \leq y) = \P(nZ_m \leq y) = \P\left(Z_m \leq \frac{y}{n}\right) 
+    = 1 - \left[1 - F\left(\frac{y}{n}\right)\right]^n %\\
+    %&\approx 1 - \exp\left\{-n F\left(\frac{y}{n}\right) \right\}
+\end{align*}
+From using the result above.
+
+For the CDF, which is an integral, we can make an approximation with a step function
+(which can be thought of as approximating the curve with a square),
+$$
+F\left(\frac{y}{n}\right) = \int_0^{y/n} f(z)dz \approx f(c_j)\left(\frac{y}{n} - 0\right)
+= f(c_j)\frac{y}{n}
+$$
+where $c_j$ is e.g. the midpoint in the interval, such as $c_j = \frac{y}{2n}$.
+When letting $n\ra\infty$ then $f(c_j)\ra f(0) = \lambda$. So:
+$$
+\lim_{n\ra\infty} F_n(x) = \lim_{n\ra\infty} 1 - \left[1 - F\left(\frac{x}{n}\right)\right]^n
+= \lim_{n\ra\infty} 1 - \left[1 - \frac{f(c_j)x}{n}\right]^n
+= 1 - \exp(-f(0) x)
+= 1 - \exp(-\lambda x)
+$$
+We recognise this as the exponential CDF with parameter $\lambda$, so if we set
+$Z\sim\text{Exp}(\lambda)$ with CDF $F_Z$, then we have shown that
+$F_n\ra F_Z$ as $n\ra\infty$, so $X_n\raD Z$.
+
+
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{5.14}\\  % PDF page 84
+Let $X_1,\ldots,X_n\sim U(0,1)$ and let $Y_n = \bar{X}_n^2$. We will find the
+limiting distribution of $Y_n$. 
+
+\medskip\noindent
+By the CLT, $\bar{X}\sim N(\mu, \sigma^2)$, and from the uniform distrbution this is:
+$$
+\mu = \E[X] = \frac{1 + 0}{2} = \frac{1}{2}
+$$
+$$
+\sigma^2 = \V(X) = \frac{(1-0)^2}{12} = \frac{1}{12}
+$$
+And so, $\bar{X}\sim N(1/2, 1/12)$. To find the distribution of $\bar{X}^2$, we apply
+the delta method with $g(x) = x^2$, which gives us $N(g(\mu), (g'(\mu))^2\sigma^2)$.
+Calculating:
+$$
+g(\mu) = (1/2)^2 = 1/4
+$$
+$$
+(g'(\mu))^2\sigma^2) = (2(1/2))^2(1/12) = 1/12
+$$
+Which means that $\bar{X}^2\sim N(1/4, 1/12)$. Verified with a simulation in \texttt{5.14.R}.
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{5.15}\\  % PDF page 84
+Let
+$$
+\begin{pmatrix}
+    X_{11} \\
+    X_{21}
+\end{pmatrix},
+\begin{pmatrix}
+    X_{12} \\
+    X_{22}
+\end{pmatrix},
+\ldots,
+\begin{pmatrix}
+    X_{1n} \\
+    X_{2n}
+\end{pmatrix}
+$$
+be IID random vectors with mean $\mu = (\mu_1, \mu_2)$ and variance $\Sigma$ with
+$$
+\bar{X}_1 = \frac{1}{n}\sum_{i=1}^n X_{1i},
+\qquad
+\bar{X}_2 = \frac{1}{n}\sum_{i=1}^n X_{2i}.
+$$
+We will find the limiting distribution of $Y_n = \bar{X}_1/\bar{X}_2$.
+
+\medskip\noindent Following example 5.16 closely. $Y_n = g(\bar{X}_1, \bar{X}_2)$
+where
+$$
+g(s_1, s_2) = \frac{s_1}{s_2}.
+$$
+By the central limit theorem:
+$$
+\sqrt{n}
+\begin{pmatrix}
+    \bar{X}_1 - \mu_1 \\
+    \bar{X}_2 - \mu_2
+\end{pmatrix}
+\raD N(0, \Sigma).
+$$
+Finding the gradient of $g(s_1, s_2)$.
+$$
+\nabla g(s_1, s_2) =
+\begin{pmatrix}
+    \displaystyle\frac{\partial g}{\partial s_1} \\
+    \rule{0pt}{21pt}\displaystyle\frac{\partial g}{\partial s_2}
+\end{pmatrix}
+=
+\begin{pmatrix}
+    \displaystyle\frac{1}{s_2} \\
+    \rule{0pt}{21pt}\displaystyle-\frac{s_1}{s_2^2}
+\end{pmatrix}
+$$
+
+\newpage\noindent
+Calculating the deltra transformed covariance matrix.
+\begin{align*}
+    \nabla g(\mu_1, \mu_2)^T \Sigma \nabla g(\mu_1, \mu_2)
+    &=
+    \begin{pmatrix}
+        \displaystyle\frac{1}{\mu_2} \\
+        \rule{0pt}{21pt}\displaystyle-\frac{\mu_1}{\mu_2^2}
+    \end{pmatrix}^T
+    \begin{pmatrix}
+        \sigma_{11} & \sigma_{12} \\
+        \sigma_{21} & \sigma_{22}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \displaystyle\frac{1}{\mu_2} \\
+        \rule{0pt}{21pt}\displaystyle-\frac{\mu_1}{\mu_2^2}
+    \end{pmatrix} \\
+    &=
+    \begin{pmatrix}
+        \displaystyle\frac{1}{\mu_2} \\
+        \rule{0pt}{21pt}\displaystyle-\frac{\mu_1}{\mu_2^2}
+    \end{pmatrix}^T
+    \begin{pmatrix}
+        \displaystyle\frac{\sigma_{11}}{\mu_2} - \frac{\sigma_{12}\mu_1}{\mu_2^2}  \\
+        \rule{0pt}{21pt}\displaystyle\frac{\sigma_{21}}{\mu_2} - \frac{\sigma_{22}\mu_1}{\mu_2^2} 
+    \end{pmatrix} \\
+    &=
+    \frac{\sigma_{11}}{\mu_2^2} - \frac{\sigma_{12}\mu_1}{\mu_2^3} - 
+    \frac{\sigma_{21}\mu_1}{\mu_2^3} + \frac{\sigma_{22}\mu_1^2}{\mu_2^4} \\
+    &= \frac{\mu_2^2\sigma_{11} - \mu_1\mu_2\sigma_{12} - \mu_1\mu_2\sigma_{21} + \mu_1^2\sigma_{22}}{\mu^4}
+\end{align*}
+With this we have found the limiting distribution.
+$$
+\sqrt{n}\big(\bar{X}_1/\bar{X}_2 - \mu_1/\mu_2\big)
+\raD
+N\Big(0, \frac{\mu_2^2\sigma_{11} - \mu_1\mu_2\sigma_{12} - \mu_1\mu_2\sigma_{21} + \mu_1^2\sigma_{22}}{\mu^4}\Big)
+$$
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{5.16}\\  % PDF page 84
+Finding an example where $X_n\raD X$ and $Y_n\raD Y$, but $X_n + Y_n \not\raD X + Y$.
+
+\medskip\noindent
+Set $X\sim U(0,1)$ and $Y\sim U(-1,0)$. Then we define $X_n = U(0,1)$ and $Y_n = -X_n$
+and we denote the CDFs as $X\sim F$, $Y\sim G$, $X_n\sim F_n$ and $Y_n\sim G_n$.
+
+Then:
+$$
+\lim_{n\ra\infty} F_n(x) = \lim_{n\ra\infty} x = x = F(x)
+$$
+$$
+\lim_{n\ra\infty} G_n(x) = \lim_{n\ra\infty} -x = -x = G(x)
+$$
+so $X_n\raD X$ and $Y_n\raD Y$. However,
+$$
+\lim_{n\ra\infty} F_n(x) + G_n(x) = \lim_{n\ra\infty} x - x = \lim_{n\ra\infty} 0 = 0
+$$
+so $X_n + Y_n \raD 0$, but $X + Y \not= 0$. (This can be seen in exercise 2.20 with $X-Y$,
+which corresponds to this one if we instead use $X+Z$ with $Z=-Y$. Also see \texttt{5.16.R}).
+
+
+
+
+
+
+
+
 
 
 \begin{comment}
