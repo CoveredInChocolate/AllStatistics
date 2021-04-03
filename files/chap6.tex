@@ -2,19 +2,169 @@
 \newpage
 \section{Chapter 6 - Models, Statistical Inference and Learning}
 
+\subsection*{Definitions}
+\noindent The bias of an estimator is defined as
+$$
+\bias(\hat{\theta}_n) = \E_\theta[\hat{\theta}_n] - \theta.
+$$
+The standard error, denoted by \se\, and is defined as:
+$$
+\se(\hat{\theta}_n) = \sqrt{\V(\hat{\theta}_n)}.
+$$
+The MSE, mean squared error, is defined as:
+$$
+\MSE = \E_\theta[(\hat{\theta}_n - \theta)^2].
+$$
+The MSE can according to Theorem 6.9 be written as:
+$$
+\MSE = \bias^2(\hat{\theta}_n) + \V_\theta(\hat{\theta}_n).
+$$
+
 \subsection*{Exercises}
 
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{6.1}\\  % PDF page 95
+Let $X_1,\ldots,X_n\sim\text{Poisson}(\lambda)$ and let
+$\hat{\lambda} = n^{-1}\sum_{i=1}^nX_i$. We will calculate the bias, se and MSE
+of the estimator.
 
+For the Poisson distribution, we know that $\E[X_i] = \lambda$ and $\V(X_i) = \lambda$.
 
+\medskip\noindent Calculating the bias.
+$$
+\bias(\hat{\lambda}) = \E_\theta\left[\frac{1}{n}\sum_{i=1}^nX_i\right] - \lambda
+= \frac{1}{n}\sum_{i=1}^n\E_\theta[X_i] - \lambda = \lambda - \lambda = 0
+$$
+which shows that the mean is an unbiased estimator. Calculating the variance.
+$$
+\V(\hat{\lambda}) = \V\left(\frac{1}{n}\sum_{i=1}^nX_i\right) =
+\frac{1}{n^2}\sum_{i=1}^n\V(X_i) = \frac{\lambda}{n}
+$$
+The standard error is the square root of the variance.
+$$
+\se(\hat{\lambda}) = \sqrt{\frac{\lambda}{n}}
+$$
+Finally, the MSE.
+$$
+\MSE = 0^2 + \frac{\lambda}{n} = \frac{\lambda}{n}.
+$$
 
+\newpage\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{6.2}\\  % PDF page 95
+Let $X_1,\ldots,X_n \sim U(0,\theta)$ and let $\hat{\theta} = \max(X_1,\ldots, X_n)$.
+Find \bias, \se\, and MSE.
 
+For the $U(0,\theta)$ uniform distribution, $\E[X_i] = \theta/2$ and $\V(X_i) = \theta^2/12$.
+However, we are using the maximum value, which we don't know the expectation of. In order to
+calculate it, we will need the PDF, which requires the CDF. For each $X_i$ the CDF is $F(x) = x/\theta$.
+We assume independence and will find the CDF of $\hat{\theta}$ which we will denote as $F_\theta$.
+\begin{align*}
+    F_\theta(x) = \P(\hat{\theta} \leq x)
+    &= \P(X_1\leq x, X_2\leq x, \ldots, X_n\leq x) \\
+    &= \P(X_1\leq x)\P(X_2\leq x)\cdots P(X_n\leq x) \\
+    &= \left(\frac{x}{\theta}\right)^n \\
+    &= \frac{x^n}{\theta^n}
+\end{align*}
+We find the PDF by differentiating the CDF.
+$$
+f_\theta(x) = F'(x) = \frac{n\theta^{n-1}}{\theta}
+$$
+Now we can calculate the expectation. (A simulated verification is in \texttt{6.2.R}).
+\begin{align*}
+    \E[\hat{\theta}] &= \int_0^\theta x\cdot \frac{n x^{n-1}}{\theta} dx
+    = \frac{n}{\theta^n}\int_0^\theta x^n dx \\
+    &= \frac{n}{\theta^n}\left[\frac{x^{n+1}}{n+1}\right]_0^\theta
+    =\frac{n}{n+1}\frac{1}{\theta^n}\theta^{n+1} \\
+    &= \frac{n}{n+1}\theta
+\end{align*}
+We will also need the variance, so we calculate the second moment.
+\begin{align*}
+    \E[\hat{\theta}^2] &= \int_0^\theta x^2\cdot \frac{n x^{n-1}}{\theta} dx
+    = \frac{n}{\theta^n}\int_0^\theta x^{n+1} dx \\
+    &= \frac{n}{\theta^n}\left[\frac{x^{n+2}}{n+2}\right]_0^\theta
+    =\frac{n}{n+2}\frac{1}{\theta^n}\theta^{n+2} \\
+    &= \frac{n}{n+2}\theta^2
+\end{align*}
+Now we can calculate the variance (skipping the algebra).
+(A simulated verification is in \texttt{6.2.R}).
+\begin{align*}
+    \V(\hat{\theta}) &= \E[\hat{\theta}^2] - \E[\hat{\theta}]^2\\
+    &= \frac{n}{n+2}\theta^2 - \left(\frac{n}{n+1}\right)^2\theta^2 \\
+    &= \frac{n}{(n+2)(n+1)^2}\theta^2
+\end{align*}
+
+\newpage\noindent
+Finding the \bias.
+$$
+\bias(\thetah) = \E[\thetah] - \theta = \frac{n}{n+1}\theta - \theta = -\frac{1}{n+1}\theta
+$$
+This estimator is not unbiased, because we will often end up with a slightly smaller value.
+As we have shown, we could use the unbiased estimator $\frac{n+1}{n}\max(X_1,\ldots,X_n)$
+instead.
+
+Finding the standard error, which is just the square root of the variance.
+$$
+\se(\thetah) = \sqrt{\V(\thetah)} = \frac{\sqrt{n}}{\sqrt{n+2}(n+1)}\theta
+$$
+And finally, the MSE.
+\begin{align*}
+    \MSE &= \bias^2(\thetah) + \V(\thetah) \\
+    &= \frac{1}{(n+1)^2}\theta^2 + \frac{n}{(n+2)(n+1)^2}\theta^2 \\
+    &= \frac{n+2}{(n+2)(1+n)^2}\theta^2 + \frac{n}{(n+2)(n+1)^2}\theta^2\\
+    &= \frac{2n + 2}{(n+2)(n+1)^2}\theta^2
+\end{align*}
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{6.3}\\  % PDF page 96
+Let $X_1,\ldots, X_n\sim U(0, \theta)$ and let $\thetah = 2\bar{X}_n$. Find the
+bias, se and MSE.
+
+\medskip\noindent
+Here the estimator is two times the mean, or written more explicitly.
+$$
+\thetah = \frac{2}{n}\sum_{i=1}^n X_i
+$$
+Now we can use the properties of the uniform distribution:
+$$
+\E[X_i] = \frac{\theta}{2}\quad\text{and}\quad
+\V(X_i) = \frac{\theta^2}{12}
+$$
+Finding the bias.
+$$
+\bias(\thetah) = \E\left[\frac{2}{n}\sum_{i=1}^n X_i\right] - \theta
+= \frac{2}{n}\sum_{i=1}^n \E\left[X_i\right] - \theta
+= 2\cdot\frac{\theta}{2} - \theta = \theta - \theta = 0
+$$
+In this case, we have an unbiased estimator. Calculating the variance:
+$$
+\V(\thetah) = \V\left(\frac{2}{n}\sum_{i=1}^n X_i\right)
+= \frac{4}{n^2}\sum_{i=1}^n  \V\left(X_i\right)
+= \frac{4}{n}\cdot \frac{\theta^2}{12}
+= \frac{\theta^2}{3n}
+$$
+(Simulations for expectation and variance confirmed in \texttt{6.3.R}).
+
+\newpage\noindent
+The standard error, se, is just the square root of the variance.
+$$
+\se(\thetah) = \sqrt{\V(\thetah)} = \frac{\theta}{\sqrt{3n}}
+$$
+Calculating the MSE.
+\begin{align*}
+    \MSE &= \bias^2(\thetah) + \V(\thetah) \\
+    &= 0^2 + \frac{\theta^2}{3n} \\
+    &= \frac{\theta^2}{3n}
+\end{align*}
 
 
 \begin{comment}
 
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{3.2X}\\  % PDF page 61
+\textbf{6.X}\\  % PDF page 96
 
 
 \begin{align*}
