@@ -285,7 +285,9 @@ Code found in \texttt{7.7.R}. Plot of empirical distribution and bounds:
 (The CDF jumps because there are only 1000 points and jumps in the data itself).
 
 \medskip\noindent
-Finding the confidence interval for $F(4.9) - F(4.3)$.
+Finding the confidence interval for $F(4.9) - F(4.3)$. (Note: these results will
+differ depending on whether the empirical distribution is defined with $<$ or $\leq$.
+These are the bounds for $\leq$, as the definition says).
 
 \begin{lstlisting}[style=RSyntax, title=R]
 '95% Confidence Interval for F(4.9) - F(4.3):'
@@ -295,6 +297,84 @@ Finding the confidence interval for $F(4.9) - F(4.3)$.
 \bigskip\noindent
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \textbf{7.8}\\  % PDF page 105
+Results for the 'Old Faithful' dataset. Code found in \texttt{7.8.R}.
+
+Output from code:
+\begin{lstlisting}[style=RSyntax, title=R]
+> # Mean
+> sprintf("Sample mean: %2.3f", Xbar)
+[1] "Sample mean: 70.897"
+
+> # 90% confidence interval
+> sprintf("90%% Confidence interval: (%.3f, %.3f)", CIlower, CIupper)
+[1] "90% Confidence interval: (48.576, 93.218)"
+
+> # Median
+> sprintf("Median at: %2.f, with probability %2.2f", xvalMedian, Fhat(xvalMedian, of$waiting))
+[1] "Median at: 76, with probability 0.53"
+\end{lstlisting}
+
+\bigskip\noindent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{7.9}\\  % PDF page 105
+Comparing two trials of antibiotic. 100 people are given standard and 90 recover,
+100 are given new and 85 recover.
+
+\medskip\noindent
+We will assume that these are independent. We will also assume that the
+standard trial is $X_1,\ldots, X_{100}\sim\text{Bernoulli}(p_1)$ and the new trial is
+$Y_1,\ldots, Y_{100}\sim\text{Bernoulli}(p_2)$. This is the same conditions
+as in exercise 7.2.
+
+If we define $X_i = 1$ and $Y_i = 1$ for recoveries and $X_i = 0$ and $Y_i = 0$
+for no change, we can estimate the probabilities with the sample mean:
+$$
+\hat{p}_1 = \frac{1}{100}\sum_{i=1}^{100} X_i = \frac{90}{100} = 0.90
+$$
+$$
+\hat{p}_2 = \frac{1}{100}\sum_{i=1}^{100} Y_i = \frac{85}{100} = 0.85
+$$
+If we define $\thetah = \hat{p}_1  - \hat{p}_2$, it becomes:
+$$
+\thetah = \hat{p}_1  - \hat{p}_2 = 0.90 - 0.85 = 0.05
+$$
+Finding the standard errors for each $\hat{p}_i$.
+$$
+\se(\hat{p}_1) = \frac{\sqrt{\hat{p}_1(1 - \hat{p}_1)}}{\sqrt{n}} = \frac{\sqrt{0.9(0.1)}}{\sqrt{100}} = 0.03
+\imp \se(\hat{p}_1)^2 = 0.0009
+$$
+$$
+\se(\hat{p}_2) = \frac{\sqrt{\hat{p}_2(1 - \hat{p}_2)}}{\sqrt{n}} = \frac{\sqrt{0.85(0.15)}}{\sqrt{100}} = 0.0357
+\imp \se(\hat{p}_1)^2 = 0.001275
+$$
+Since they are independent, the covariance is 0. The standard error for $\thetah$:
+$$
+\se(\thetah) = \sqrt{\V(\hat{p}_1 - \hat{p}_2)} = \sqrt{\se(\hat{p}_1)^2 + \se(\hat{p}_2)^2}
+= \sqrt{0.002175} = 0.046637
+$$
+For constructing the confidence intervals, we find the corresponding $z_{.90}$ and $z_{0.975}$ values
+and calculate. Since probabilities can't be negative, we cap them at 0.
+80\% confidence interval.
+$$
+\thetah \pm z_{.90}\se(\thetah)  = 0.05 \pm 1.28(0.046637) = (-0.0097, 0.1097) = (0, 0.1097)
+$$
+95\% confidence interval.
+$$
+\thetah \pm z_{.975}\se(\thetah)  = 0.05 \pm 1.96(0.046637) = (-0.0414, 0.1414) = (0, 0.1414)
+$$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{7.10}\\  % PDF page 105
+Code found in \texttt{7.10.R}.
+\begin{lstlisting}[style=RSyntax, title=R]
+> theta   # Estimate of theta
+[1] 277.3962
+> seTheta # Standard error of theta
+[1] 388.522
+> sprintf("CI: (%3.2f, %3.2f)", CIlwr, CIupr)
+[1] "CI: (0.00, 601.90)"
+\end{lstlisting}
+
+
 
 
 

@@ -5,7 +5,6 @@
 Fhat <- function(x, vector) {
   # Summing up number of values smaller than x
   # Divided by n (the length of the vector)
-  
   if (length(x) == 1) {
     # If 'x' is a value
     prob = sum(vector <= x)/length(vector)

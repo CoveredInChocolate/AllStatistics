@@ -1,4 +1,4 @@
-Unseeded Clouds	Seeded Clouds
+UnseededClouds	SeededClouds
 1202.6	2745.6
 830.1	1697.8
 372.4	1656
